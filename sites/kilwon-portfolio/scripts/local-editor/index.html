@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>포트폴리오 로컬 편집</title>
+  <link rel="stylesheet" href="/__editor/style.css">
+  <script src="/__editor/editor.js" defer></script>
+</head>
+<body>
+  <header>
+    <div><h1>포트폴리오 편집</h1><p>화면의 문구를 클릭해 수정하세요. 저장하면 로컬 소스에 반영됩니다.</p></div>
+    <div class="navigation"><label for="page">편집할 페이지</label><select id="page"><option value="/">메인</option><option value="/projects/">프로젝트 목록</option></select><button id="add-project" type="button" disabled>프로젝트 추가</button><button id="add-section" type="button" disabled>사례 추가</button><button id="reload" type="button">새로고침</button></div>
+  </header>
+  <main>
+    <div class="preview"><iframe id="preview" src="/" title="포트폴리오 편집 미리보기"></iframe></div>
+    <aside aria-labelledby="edit-title">
+      <h2 id="edit-title">문구 수정</h2>
+      <label for="field">문구 목록으로 선택</label>
+      <select id="field"><option value="">화면에서 클릭하거나 목록에서 선택</option></select>
+      <p id="selection">왼쪽 화면에서 수정할 문구를 클릭하세요.</p>
+      <label for="text">내용</label>
+      <textarea id="text" rows="12" disabled placeholder="선택한 문구가 여기에 표시됩니다."></textarea>
+      <div class="actions"><button id="apply" type="button" disabled>미리보기</button><button id="save" class="primary" type="button" disabled>저장</button></div>
+      <button id="reset" type="button" disabled>수정 취소</button>
+      <p id="status" role="status" aria-live="polite">미리보기를 불러오고 있습니다.</p>
+      <div class="help"><h3>사용 방법</h3><ol><li>상단에서 페이지를 선택합니다.</li><li>수정할 문구를 클릭하고 내용을 입력합니다.</li><li>미리보기로 확인한 뒤 저장합니다.</li></ol><p>저장 전 미리보기는 파일을 바꾸지 않습니다. 같은 프로젝트 안의 동일한 문구는 함께 저장됩니다.</p><p>링크를 따라가려면 Alt(⌥)를 누른 채 클릭하세요. 필터는 그대로 사용할 수 있습니다.</p><p>링크 주소·프로젝트 ID·기술 태그는 이 화면에서 수정하지 않습니다.</p><p>공개 사이트에 반영하려면 기존처럼 커밋 후 push하세요.</p></div>
+    </aside>
+  </main>
+  <dialog id="create-dialog" aria-labelledby="create-title">
+    <form id="create-form">
+      <h2 id="create-title">프로젝트 추가</h2>
+      <p id="create-description">기본 정보와 첫 사례를 입력하세요. 추가하면 프로젝트 목록과 상세 페이지에 표시됩니다.</p>
+      <fieldset id="target-fields" hidden disabled>
+        <label>사례를 추가할 프로젝트<select name="target" id="target-project" required></select></label>
+      </fieldset>
+      <fieldset id="project-fields">
+        <legend>프로젝트 정보</legend>
+        <div class="form-grid">
+          <label>프로젝트 이름<input name="project.name" required maxlength="200"></label>
+          <label>프로젝트 주소<input name="project.slug" required maxlength="80" pattern="[a-z0-9]+(-[a-z0-9]+)*" placeholder="my-project" aria-describedby="slug-help"><small id="slug-help">영문 소문자·숫자·하이픈으로 입력합니다. /projects/주소/로 공개됩니다.</small></label>
+          <label>분류<select name="project.group" id="project-group" required></select></label>
+          <label>소속·수상 이력<input name="project.organization" required placeholder="대회명과 수상명 또는 소속"></label>
+          <label>기간<input name="project.period" required placeholder="2026.01~03"></label>
+          <label>팀 구성<input name="project.status" required placeholder="3인 팀 / 1인 개발"></label>
+          <label class="wide">담당 업무<input name="project.role" required placeholder="팀장 · 백엔드 / AI 담당"></label>
+          <label class="wide">부제<input name="project.subtitle" required></label>
+          <label class="wide">프로젝트 설명<textarea name="project.summary" rows="3" required></textarea></label>
+          <label>분야<input name="project.category" required placeholder="대화 Agent / 데이터 엔지니어링"></label>
+          <label>기술·키워드<input name="project.tags" required placeholder="Python, FastAPI, RAG"><small>쉼표로 구분합니다.</small></label>
+          <fieldset class="wide" id="project-roles"><legend>관련 직무 (하나 이상 선택)</legend></fieldset>
+          <label class="wide">처리 흐름 (선택)<textarea name="project.flow" rows="3" placeholder="한 줄에 한 단계씩 입력"></textarea></label>
+          <label class="wide">코드 주소 (선택)<input name="project.url" type="url" placeholder="https://github.com/..."><small>비워두면 ‘코드 비공개’로 표시합니다.</small></label>
+        </div>
+      </fieldset>
+      <fieldset id="section-fields">
+        <legend id="section-legend">첫 사례</legend>
+        <div class="form-grid">
+          <label>사례 제목<input name="section.title" required></label>
+          <label>사례 주소<input name="section.id" required maxlength="80" pattern="[a-z]([a-z0-9]|-)*" placeholder="overview"><small>영문 소문자로 시작합니다. 상세 페이지의 #주소로 사용됩니다.</small></label>
+          <label class="wide">한 줄 요약<input name="section.lead" required><small>새 프로젝트의 핵심 설계 요약에도 사용됩니다.</small></label>
+          <label class="wide">문제 상황<textarea name="section.situation" rows="3" required></textarea></label>
+          <label class="wide">해결할 과제<textarea name="section.task" rows="2" required></textarea></label>
+          <label class="wide">작업 내용<textarea name="section.action" rows="5" required placeholder="한 줄에 한 항목씩 입력"></textarea></label>
+          <label class="wide">결과<textarea name="section.result" rows="3" required></textarea></label>
+          <label class="wide">사례 기술·키워드<input name="section.tags" placeholder="Neo4j, 기억 검색"><small id="section-tags-help">쉼표로 구분합니다. 비워두면 프로젝트 기술·키워드를 사용합니다.</small></label>
+          <label class="wide">작업 내용 소제목 (선택)<input name="section.actionTitle"></label>
+          <label class="wide">구현 흐름 (선택)<textarea name="section.implementation" rows="3"></textarea></label>
+          <label class="wide">결과의 조건·한계 (선택)<textarea name="section.note" rows="2" placeholder="측정 환경, 평가 범위 등을 입력"></textarea></label>
+        </div>
+      </fieldset>
+      <p id="create-status" role="status" aria-live="polite"></p>
+      <div class="dialog-actions"><button id="cancel-create" type="button">취소</button><button id="confirm-create" class="primary" type="submit">추가</button></div>
+    </form>
+  </dialog>
+</body>
+</html>

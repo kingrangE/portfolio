@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { projects, roles, matchesProject } from '../content/projects.mjs';
+import { projects, roles, matchesProject, projectGroups } from '../content/projects.mjs';
 import ProjectVisual from './project-visual';
 
 export default function ProjectGallery({ featured = false }) {
@@ -32,8 +32,13 @@ export default function ProjectGallery({ featured = false }) {
           {(role !== 'all' || keyword !== 'all') && <button className="text-link" onClick={reset}>필터 초기화</button>}
         </div>
       </div>}
-      <div className={featured ? 'project-grid' : 'catalog-grid'}>
-        {visible.map(project => {
+      {(featured ? ['대표 프로젝트'] : projectGroups).map(group => {
+        const grouped = featured ? visible : visible.filter(project => project.group === group);
+        if (grouped.length === 0) return null;
+        return <section key={group} className={featured ? undefined : 'catalog-group'} aria-label={group}>
+          {!featured && <h2>{group} <span>{grouped.length}개</span></h2>}
+          <div className={featured ? 'project-grid' : 'catalog-grid'}>
+        {grouped.map(project => {
           const relatedCase = project.sections.find(section => section.tags.includes(keyword));
           const href = `/projects/${project.slug}/${relatedCase ? `#${relatedCase.id}` : ''}`;
           return (
@@ -53,7 +58,9 @@ export default function ProjectGallery({ featured = false }) {
           </article>
           );
         })}
-      </div>
+          </div>
+        </section>;
+      })}
       {!featured && visible.length === 0 && <div className="catalog-empty"><p>이 직무와 키워드를 함께 가진 프로젝트가 없습니다.</p><button className="button primary" onClick={reset}>전체 프로젝트 보기</button></div>}
     </>
   );

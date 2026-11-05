@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "edit": "node scripts/local-editor/server.mjs",
     "build": "next build",
     "test": "node --test tests/*.test.mjs",
     "check:export": "node scripts/check-export.mjs"

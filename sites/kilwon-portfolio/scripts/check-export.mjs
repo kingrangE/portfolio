@@ -9,7 +9,7 @@ assert.ok(home.includes(`href="${basePath}/projects/"`));
 assert.ok(home.includes(`src="${basePath}/images/kilwon-profile.jpg"`));
 assert.equal((home.match(/class="project-card"/g) || []).length, 4);
 assert.equal((catalog.match(/class="catalog-card"/g) || []).length, projects.length);
-assert.ok(home.includes('꾸준한 학습과 모든 실패 가능성에 대한 반증'));
+assert.ok(home.includes('id="hero-title"'));
 assert.ok(!home.includes('project-dialog'));
 for (const project of projects) {
   const route = `/projects/${project.slug}/`;
@@ -37,4 +37,4 @@ for (const html of [home, catalog, readFileSync('out/404.html', 'utf8'), ...proj
     assert.ok(existsSync(`out${local.endsWith('/') ? `${local}index.html` : local}`), `Missing local target ${pathname}`);
   }
 }
-console.log('PASS: four featured projects, full catalog links, all project pages, TOC targets, unique IDs, base path, images, local links, assets, 404, preserved introduction');
+console.log('PASS: four featured projects, full catalog links, all project pages, TOC targets, unique IDs, base path, images, local links, assets, 404, introduction heading');

@@ -3,8 +3,8 @@ import SiteFooter from '../components/site-footer';
 import './globals.css';
 
 export const metadata = {
-  title: { default: '전길원 — LLM & Data Engineer', template: '%s | 전길원' },
-  description: '데이터에서 신뢰할 수 있는 AI 서비스까지. LLM 서비스, Agent, 데이터 파이프라인을 만드는 전길원의 포트폴리오.',
+  title: { default: '전길원 | LLM & Data Engineer', template: '%s | 전길원' },
+  description: 'LLM 서비스, Agent, 데이터 파이프라인을 개발하는 전길원의 포트폴리오. 프로젝트별 담당 업무와 설계 이유, 실험 결과를 소개합니다.',
   icons: { icon: `${process.env.NEXT_PUBLIC_BASE_PATH || ''}/favicon.svg` },
 };
 

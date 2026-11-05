@@ -12,7 +12,7 @@ export default function Home() {
         <p className="intro-name">꾸준한 학습과 모든 실패 가능성에 대한 반증을 통해 현재 상황에 맞는 최선의 정답을 찾고자 하는 개발자 전길원입니다.</p>
         <h1 id="hero-title">답변에는 근거를.<br />데이터에는 신뢰를.</h1>
         <p className="hero-description">흩어진 정보를 연결하고, AI의 결과를 검증합니다.<br />좋아 보이는 데서 멈추지 않고,<br />실제로 쓸 수 있는 서비스를 만듭니다.</p>
-        <div className="hero-actions"><a className="button primary" href="#projects">프로젝트 살펴보기</a><a className="text-link" href="https://kingrange.github.io/Resume/" target="_blank" rel="noopener noreferrer">이력서 읽기</a></div>
+        <div className="hero-actions"><a className="button primary" href="https://kingrange.github.io/Resume/" target="_blank" rel="noopener noreferrer">이력서 확인</a></div>
         <div className="hero-socials"><a href="https://github.com/kingrangE" target="_blank" rel="noopener noreferrer">GitHub</a><a href="https://kingrang-e.tistory.com/" target="_blank" rel="noopener noreferrer">개발 블로그</a></div>
       </div>
       <figure className="profile-portrait">
@@ -21,7 +21,7 @@ export default function Home() {
       </figure>
     </section>
     <section className="projects wrap section" id="projects" aria-labelledby="projects-title">
-      <div className="section-top"><div><h2 id="projects-title">네 가지 문제, 네 가지 접근</h2><p className="section-description">평가 설계부터 대화의 기억, 데이터 품질과 검색까지.</p></div></div>
+      <div className="section-top"><div><h2 id="projects-title">대표 프로젝트</h2><p className="section-description">평가 설계부터 대화의 기억, 데이터 품질과 검색까지.</p></div></div>
       <ProjectGallery featured />
       <div className="all-work">
         <Link className="button primary all-work-button" href="/projects/">전체 {projects.length}개 프로젝트 보기</Link>

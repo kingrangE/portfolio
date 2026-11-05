@@ -33,7 +33,7 @@ export default function ProjectCases({ name, sections, nextProject }) {
     <div className="reading-layout case-reading-layout">
       <ProjectToc sections={visible} />
       <article className="project-article" aria-label={`${name} 설계·문제 해결 사례`}>
-        {sections.map(section => <section key={section.id} id={section.id} className="case-section star-case"
+        {sections.map(section => <section key={section.id} id={section.id} className="case-section engineering-case"
           hidden={selected !== 'all' && !section.tags.includes(selected)} aria-labelledby={`${section.id}-title`}>
           {section.aliases?.map(id => <span className="case-alias" id={id} key={id} aria-hidden="true" />)}
           {section.version && <p className="case-version">{section.version}</p>}
@@ -41,12 +41,15 @@ export default function ProjectCases({ name, sections, nextProject }) {
           <p className="case-lead">{section.lead}</p>
           <div className="case-tags" aria-label="이 사례의 태그">{section.tags.map(tag => <button key={tag} className="keyword-link"
             aria-pressed={selected === tag} onClick={() => setSelected(selected === tag ? 'all' : tag)}>{tag}</button>)}</div>
-          <dl className="star-story">
-            <div><dt><span>S</span> 상황</dt><dd><p>{section.situation}</p></dd></div>
-            <div><dt><span>T</span> 과제</dt><dd><p>{section.task}</p></dd></div>
-            <div><dt><span>A</span> 설계·해결</dt><dd><ul>{section.action.map(action => <li key={action}>{action}</li>)}</ul></dd></div>
-            <div className="star-result"><dt><span>R</span> 결과</dt><dd><p>{section.result}</p>{section.note && <p className="case-note">{section.note}</p>}</dd></div>
-          </dl>
+          <div className="case-narrative">
+            <p>{section.situation} {section.task}</p>
+            <h3>{section.actionTitle || '설계와 구현'}</h3>
+            <ul>{section.action.map(action => <li key={action}>{action}</li>)}</ul>
+            {section.implementation && <pre aria-label="구현 흐름"><code>{section.implementation}</code></pre>}
+            <div className="case-outcome"><h3>적용 결과</h3><p>{section.result}</p>
+              {section.note && <p className="case-note">{section.note}</p>}
+            </div>
+          </div>
         </section>)}
         <footer className="case-footer"><p>다음 프로젝트</p><Link href={`/projects/${nextProject.slug}/`}>{nextProject.name}<span>{nextProject.subtitle}</span></Link></footer>
       </article>

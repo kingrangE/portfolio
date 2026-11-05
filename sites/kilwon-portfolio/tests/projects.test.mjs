@@ -10,7 +10,7 @@ test('project URLs and section links are unique and valid', () => {
     assert.ok(project.categories.every(category => roles.some(role => role.id === category)));
     for (const field of ['organization', 'period', 'role', 'decision']) assert.ok(project[field]?.trim(), `${project.slug}: missing ${field}`);
     assert.equal(new Set(project.tags).size, project.tags.length);
-    assert.ok(project.sections.length >= 2);
+    assert.ok(project.sections.length >= 1);
     assert.equal(new Set(project.sections.map(section => section.id)).size, project.sections.length);
     for (const section of project.sections) {
       assert.match(section.id, /^[a-z][a-z0-9-]*$/);

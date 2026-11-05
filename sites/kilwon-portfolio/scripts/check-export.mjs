@@ -18,10 +18,13 @@ for (const project of projects) {
   const html = readFileSync(`out${route}index.html`, 'utf8');
   const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
   assert.equal(new Set(ids).size, ids.length, `Duplicate IDs in ${route}`);
+  assert.ok(html.includes('aria-label="설계·문제 해결 사례 태그"'), `Missing case filters in ${route}`);
+  assert.equal((html.match(/class="star-story"/g) || []).length, project.sections.length, `Missing STAR cases in ${route}`);
   for (const section of project.sections) {
     assert.ok(html.includes(`href="#${section.id}"`), `Missing TOC link ${route}#${section.id}`);
     assert.ok(ids.includes(section.id), `Missing section target ${route}#${section.id}`);
     assert.ok(ids.includes(`${section.id}-title`), `Missing section heading in ${route}`);
+    for (const alias of section.aliases || []) assert.ok(ids.includes(alias), `Lost deep link ${route}#${alias}`);
   }
 
 }

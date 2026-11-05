@@ -513,3 +513,38 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .more-keywords { margin-top: 12px; }
 .more-keywords summary { cursor: pointer; color: var(--blue); font-size: 13px; width: fit-content; padding: 8px 0; }
 .more-keywords[open] summary { margin-bottom: 8px; }
+
+.detail-context { font-size: 13px; color: var(--muted); margin: 20px 0; }
+.case-explorer { padding-top: 34px; scroll-margin-top: 24px; }
+.case-explorer h2 { font-size: 23px; letter-spacing: -.7px; margin: 0 0 18px; }
+.case-filters { gap: 8px; }
+.case-filters .filter { border: 1px solid var(--line); padding: 9px 13px; background: #fff; font-size: 13px; min-height: 42px; }
+.case-filters .filter.active { background: var(--ink); border-color: var(--ink); color: #fff; }
+.case-count { color: var(--muted); font-size: 13px; margin: 18px 0 0; }
+.case-reading-layout { padding-top: 30px; }
+.star-case { border-top: 1px solid var(--line); padding-top: 28px; margin-bottom: 48px; }
+.star-case[hidden] { display: none; }
+.case-alias { display: block; scroll-margin-top: 90px; }
+.star-case h2 { margin-bottom: 12px; }
+.star-case .case-version { font-size: 12px; color: var(--muted); margin-bottom: 10px; }
+.star-case .case-lead { color: var(--ink); font-size: 17px; font-weight: 650; line-height: 1.8; margin-bottom: 12px; }
+.case-tags { display: flex; flex-wrap: wrap; gap: 4px 16px; margin-bottom: 24px; }
+.star-story { margin: 0; }
+.star-story>div { display: grid; grid-template-columns: 108px minmax(0, 1fr); gap: 20px; padding: 18px 0; border-top: 1px solid var(--line); }
+.star-story dt { display: flex; align-items: baseline; gap: 10px; font-size: 13px; font-weight: 650; padding-top: 4px; }
+.star-story dt>span { color: var(--blue); font-family: var(--display); }
+.star-story dd { margin: 0; min-width: 0; }
+.star-story dd p { margin: 0; font-size: 15px; }
+.star-story dd ul { margin: 0; padding-left: 19px; }
+.star-story dd li { font-size: 15px; margin-bottom: 12px; }
+.star-story dd li:last-child { margin-bottom: 0; }
+.star-story .star-result p { color: var(--ink); font-weight: 550; }
+.star-story .star-result .case-note { font-size: 12px; color: var(--muted); font-weight: 400; margin-top: 10px; line-height: 1.8; }
+@media (max-width: 600px) {
+  .case-explorer h2 { font-size: 21px; }
+  .case-filters .filter { font-size: 12px; padding: 8px 11px; }
+  .star-case h2 { font-size: 22px; }
+  .star-story>div { grid-template-columns: 1fr; gap: 8px; }
+  .star-story dd p, .star-story dd li { font-size: 14px; line-height: 1.9; }
+  .star-story dt { padding-top: 0; }
+}

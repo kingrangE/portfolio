@@ -33,22 +33,26 @@ export default function ProjectGallery({ featured = false }) {
         </div>
       </div>}
       <div className={featured ? 'project-grid' : 'catalog-grid'}>
-        {visible.map(project => (
+        {visible.map(project => {
+          const relatedCase = project.sections.find(section => section.tags.includes(keyword));
+          const href = `/projects/${project.slug}/${relatedCase ? `#${relatedCase.id}` : ''}`;
+          return (
           <article key={project.slug} id={project.slug} className={featured ? 'project-card' : 'catalog-card'}>
-            <Link className="project-open" href={`/projects/${project.slug}/`} aria-label={`${project.name} 프로젝트 읽기`}>
+            <Link className="project-open" href={href} aria-label={`${project.name}${relatedCase ? `: ${relatedCase.title}` : " 프로젝트"} 읽기`}>
               {featured && <ProjectVisual slug={project.slug} />}
               <div className="project-body">
                 <div className="project-meta"><span>{project.organization}</span><span>{project.status}</span></div>
                 <h3>{project.name}<span>{project.subtitle}</span></h3>
                 <p>{project.summary}</p>
-                {!featured && <p className="design-note">{project.decision}</p>}
+                {!featured && <p className="design-note">{relatedCase ? relatedCase.lead : project.decision}</p>}
               </div>
             </Link>
             <div className="tag-row">{project.tags.map(tag => featured ? <span key={tag}>{tag}</span> :
               <button key={tag} className="keyword-link" aria-pressed={keyword === tag} aria-label={`${tag} 프로젝트 모아보기`}
                 onClick={() => { setRole('all'); setKeyword(tag); }}>{tag}</button>)}</div>
           </article>
-        ))}
+          );
+        })}
       </div>
       {!featured && visible.length === 0 && <div className="catalog-empty"><p>이 직무와 키워드를 함께 가진 프로젝트가 없습니다.</p><button className="button primary" onClick={reset}>전체 프로젝트 보기</button></div>}
     </>

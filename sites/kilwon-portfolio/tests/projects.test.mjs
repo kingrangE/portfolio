@@ -15,8 +15,11 @@ test('project URLs and section links are unique and valid', () => {
     for (const section of project.sections) {
       assert.match(section.id, /^[a-z][a-z0-9-]*$/);
       assert.ok(section.title.trim());
-      assert.ok(section.paragraphs.length > 0);
-      assert.ok(section.paragraphs.every(paragraph => paragraph.trim().length > 0));
+      for (const field of ['lead', 'situation', 'task', 'result']) assert.ok(section[field]?.trim(), `${project.slug}/${section.id}: missing ${field}`);
+      assert.ok(section.action.length > 0);
+      assert.ok(section.action.every(action => action.trim().length > 0));
+      assert.ok(section.tags.length > 0);
+      assert.equal(new Set(section.tags).size, section.tags.length);
     }
     if (project.url) assert.equal(new URL(project.url).protocol, 'https:');
   }

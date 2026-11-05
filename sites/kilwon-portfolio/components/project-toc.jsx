@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 
 export default function ProjectToc({ sections }) {
   const [active, setActive] = useState(sections[0].id);
+  const current = sections.find(section => section.id === active) || sections[0];
 
   useEffect(() => {
     const hash = window.location.hash.slice(1);
@@ -25,7 +26,7 @@ export default function ProjectToc({ sections }) {
 
   const links = sections.map(section => (
     <li key={section.id}>
-      <a href={`#${section.id}`} aria-current={active === section.id ? 'location' : undefined}
+      <a href={`#${section.id}`} aria-current={current.id === section.id ? 'location' : undefined}
         onClick={event => {
           setActive(section.id);
           const disclosure = event.currentTarget.closest('details');
@@ -37,12 +38,12 @@ export default function ProjectToc({ sections }) {
   return (
     <>
       <aside className="desktop-toc">
-        <p>이 프로젝트의 이야기</p>
+        <p>설계·문제 해결 사례</p>
         <nav aria-label="프로젝트 목차"><ol>{links}</ol></nav>
-        <Link className="toc-back" href="/#projects">모든 프로젝트 보기</Link>
+        <Link className="toc-back" href="/projects/">모든 프로젝트 보기</Link>
       </aside>
       <details className="mobile-toc">
-        <summary>목차 <span>{sections.find(section => section.id === active)?.title}</span><b aria-hidden="true">+</b></summary>
+        <summary>목차 <span>{current.title}</span><b aria-hidden="true">+</b></summary>
         <nav aria-label="모바일 프로젝트 목차"><ol>{links}</ol></nav>
       </details>
     </>

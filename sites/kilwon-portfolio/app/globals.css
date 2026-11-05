@@ -117,7 +117,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .project-body p br { display: none; }
 .tag-row { display: flex; flex-wrap: wrap; gap: 6px 13px; }
 .tag-row span { font-size: 11px; color: var(--muted); }
-.all-work { margin-top: 48px; padding: 32px 24px; background: var(--mist); border-radius: 10px; text-align: center; }
+.all-work { margin-top: 48px; padding: 32px 24px; border-radius: 10px; text-align: center; }
 .all-work-button { width: min(100%, 520px); min-height: 68px; font-size: 20px; font-weight: 700; }
 .all-work p { margin: 16px 0 0; font-size: 14px; color: var(--muted); }
 .about-section { background: #eaf0f9; }

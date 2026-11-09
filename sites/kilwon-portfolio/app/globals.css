@@ -99,11 +99,16 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .visual-orecast { background: var(--mist); color: var(--ink); }
 .orecast-title { position: absolute; top: 54px; left: 25px; font: 500 42px/1.2 var(--display); letter-spacing: -2px; }
 .orecast-title>span { display: block; margin-top: 10px; font: 500 12px/1.8 var(--body); letter-spacing: 0; }
-.orecast-flow { position: absolute; inset: 145px 20px 20px; display: grid; grid-template-columns: 1fr auto 1fr auto 1fr; align-items: center; gap: 8px; font-size: 11px; }
-.orecast-flow>div { min-width: 0; padding-left: 8px; border-left: 3px solid var(--blue); }
-.orecast-flow>div>span { color: var(--blue); font-weight: 700; }
-.orecast-flow p { margin: 2px 0 0; }
-.orecast-flow>span { color: var(--muted); line-height: 1; transform: rotate(-90deg); }
+.orecast-flow { position: absolute; left: 16px; bottom: 16px; width: calc(100% - 32px); height: calc(100% - 144px); overflow: visible; }
+.orecast-track, .orecast-packet { fill: none; stroke-linecap: round; }
+.orecast-track { stroke: #a8bfe8; stroke-width: 2; }
+.orecast-packet { stroke: var(--blue); stroke-width: 5; stroke-dasharray: .045 .955; stroke-dashoffset: 0; }
+.orecast-node { fill: #fff; stroke: var(--blue); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.orecast-node path { fill: none; }
+.orecast-node .orecast-solid { fill: #fff; }
+.orecast-step, .orecast-caption { text-anchor: middle; font-family: var(--body); }
+.orecast-step { fill: var(--ink); font-size: 12px; font-weight: 700; }
+.orecast-caption { fill: var(--muted); font-size: 10px; }
 .visual-semo { background: #dce9fc; color: #24467f; }
 .semo-title { position: absolute; top: 56px; left: 27px; font: 500 50px/1.2 var(--display); letter-spacing: -4px; }
 .semo-title>span { display: block; font: 500 12px/1.8 var(--body); letter-spacing: 0; margin-top: 10px; }
@@ -325,12 +330,17 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
   from { transform: scaleX(0); }
   to { transform: scaleX(1); }
 }
+@keyframes orecast-transfer {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
 @media (prefers-reduced-motion: no-preference) {
   .project-open:is(:focus-visible, :active) {
     --voice-animation: voice-level;
     --route-animation: route-draw;
     --drive-animation: route-drive;
     --score-animation: score-fill;
+    --orecast-animation: orecast-transfer;
     --back-paper: translate(-7px, -5px) rotate(-3deg);
     --front-paper: translate(3px, 2px);
     --source-color: #d3e3ff;
@@ -341,6 +351,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
   .waveform i:nth-child(5n) { animation-duration: .57s; animation-delay: -.16s; }
   .route-line { animation: var(--route-animation, none) 2.8s ease-in-out infinite; }
   .route-traveler { animation: var(--drive-animation, none) 2.8s ease-in-out infinite; }
+  .orecast-packet { animation: var(--orecast-animation, none) 3.6s linear infinite; }
   .score-row i:after { transform-origin: left; animation: var(--score-animation, none) .85s cubic-bezier(.22, 1, .36, 1) backwards; }
   .score-row:nth-child(3) i:after { animation-delay: .12s; }
   .score-row:nth-child(4) i:after { animation-delay: .24s; }
@@ -354,6 +365,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
     --route-animation: route-draw;
     --drive-animation: route-drive;
     --score-animation: score-fill;
+    --orecast-animation: orecast-transfer;
     --back-paper: translate(-7px, -5px) rotate(-3deg);
     --front-paper: translate(3px, 2px);
     --source-color: #d3e3ff;

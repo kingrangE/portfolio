@@ -38,7 +38,7 @@ export default function ProjectToc({ sections }) {
   return (
     <>
       <aside className="desktop-toc">
-        <p>설계·문제 해결 사례</p>
+        <p>설계, 문제 해결 사례</p>
         <nav aria-label="프로젝트 목차"><ol>{links}</ol></nav>
         <Link className="toc-back" href="/projects/">모든 프로젝트 보기</Link>
       </aside>

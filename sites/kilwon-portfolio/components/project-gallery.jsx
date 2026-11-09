@@ -24,11 +24,11 @@ export default function ProjectGallery({ featured = false }) {
         <fieldset><legend>기술과 설계로 찾기</legend><div className="filters keyword-filters">
           {['all', ...keywords.slice(0, 11)].map(tag => <button key={tag} className={`filter${keyword === tag ? ' active' : ''}`}
             aria-pressed={keyword === tag} onClick={() => setKeyword(tag === keyword ? 'all' : tag)}>{tag === 'all' ? '전체' : tag}</button>)}
-        </div><details className="more-keywords"><summary>다른 키워드 {keywords.length - 11}개{keywords.slice(11).includes(keyword) && ` · ${keyword} 선택됨`}</summary>
+        </div><details className="more-keywords"><summary>다른 키워드 {keywords.length - 11}개{keywords.slice(11).includes(keyword) && ` / ${keyword} 선택됨`}</summary>
           <div className="filters keyword-filters">{keywords.slice(11).map(tag => <button key={tag} className={`filter${keyword === tag ? ' active' : ''}`}
             aria-pressed={keyword === tag} onClick={() => setKeyword(tag === keyword ? 'all' : tag)}>{tag}</button>)}</div>
         </details></fieldset>
-        <div className="catalog-results"><p role="status">{visible.length}개 프로젝트{role !== 'all' && ` · ${roles.find(item => item.id === role).label}`}{keyword !== 'all' && ` · ${keyword}`}</p>
+        <div className="catalog-results"><p role="status">{visible.length}개 프로젝트{role !== 'all' && ` / ${roles.find(item => item.id === role).label}`}{keyword !== 'all' && ` / ${keyword}`}</p>
           {(role !== 'all' || keyword !== 'all') && <button className="text-link" onClick={reset}>필터 초기화</button>}
         </div>
       </div>}

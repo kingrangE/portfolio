@@ -46,10 +46,10 @@ export function addContent(source, input) {
   const sectionInput = input.section;
   if (!sectionInput || typeof sectionInput !== 'object') throw new Error('사례 내용을 입력해주세요.');
   const id = text(sectionInput.id, '사례 주소');
-  if (!/^[a-z][a-z0-9-]{0,79}$/.test(id)) throw new Error('사례 주소는 영문 소문자로 시작하고 소문자·숫자·하이픈만 사용할 수 있습니다.');
+  if (!/^[a-z][a-z0-9-]{0,79}$/.test(id)) throw new Error('사례 주소는 영문 소문자로 시작하고 소문자, 숫자, 하이픈만 사용할 수 있습니다.');
   const section = { id };
   for (const [key, label] of Object.entries({ title: '사례 제목', lead: '한 줄 요약', situation: '문제 상황', task: '해결할 과제', result: '결과' })) section[key] = text(sectionInput[key], label);
-  section.tags = list(sectionInput.tags, '사례 기술·키워드');
+  section.tags = list(sectionInput.tags, '사례 기술, 키워드');
   section.action = list(sectionInput.action, '작업 내용');
   for (const key of ['note', 'actionTitle', 'implementation']) {
     const value = text(sectionInput[key], key, true);
@@ -76,15 +76,15 @@ export function addContent(source, input) {
     const info = input.project;
     if (!info || typeof info !== 'object') throw new Error('프로젝트 정보를 입력해주세요.');
     slug = text(info.slug, '프로젝트 주소');
-    if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug) || slug.length > 80) throw new Error('프로젝트 주소는 영문 소문자·숫자·하이픈으로 입력해주세요.');
+    if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug) || slug.length > 80) throw new Error('프로젝트 주소는 영문 소문자, 숫자, 하이픈으로 입력해주세요.');
     if (projects.elements.some(node => property(node, 'slug').value === slug)) throw new Error('이미 사용 중인 프로젝트 주소입니다.');
     if (!projectGroups.includes(info.group)) throw new Error('프로젝트 분류를 선택해주세요.');
     const categories = list(info.categories, '직무');
     if (!categories.every(category => roles.some(role => role.id === category))) throw new Error('지원하지 않는 직무입니다.');
     value = { slug, group: info.group };
-    for (const [key, label] of Object.entries({ name: '프로젝트 이름', subtitle: '부제', summary: '프로젝트 설명', organization: '소속·수상 이력', period: '기간', role: '담당 업무', status: '팀 구성', category: '분야' })) value[key] = text(info[key], label);
+    for (const [key, label] of Object.entries({ name: '프로젝트 이름', subtitle: '부제', summary: '프로젝트 설명', organization: '소속, 수상 이력', period: '기간', role: '담당 업무', status: '팀 구성', category: '분야' })) value[key] = text(info[key], label);
     value.categories = categories;
-    value.tags = list(info.tags, '프로젝트 기술·키워드');
+    value.tags = list(info.tags, '프로젝트 기술, 키워드');
     value.decision = section.lead;
     value.flow = info.flow?.length ? list(info.flow, '처리 흐름') : [];
     const url = text(info.url, '코드 주소', true);

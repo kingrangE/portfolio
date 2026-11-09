@@ -18,7 +18,7 @@ for (const project of projects) {
   const html = readFileSync(`out${route}index.html`, 'utf8');
   const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
   assert.equal(new Set(ids).size, ids.length, `Duplicate IDs in ${route}`);
-  assert.ok(html.includes('aria-label="설계·문제 해결 사례 태그"'), `Missing case filters in ${route}`);
+  assert.ok(html.includes('aria-label="설계, 문제 해결 사례 태그"'), `Missing case filters in ${route}`);
   assert.equal((html.match(/class="case-narrative"/g) || []).length, project.sections.length, `Missing case narratives in ${route}`);
   for (const section of project.sections) {
     assert.ok(html.includes(`href="#${section.id}"`), `Missing TOC link ${route}#${section.id}`);

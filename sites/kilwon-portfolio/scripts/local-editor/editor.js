@@ -88,7 +88,7 @@ function openCreate(kind) {
   document.querySelector('#create-description').textContent = isProject ? '기본 정보와 첫 사례를 입력하세요. 추가하면 프로젝트 목록과 상세 페이지에 표시됩니다.' : '프로젝트를 선택하고 새 사례를 입력하세요. 기존 사례 뒤에 추가됩니다.';
   document.querySelector('#section-legend').textContent = isProject ? '첫 사례' : '추가할 사례';
   createForm.elements.namedItem('section.tags').required = !isProject;
-  document.querySelector('#section-tags-help').textContent = isProject ? '쉼표로 구분합니다. 비워두면 프로젝트 기술·키워드를 사용합니다.' : '쉼표로 구분합니다. 하나 이상 입력하세요.';
+  document.querySelector('#section-tags-help').textContent = isProject ? '쉼표로 구분합니다. 비워두면 프로젝트 기술, 키워드를 사용합니다.' : '쉼표로 구분합니다. 하나 이상 입력하세요.';
   createForm.elements.namedItem('section.id').value = isProject ? 'overview' : '';
   const currentSlug = page.value.match(/^\/projects\/([^/]+)\/$/)?.[1];
   if (currentSlug) targetProject.value = currentSlug;
@@ -157,7 +157,7 @@ function select(message) {
   selected = { file: file.file, revision: file.revision, ids: message.ids, value: token.value };
   input.value = token.value;
   dirty = false;
-  document.querySelector('#selection').textContent = `${file.file}${message.ids.length > 1 ? ` · 동일 문구 ${message.ids.length}곳 함께 저장` : ''}`;
+  document.querySelector('#selection').textContent = `${file.file}${message.ids.length > 1 ? ` / 동일 문구 ${message.ids.length}곳 함께 저장` : ''}`;
   status.textContent = '내용을 수정한 뒤 저장하세요.';
   controls();
   input.focus();

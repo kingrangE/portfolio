@@ -22,7 +22,7 @@ export default function ProjectCases({ name, sections, nextProject }) {
   return <>
     <section className="case-explorer" id="case-explorer" aria-labelledby="cases-title">
       <h2 id="cases-title">핵심 설계와 문제 해결</h2>
-      <div className="filters case-filters" role="group" aria-label="설계·문제 해결 사례 태그">
+      <div className="filters case-filters" role="group" aria-label="설계, 문제 해결 사례 태그">
         {['all', ...tags].map(tag => <button key={tag} className={`filter${selected === tag ? ' active' : ''}`}
           aria-pressed={selected === tag} onClick={() => setSelected(selected === tag ? 'all' : tag)}>
           {tag === 'all' ? '전체 사례' : tag}
@@ -32,7 +32,7 @@ export default function ProjectCases({ name, sections, nextProject }) {
     </section>
     <div className="reading-layout case-reading-layout">
       <ProjectToc sections={visible} />
-      <article className="project-article" aria-label={`${name} 설계·문제 해결 사례`}>
+      <article className="project-article" aria-label={`${name} 설계, 문제 해결 사례`}>
         {sections.map(section => <section key={section.id} id={section.id} className="case-section engineering-case"
           hidden={selected !== 'all' && !section.tags.includes(selected)} aria-labelledby={`${section.id}-title`}>
           {section.aliases?.map(id => <span className="case-alias" id={id} key={id} aria-hidden="true" />)}

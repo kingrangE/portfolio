@@ -32,7 +32,7 @@ export default async function ProjectPage({ params }) {
           <p className="detail-subtitle">{project.subtitle}</p>
           <p className="detail-summary">{project.summary}</p>
           <p className="detail-context">{projectEvidenceNotice}</p>
-          <p className="detail-context">{project.organization} · {project.period}<br />{project.role}</p>
+          <p className="detail-context">{project.organization} / {project.period}<br />{project.role}</p>
           <div className="tag-row">{project.tags.map(tag => <span key={tag}>{tag}</span>)}</div>
           <div className="detail-links">
             {project.url ? <a className="button primary" href={project.url} target="_blank" rel="noopener noreferrer">GitHub에서 코드 보기</a>

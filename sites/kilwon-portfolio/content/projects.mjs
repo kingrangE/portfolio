@@ -660,7 +660,7 @@ export const projects = [
         "version": "학술제 버전"
       },
       {
-        "id": "voice",
+        "id": "voice-output",
         "title": "음성이 없어도 텍스트 응답은 남기는 회화 처리",
         "tags": [
           "STT / TTS",

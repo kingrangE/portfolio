@@ -12,6 +12,8 @@ test('project URLs and section links are unique and valid', () => {
     assert.equal(new Set(project.tags).size, project.tags.length);
     assert.ok(project.sections.length >= 1);
     assert.equal(new Set(project.sections.map(section => section.id)).size, project.sections.length);
+    const anchors = ['case-explorer', 'cases-title', ...project.sections.flatMap(section => [section.id, `${section.id}-title`, ...(section.aliases || [])])];
+    assert.equal(new Set(anchors).size, anchors.length, `${project.slug}: section IDs, heading IDs and aliases must not collide`);
     for (const section of project.sections) {
       assert.match(section.id, /^[a-z][a-z0-9-]*$/);
       assert.ok(section.title.trim());

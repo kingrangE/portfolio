@@ -31,7 +31,7 @@ export default async function ProjectPage({ params }) {
           <h1>{project.name}</h1>
           <p className="detail-subtitle">{project.subtitle}</p>
           <p className="detail-summary">{project.summary}</p>
-          <p className="detail-context">{projectEvidenceNotice}</p>
+          <p className="detail-context">{project.group === '수상' ? projectEvidenceNotice : '재직 중 수행한 업무와 구현 경험을 정리한 회사 프로젝트입니다.'}</p>
           <p className="detail-context">{project.organization} / {project.period}<br />{project.role}</p>
           <div className="tag-row">{project.tags.map(tag => <span key={tag}>{tag}</span>)}</div>
           <div className="detail-links">

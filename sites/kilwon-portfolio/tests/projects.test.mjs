@@ -25,8 +25,8 @@ test('project URLs and section links are unique and valid', () => {
   }
 });
 
-test('home features exactly the original four projects without losing deep links', () => {
-  assert.deepEqual(projects.filter(project => project.featured).map(project => project.slug), ['gaudi', 'talky', 'softeer', 'semo']);
+test('home features the selected four projects in the requested order', () => {
+  assert.deepEqual(projects.filter(project => project.featured).map(project => project.slug), ['softeer', 'orecast', 'talky', 'semo']);
   assert.ok(projects.length >= 12);
 });
 

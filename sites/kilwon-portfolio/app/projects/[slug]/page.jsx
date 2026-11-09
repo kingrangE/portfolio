@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { projects } from '../../../content/projects.mjs';
+import { projects, projectEvidenceNotice } from '../../../content/projects.mjs';
 import ProjectVisual from '../../../components/project-visual';
 import ProjectCases from '../../../components/project-cases';
 
@@ -31,6 +31,7 @@ export default async function ProjectPage({ params }) {
           <h1>{project.name}</h1>
           <p className="detail-subtitle">{project.subtitle}</p>
           <p className="detail-summary">{project.summary}</p>
+          <p className="detail-context">{projectEvidenceNotice}</p>
           <p className="detail-context">{project.organization} · {project.period}<br />{project.role}</p>
           <div className="tag-row">{project.tags.map(tag => <span key={tag}>{tag}</span>)}</div>
           <div className="detail-links">

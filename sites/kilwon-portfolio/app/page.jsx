@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import ProjectGallery from "../components/project-gallery";
-import { projects } from "../content/projects.mjs";
+import { projects, projectEvidenceNotice } from "../content/projects.mjs";
 
 export default function Home() {
   return (
@@ -21,7 +21,7 @@ export default function Home() {
       </figure>
     </section>
     <section className="projects wrap section" id="projects" aria-labelledby="projects-title">
-      <div className="section-top"><div><h2 id="projects-title">대표 프로젝트</h2><p className="section-description">{"Platform, Agent, Data Engineering, RAG 프로젝트입니다."}</p></div></div>
+      <div className="section-top"><div><h2 id="projects-title">대표 프로젝트</h2><p className="section-description">{"Platform, Agent, Data Engineering, RAG 프로젝트입니다."}</p><p className="section-description">{projectEvidenceNotice}</p></div></div>
       <ProjectGallery featured />
       <div className="all-work">
         <Link className="button primary all-work-button" href="/projects/">전체 {projects.length}개 프로젝트 보기</Link>

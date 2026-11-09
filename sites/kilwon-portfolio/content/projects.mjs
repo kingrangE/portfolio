@@ -1,3 +1,5 @@
+export const projectEvidenceNotice = '개인·팀 프로젝트의 기술·구현 내용은 GitHub 커밋 기록과 구현 코드를 바탕으로 작성했습니다. 회사 프로젝트는 재직 중 수행한 업무와 프로젝트 기록을 바탕으로 작성했습니다.';
+
 export const projects = [
   {
     "featured": true,
@@ -192,7 +194,7 @@ export const projects = [
       "ml",
       "product"
     ],
-    "organization": "솔브레인 인턴",
+    "organization": "솔브레인 인턴 · 회사 프로젝트",
     "period": "2026.05–06",
     "role": "구매팀 데이터 수집·분석·예측 제품 1인 개발",
     "status": "1인 개발",
@@ -777,7 +779,7 @@ export const projects = [
       "llm",
       "product"
     ],
-    "organization": "솔브레인 인턴",
+    "organization": "솔브레인 인턴 · 회사 프로젝트",
     "period": "2026.04–06",
     "role": "기획·개발 1인",
     "status": "1인 개발",
@@ -874,7 +876,7 @@ export const projects = [
       "data",
       "product"
     ],
-    "organization": "솔브레인 인턴",
+    "organization": "솔브레인 인턴 · 회사 프로젝트",
     "period": "2026.03–04",
     "role": "SCM팀 업무 분석·데스크톱 앱 1인 개발",
     "status": "1인 개발",
@@ -989,7 +991,7 @@ export const projects = [
       "data",
       "product"
     ],
-    "organization": "솔브레인 인턴",
+    "organization": "솔브레인 인턴 · 회사 프로젝트",
     "period": "2026.04–05",
     "role": "EX팀 평가 웹 서비스 1인 개발",
     "status": "1인 개발",
@@ -1133,7 +1135,7 @@ export const projects = [
     "categories": [
       "ml"
     ],
-    "organization": "왓츠랩 인턴",
+    "organization": "왓츠랩 인턴 · 회사 프로젝트",
     "period": "인턴십 2023.12–2025.02",
     "role": "3D 생성·AutoRigging 1인 개발",
     "status": "1인 개발",
@@ -1193,7 +1195,7 @@ export const projects = [
       "ml",
       "data"
     ],
-    "organization": "왓츠랩 인턴",
+    "organization": "왓츠랩 인턴 · 회사 프로젝트",
     "period": "2024.11–2025.02",
     "role": "데이터 정제·피처 설계·모델·SHAP",
     "status": "진단 가능성 PoC",
@@ -1288,7 +1290,7 @@ export const projects = [
       "ml",
       "product"
     ],
-    "organization": "왓츠랩 인턴",
+    "organization": "왓츠랩 인턴 · 회사 프로젝트",
     "period": "2024.12–2025.02",
     "role": "2인 중 백엔드·LLM·사용자 웹 담당",
     "status": "2인 개발",

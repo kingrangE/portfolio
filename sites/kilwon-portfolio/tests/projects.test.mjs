@@ -39,7 +39,11 @@ test('role and keyword filters intersect, and resetting restores the catalog', (
   assert.deepEqual(filter('data', 'Airflow').map(project => project.slug), ['softeer', 'semo']);
   assert.deepEqual(filter('llm', 'LoRA').map(project => project.slug), ['stage-anxiety']);
   assert.equal(filter('data', 'LoRA').length, 0);
-  assert.ok(filter('all', 'Neo4j').some(project => project.slug === 'meeting-assistant'));
+  for (const project of samples) {
+    for (const keyword of project.tags) {
+      assert.ok(filter('all', keyword).includes(project), `${project.slug}: searchable by ${keyword}`);
+    }
+  }
   assert.ok(filter('ml', 'all').every(project => !project.categories.includes('llm') || project.slug === 'stage-anxiety'));
 });
 

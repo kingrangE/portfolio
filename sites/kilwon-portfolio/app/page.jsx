@@ -10,8 +10,9 @@ export default function Home() {
 
     <section className="hero wrap" aria-labelledby="hero-title">
       <div className="hero-copy">
-        {/* 사용자가 고정한 자기소개입니다. 명시적인 변경 요청이 있을 때만 수정합니다. */}
-        <h1 id="hero-title" className="fixed-intro">꾸준한 학습과 모든 실패 가능성에 대한 반증을 통해 현재 상황에 맞는 최선의 정답을 찾고자 하는 개발자 전길원입니다.</h1>
+        {/* 상단 소개와 하단 본문은 사용자 고정 원문입니다. 명시적인 변경 요청 없이 수정하지 않습니다. */}
+        <p className="intro-name">모든 실패 가능성에 대한 반증을 통해 현재 상황에 맞는 최선의 정답을 찾고자 하는 개발자 전길원입니다.</p>
+        <h1 id="hero-title">데이터 파이프라인과 LLM 서비스를 개발합니다.</h1>
         <p className="hero-description">학부 시절 AI/LLM/Agent 서비스를 개발하며, 좋은 프로덕트는 탄탄한 데이터 기반에서 시작함을 느꼈습니다. 이 경험에서 현재는 LLM, Agent 뿐만 아니라 데이터 처리/적재/품질 관리를 위한 데이터 엔지니어링과 모델링, AI를 개발에 효과적으로 활용하기 위한 하네스 엔지니어링과 Practice AI를 꾸준히 학습하고 있습니다.</p>
         <div className="hero-actions"><a className="button primary" href="https://kingrange.github.io/Resume/" target="_blank" rel="noopener noreferrer">이력서 확인</a></div>
         <div className="hero-socials"><a href="https://github.com/kingrangE" target="_blank" rel="noopener noreferrer">GitHub</a><a href="https://kingrang-e.tistory.com/" target="_blank" rel="noopener noreferrer">개발 블로그</a></div>

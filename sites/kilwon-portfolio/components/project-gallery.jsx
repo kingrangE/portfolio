@@ -2,12 +2,14 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { projects, engineeringFields, fieldsForProject, matchesProject, projectGroups } from '../content/projects.mjs';
+import { projects, engineeringFields, problemTypes, fieldsForProject, matchesSection, matchesProject, projectGroups } from '../content/projects.mjs';
 import ProjectVisual from './project-visual';
 
 export default function ProjectGallery({ featured = false }) {
   const [field, setField] = useState('all');
-  const visible = projects.filter(project => featured ? project.featured : matchesProject(project, field));
+  const [problem, setProblem] = useState('all');
+  const visible = projects.filter(project => featured ? project.featured : matchesProject(project, field, problem));
+  function reset() { setField('all'); setProblem('all'); }
   return (
     <>
       {!featured && <div className="catalog-filters">
@@ -17,8 +19,14 @@ export default function ProjectGallery({ featured = false }) {
               aria-pressed={field === filter.id} onClick={() => setField(filter.id === field ? 'all' : filter.id)}>{filter.label}</button>
           ))}
         </div></fieldset>
-        <div className="catalog-results"><p role="status">{visible.length}개 프로젝트{field !== 'all' && ` / ${engineeringFields.find(item => item.id === field).label}`}</p>
-          {field !== 'all' && <button className="text-link" onClick={() => setField('all')}>전체 보기</button>}
+        <fieldset><legend>문제 해결 유형</legend><div className="filters">
+          {[{ id: 'all', label: '전체' }, ...problemTypes].map(filter => (
+            <button key={filter.id} className={`filter${problem === filter.id ? ' active' : ''}`}
+              aria-pressed={problem === filter.id} onClick={() => setProblem(filter.id === problem ? 'all' : filter.id)}>{filter.label}</button>
+          ))}
+        </div></fieldset>
+        <div className="catalog-results"><p role="status">{visible.length}개 프로젝트{field !== 'all' && ` / ${engineeringFields.find(item => item.id === field).label}`}{problem !== 'all' && ` / ${problemTypes.find(item => item.id === problem).label}`}</p>
+          {(field !== 'all' || problem !== 'all') && <button className="text-link" onClick={reset}>전체 보기</button>}
         </div>
       </div>}
       {(featured ? ['대표 프로젝트'] : projectGroups).map(group => {
@@ -28,7 +36,7 @@ export default function ProjectGallery({ featured = false }) {
           {!featured && <h2>{group} <span>{grouped.length}개</span></h2>}
           <div className={featured ? 'project-grid' : 'catalog-grid'}>
         {grouped.map(project => {
-          const relatedCase = project.sections.find(section => section.fields?.includes(field));
+          const relatedCase = field !== 'all' || problem !== 'all' ? project.sections.find(section => matchesSection(section, field, problem)) : undefined;
           const href = `/projects/${project.slug}/${relatedCase ? `#${relatedCase.id}` : ''}`;
           return (
           <article key={project.slug} id={project.slug} className={featured ? 'project-card' : 'catalog-card'}>
@@ -52,7 +60,7 @@ export default function ProjectGallery({ featured = false }) {
           </div>
         </section>;
       })}
-      {!featured && visible.length === 0 && <div className="catalog-empty"><p>이 분야의 프로젝트가 없습니다.</p><button className="button primary" onClick={() => setField('all')}>전체 프로젝트 보기</button></div>}
+      {!featured && visible.length === 0 && <div className="catalog-empty"><p>선택한 분야와 문제 해결 유형에 해당하는 사례가 없습니다.</p><button className="button primary" onClick={reset}>전체 프로젝트 보기</button></div>}
     </>
   );
 }

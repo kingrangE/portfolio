@@ -11,6 +11,7 @@ assert.equal((home.match(/class="project-card"/g) || []).length, projects.filter
 assert.equal((catalog.match(/class="catalog-card"/g) || []).length, projects.length);
 assert.ok(home.includes('id="hero-title"'));
 assert.ok(!home.includes('project-dialog'));
+assert.ok(catalog.includes('문제 해결 유형'), 'Missing problem type filters in catalog');
 for (const project of projects) {
   const route = `/projects/${project.slug}/`;
   assert.ok(catalog.includes(`href="${basePath}${route}"`), `Catalog must link to ${route}`);
@@ -19,6 +20,7 @@ for (const project of projects) {
   const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
   assert.equal(new Set(ids).size, ids.length, `Duplicate IDs in ${route}`);
   assert.ok(html.includes('aria-label="사례 분야"'), `Missing case filters in ${route}`);
+  assert.ok(html.includes('aria-label="사례 문제 해결 유형"'), `Missing problem type filters in ${route}`);
   assert.equal((html.match(/class="case-narrative"/g) || []).length, project.sections.length, `Missing case narratives in ${route}`);
   for (const section of project.sections) {
     assert.ok(html.includes(`href="#${section.id}"`), `Missing TOC link ${route}#${section.id}`);

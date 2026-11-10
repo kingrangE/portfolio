@@ -26,7 +26,7 @@ export default function Home() {
       <ProjectGallery featured />
       <div className="all-work">
         <Link className="button primary all-work-button" href="/projects/">전체 {projects.length}개 프로젝트 보기</Link>
-        <p>개인 프로젝트와 인턴십, 대회에서 한 작업을 분야별로 볼 수 있습니다.</p>
+        <p>개인 프로젝트와 인턴십, 대회에서 한 작업을 분야와 문제 해결 유형별로 볼 수 있습니다.</p>
       </div>
     </section>
     <section className="tech-stack wrap section" id="tech-stack" aria-labelledby="tech-stack-title">

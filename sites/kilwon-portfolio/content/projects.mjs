@@ -83,6 +83,9 @@ export const projects = [
         "note": "기사 2,000명은 합성한 분석 대상입니다. 실제 업체의 매출 증가를 측정한 프로젝트는 아닙니다.",
         "fields": [
           "data"
+        ],
+        "problemTypes": [
+          "design"
         ]
       },
       {
@@ -106,6 +109,9 @@ export const projects = [
         "implementation": "원본 수집 무결성 확인 → 정제 전 전체 행 검사\n  → 정상, 제외 건수 대조 → 금액, 기사, 재고 검증\n  ├─ 통과: 성공 표식 발행 → 후속 작업에서 사용\n  └─ 실패: 원인 기록, 격리 → 후속 사용 차단",
         "fields": [
           "data"
+        ],
+        "problemTypes": [
+          "quality"
         ]
       },
       {
@@ -128,6 +134,9 @@ export const projects = [
         "result": "일시 오류는 정해진 정책으로 재시도하고, 입력을 고쳐야 하는 실패는 원인을 남겼습니다. 계산을 실행하지 못한 지역과 월도 알림에서 확인할 수 있게 했습니다.",
         "fields": [
           "data"
+        ],
+        "problemTypes": [
+          "recovery"
         ]
       },
       {
@@ -154,6 +163,10 @@ export const projects = [
         "implementation": "지역, 월별 저장 잠금 → 입력, 설정 식별자 조회\n  ├─ 기존 실행: 저장된 버전 반환\n  └─ 새 실행: 결과, 입력 이력 저장 → 적재 건수 확인 → 함께 확정",
         "fields": [
           "data"
+        ],
+        "problemTypes": [
+          "quality",
+          "recovery"
         ]
       },
       {
@@ -175,6 +188,10 @@ export const projects = [
         "result": "새 수집이 끝나지 않았으면 완료된 이전 버전을 선택합니다. 여러 월을 다시 처리해도 해당 결과에 포함된 파티션만 교체합니다.",
         "fields": [
           "data"
+        ],
+        "problemTypes": [
+          "recovery",
+          "quality"
         ]
       },
       {
@@ -198,6 +215,9 @@ export const projects = [
         "note": "Spark 3.5.6, Java 17, 로컬 3코어의 과거 비교 기록입니다. CSV와 DB 저장은 측정 범위에서 제외됐으며 운영 환경의 감소율로 일반화하지 않습니다.",
         "fields": [
           "data"
+        ],
+        "problemTypes": [
+          "performance"
         ]
       },
       {
@@ -221,6 +241,9 @@ export const projects = [
         "note": "Spark 3.5.6, 로컬 3코어의 배정 루프 비교 기록입니다. 전체 파이프라인이나 운영 EMR의 실행 시간 감소율을 뜻하지 않습니다.",
         "fields": [
           "data"
+        ],
+        "problemTypes": [
+          "performance"
         ]
       },
       {
@@ -243,6 +266,10 @@ export const projects = [
         "result": "월별 기사 현황은 전월 상태를 이어받습니다. 전월 데이터가 없거나 설정이 달라지면 생성을 멈춰, 연속성이 끊긴 자료가 정상 결과로 남지 않도록 했습니다.",
         "fields": [
           "data"
+        ],
+        "problemTypes": [
+          "quality",
+          "design"
         ]
       },
       {
@@ -265,6 +292,10 @@ export const projects = [
         "result": "운행이 한 그룹에만 속하도록 후보를 만들고, Python으로 한 번에 넘기는 데이터도 줄였습니다. 계약, 등급, 근무 조건별 제외 건수로 후보가 부족한 이유를 확인합니다.",
         "fields": [
           "data"
+        ],
+        "problemTypes": [
+          "performance",
+          "design"
         ]
       },
       {
@@ -288,6 +319,9 @@ export const projects = [
         "note": "시간순 탐욕 배정이며 전체 기사와 운행에 대한 전역 최적해를 보장하는 방식은 아닙니다.",
         "fields": [
           "data"
+        ],
+        "problemTypes": [
+          "quality"
         ]
       },
       {
@@ -309,6 +343,9 @@ export const projects = [
         "result": "원천 25개 컬럼 중 3개만 읽도록 범위를 줄였습니다. 성향 생성에 쓰지 않는 문자열 데이터를 메모리에 올리는 경로를 제거했습니다.",
         "fields": [
           "data"
+        ],
+        "problemTypes": [
+          "performance"
         ]
       },
       {
@@ -332,6 +369,10 @@ export const projects = [
         "note": "호출 구조의 변화이며 실행 시간이 세 배 빨라졌다는 측정 결과를 뜻하지 않습니다.",
         "fields": [
           "data"
+        ],
+        "problemTypes": [
+          "performance",
+          "design"
         ]
       }
     ],
@@ -406,6 +447,10 @@ export const projects = [
         "actionTitle": "사이트마다 다른 가격 정보를 품목명, 날짜, 가격으로 통일",
         "fields": [
           "data"
+        ],
+        "problemTypes": [
+          "design",
+          "quality"
         ]
       },
       {
@@ -430,6 +475,10 @@ export const projects = [
         "implementation": "미처리 메시지 우선 조회 → 품목, 날짜별 가격 저장 → DB 저장 확정\n  → 메시지 처리 완료 확정\n  ├─ 저장 전 실패: 메시지를 다시 처리\n  └─ 저장 후 확인 전 중단: 같은 가격 행을 갱신",
         "fields": [
           "data"
+        ],
+        "problemTypes": [
+          "recovery",
+          "quality"
         ]
       },
       {
@@ -452,6 +501,9 @@ export const projects = [
         "actionTitle": "계산용 채움과 관측 품질을 별도 입력에서 계산",
         "fields": [
           "data"
+        ],
+        "problemTypes": [
+          "quality"
         ]
       },
       {
@@ -475,6 +527,10 @@ export const projects = [
         "note": "데이터 버전은 전체 내용 해시가 아닌 상태 조합이며, 계산 버전 상수는 수동 갱신합니다.",
         "fields": [
           "backend"
+        ],
+        "problemTypes": [
+          "performance",
+          "quality"
         ]
       },
       {
@@ -497,6 +553,9 @@ export const projects = [
         "result": "요청 로그에서 전체 지연을 확인한 뒤 내부 계산 단계의 기록과 대조할 수 있습니다.",
         "fields": [
           "backend"
+        ],
+        "problemTypes": [
+          "operations"
         ]
       },
       {
@@ -521,6 +580,10 @@ export const projects = [
         "implementation": "학습 설정, 데이터 버전 확인\n  → 쓰기 잠금 확보\n  → 동일 작업 확인, 대기열 여유 검사, 신규 예약\n  → 진행 조회 번호 반환 → 백그라운드 학습 → 상태 조회",
         "fields": [
           "backend"
+        ],
+        "problemTypes": [
+          "recovery",
+          "design"
         ]
       },
       {
@@ -544,6 +607,10 @@ export const projects = [
         "fields": [
           "data",
           "ml"
+        ],
+        "problemTypes": [
+          "quality",
+          "evaluation"
         ]
       },
       {
@@ -566,6 +633,9 @@ export const projects = [
         "actionTitle": "학습, 검증 기간을 분리하고 모델 선택 이후 별도 평가",
         "fields": [
           "ml"
+        ],
+        "problemTypes": [
+          "evaluation"
         ]
       },
       {
@@ -588,6 +658,9 @@ export const projects = [
         "result": "규제는 표준화한 변수에 적용하고, 표시할 계수와 절편은 원래 입력 단위로 환산했습니다.",
         "fields": [
           "ml"
+        ],
+        "problemTypes": [
+          "design"
         ]
       },
       {
@@ -610,6 +683,9 @@ export const projects = [
         "note": "보정 가중치는 검증 구간에서 선택한 값입니다. 미래 성능이나 예측구간의 실제 포함 비율을 보장하는 수치로 제시하지 않습니다.",
         "fields": [
           "ml"
+        ],
+        "problemTypes": [
+          "evaluation"
         ]
       },
       {
@@ -633,7 +709,10 @@ export const projects = [
           "scope"
         ],
         "actionTitle": "시차 히트맵의 상위 후보를 예측 피처 설정으로 전달",
-        "fields": []
+        "fields": [],
+        "problemTypes": [
+          "design"
+        ]
       },
       {
         "id": "sharing",
@@ -653,7 +732,10 @@ export const projects = [
         ],
         "result": "수신자는 조건을 다시 입력하지 않고 최신 자료를 분석할 수 있습니다. 특정 시점의 숫자가 필요하면 내보낸 파일을 사용합니다.",
         "note": "공유 링크는 과거에 본 숫자를 고정 보존하는 스냅샷이 아닙니다.",
-        "fields": []
+        "fields": [],
+        "problemTypes": [
+          "design"
+        ]
       },
       {
         "id": "model-scope",
@@ -674,6 +756,10 @@ export const projects = [
         "result": "TFT와 자동 재학습은 제거하고 기본 모델 다섯 종류와 자동 선택, 앙상블은 유지했습니다.",
         "fields": [
           "ml"
+        ],
+        "problemTypes": [
+          "design",
+          "evaluation"
         ]
       }
     ],
@@ -740,6 +826,9 @@ export const projects = [
         "version": "학술제 기획 / 이후 개인 고도화",
         "fields": [
           "agent"
+        ],
+        "problemTypes": [
+          "design"
         ]
       },
       {
@@ -769,6 +858,9 @@ export const projects = [
         "fields": [
           "rag",
           "agent"
+        ],
+        "problemTypes": [
+          "design"
         ]
       },
       {
@@ -799,6 +891,9 @@ export const projects = [
           "llm",
           "agent",
           "backend"
+        ],
+        "problemTypes": [
+          "design"
         ]
       },
       {
@@ -822,6 +917,9 @@ export const projects = [
         "fields": [
           "llm",
           "rag"
+        ],
+        "problemTypes": [
+          "evaluation"
         ]
       },
       {
@@ -844,6 +942,9 @@ export const projects = [
         "version": "개인 고도화",
         "fields": [
           "backend"
+        ],
+        "problemTypes": [
+          "recovery"
         ]
       },
       {
@@ -868,6 +969,10 @@ export const projects = [
         "fields": [
           "llm",
           "agent"
+        ],
+        "problemTypes": [
+          "design",
+          "evaluation"
         ]
       },
       {
@@ -892,6 +997,10 @@ export const projects = [
         "version": "학술제 이후 개인 고도화",
         "fields": [
           "llm"
+        ],
+        "problemTypes": [
+          "evaluation",
+          "design"
         ]
       },
       {
@@ -914,6 +1023,10 @@ export const projects = [
         "version": "학술제 이후 개인 고도화",
         "fields": [
           "backend"
+        ],
+        "problemTypes": [
+          "recovery",
+          "quality"
         ]
       }
     ],
@@ -992,6 +1105,9 @@ export const projects = [
           "data",
           "llm",
           "rag"
+        ],
+        "problemTypes": [
+          "design"
         ]
       },
       {
@@ -1015,6 +1131,10 @@ export const projects = [
         "version": "개인 재개발",
         "fields": [
           "data"
+        ],
+        "problemTypes": [
+          "operations",
+          "quality"
         ]
       },
       {
@@ -1039,6 +1159,9 @@ export const projects = [
         "fields": [
           "data",
           "rag"
+        ],
+        "problemTypes": [
+          "quality"
         ]
       },
       {
@@ -1063,6 +1186,10 @@ export const projects = [
         "fields": [
           "data",
           "rag"
+        ],
+        "problemTypes": [
+          "recovery",
+          "quality"
         ]
       },
       {
@@ -1087,6 +1214,10 @@ export const projects = [
         "fields": [
           "data",
           "rag"
+        ],
+        "problemTypes": [
+          "quality",
+          "operations"
         ]
       },
       {
@@ -1110,6 +1241,9 @@ export const projects = [
         "version": "개인 재개발",
         "fields": [
           "rag"
+        ],
+        "problemTypes": [
+          "quality"
         ]
       },
       {
@@ -1133,6 +1267,9 @@ export const projects = [
         "fields": [
           "llm",
           "rag"
+        ],
+        "problemTypes": [
+          "design"
         ]
       },
       {
@@ -1161,6 +1298,10 @@ export const projects = [
         "fields": [
           "llm",
           "rag"
+        ],
+        "problemTypes": [
+          "evaluation",
+          "operations"
         ]
       }
     ],
@@ -1239,6 +1380,9 @@ export const projects = [
         "fields": [
           "llm",
           "backend"
+        ],
+        "problemTypes": [
+          "design"
         ]
       },
       {
@@ -1261,6 +1405,9 @@ export const projects = [
         "result": "전체 페이지 번호 대신 이전, 다음으로 이동합니다. 목록에 표시할 문제와 그 문제의 사용자 상태만 읽도록 조회 범위를 줄였습니다.",
         "fields": [
           "backend"
+        ],
+        "problemTypes": [
+          "performance"
         ]
       },
       {
@@ -1283,6 +1430,9 @@ export const projects = [
         "result": "중복 행은 DB 제약으로 막고, 같은 사용자의 변경 요청은 잠금으로 직렬화했습니다. 같은 사용자가 동시에 보낸 변경은 먼저 실행 중인 요청을 기다립니다.",
         "fields": [
           "backend"
+        ],
+        "problemTypes": [
+          "quality"
         ]
       },
       {
@@ -1308,6 +1458,10 @@ export const projects = [
         "implementation": "생성 작업 수신 → 작업 ID로 기존 저장 결과 확인\n  ├─ 저장됨: 기존 문제 반환\n  └─ 미저장: 문제 생성 → 문제, 작업 ID 함께 저장\n  → 메시지 완료 확인 → 큐에서 제거",
         "fields": [
           "backend"
+        ],
+        "problemTypes": [
+          "recovery",
+          "quality"
         ]
       },
       {
@@ -1333,6 +1487,10 @@ export const projects = [
         "fields": [
           "llm",
           "backend"
+        ],
+        "problemTypes": [
+          "quality",
+          "recovery"
         ]
       },
       {
@@ -1356,6 +1514,10 @@ export const projects = [
         "fields": [
           "llm",
           "backend"
+        ],
+        "problemTypes": [
+          "recovery",
+          "design"
         ]
       },
       {
@@ -1379,6 +1541,9 @@ export const projects = [
         "note": "인증 요청 제한은 단일 Java 서버의 메모리 기준입니다.",
         "fields": [
           "backend"
+        ],
+        "problemTypes": [
+          "design"
         ]
       },
       {
@@ -1402,6 +1567,10 @@ export const projects = [
         "fields": [
           "backend",
           "cicd"
+        ],
+        "problemTypes": [
+          "operations",
+          "recovery"
         ]
       },
       {
@@ -1424,6 +1593,9 @@ export const projects = [
         "result": "API의 생존 상태와 생성 가능 여부를 별도로 볼 수 있습니다. 생성 실패와 작업 적체는 각각의 지표와 경보로 확인합니다.",
         "fields": [
           "backend"
+        ],
+        "problemTypes": [
+          "operations"
         ]
       },
       {
@@ -1446,6 +1618,9 @@ export const projects = [
         "result": "이미지 단계는 테스트한 JAR을 받아 패키징합니다. 원격 CI 시간과 캐시 적중률의 개선 수치는 측정하지 않았습니다.",
         "fields": [
           "cicd"
+        ],
+        "problemTypes": [
+          "operations"
         ]
       }
     ],
@@ -1516,6 +1691,9 @@ export const projects = [
         "actionTitle": "한 시나리오를 다섯 개의 관찰 가능한 행동으로 나누기",
         "fields": [
           "llm"
+        ],
+        "problemTypes": [
+          "design"
         ]
       },
       {
@@ -1540,6 +1718,9 @@ export const projects = [
         "note": "가중치와 감점은 설계한 채점 정책이며, 실험으로 최적화한 계수는 아닙니다.",
         "fields": [
           "llm"
+        ],
+        "problemTypes": [
+          "evaluation"
         ]
       },
       {
@@ -1566,6 +1747,10 @@ export const projects = [
         "implementation": "LLM: 테스트 의미 비교, 근거 품질, 기존 테스트 반복 여부 판정\n  ↓ 판정 결과 전달\n점수 산출: 정밀도, 재현율 계산 → 심각도, 근거 품질 가중치 반영",
         "fields": [
           "llm"
+        ],
+        "problemTypes": [
+          "evaluation",
+          "design"
         ]
       },
       {
@@ -1592,6 +1777,10 @@ export const projects = [
         "actionTitle": "올바른 발견, 오탐, 누락 수를 보존해 평가 근거 추적",
         "fields": [
           "llm"
+        ],
+        "problemTypes": [
+          "evaluation",
+          "quality"
         ]
       }
     ]
@@ -1655,6 +1844,10 @@ export const projects = [
         "implementation": "회의 음성\n  ├─ 짧은 음성 구간 → 크기가 제한된 대기열 → 실시간 자막\n  │                      └─ 가득 차면 오래된 구간 제거\n  └─ 전체 녹음 파일 → 전체 전사 → 회의록, 후속 할 일",
         "fields": [
           "backend"
+        ],
+        "problemTypes": [
+          "performance",
+          "design"
         ]
       },
       {
@@ -1677,6 +1870,10 @@ export const projects = [
         "result": "번역 응답 속도 차이를 발화 단위로 처리하고, 모든 언어를 기다리느라 자막 전환이 무한히 지연되지 않도록 했습니다.",
         "fields": [
           "backend"
+        ],
+        "problemTypes": [
+          "quality",
+          "design"
         ]
       },
       {
@@ -1699,6 +1896,9 @@ export const projects = [
         "result": "분할한 음성의 전사 결과를 원본 시간축과 화자 정보로 합쳐 사용할 수 있습니다.",
         "fields": [
           "backend"
+        ],
+        "problemTypes": [
+          "quality"
         ]
       },
       {
@@ -1722,6 +1922,10 @@ export const projects = [
         "note": "파일 기반 재구축은 저장 당시의 메타데이터를 사용합니다. 파일에 반영하지 않은 DB 변경까지 복구하는 백업은 아닙니다.",
         "fields": [
           "backend"
+        ],
+        "problemTypes": [
+          "recovery",
+          "design"
         ]
       },
       {
@@ -1744,6 +1948,9 @@ export const projects = [
         "result": "회의록에서 담당자별 할 일을 확인하고 수정하거나 완료 처리할 수 있습니다.",
         "fields": [
           "llm"
+        ],
+        "problemTypes": [
+          "design"
         ]
       },
       {
@@ -1767,6 +1974,9 @@ export const projects = [
         "fields": [
           "llm",
           "rag"
+        ],
+        "problemTypes": [
+          "design"
         ]
       },
       {
@@ -1792,6 +2002,9 @@ export const projects = [
         "actionTitle": "기본 전사 실패 시 준비된 OpenAI와 pyannote 조합 사용",
         "fields": [
           "backend"
+        ],
+        "problemTypes": [
+          "recovery"
         ]
       },
       {
@@ -1815,6 +2028,10 @@ export const projects = [
         "fields": [
           "llm",
           "backend"
+        ],
+        "problemTypes": [
+          "performance",
+          "design"
         ]
       },
       {
@@ -1834,7 +2051,11 @@ export const projects = [
           "회의 전사와 회의록 작성에 4개 국어 실시간 자막, 화자별 후속 할 일 추출과 관리, 회의 간 관계 연결을 더했습니다. 회의 중 언어 이해와 회의 후 업무 정리를 함께 지원하도록 범위를 넓혔습니다."
         ],
         "result": "팀에서 시작한 도구를 그룹사 다국적 임원 회의까지 배포했습니다.",
-        "fields": []
+        "fields": [],
+        "problemTypes": [
+          "design",
+          "operations"
+        ]
       },
       {
         "id": "relationships",
@@ -1857,6 +2078,9 @@ export const projects = [
         "version": "회의 관계 연결 설계",
         "fields": [
           "backend"
+        ],
+        "problemTypes": [
+          "design"
         ]
       }
     ]
@@ -1923,6 +2147,9 @@ export const projects = [
         "implementation": "완제품이 사용하는 반제품의 의존 관계 탐색\n  → 가장 하위 반제품부터 계산\n  → 계산 결과를 상위 반제품, 완제품에 반영",
         "fields": [
           "data"
+        ],
+        "problemTypes": [
+          "design"
         ]
       },
       {
@@ -1946,6 +2173,10 @@ export const projects = [
         "implementation": "자재, 플랜트별 저장 파일 확인\n  → 없는 자재만 SAP에서 순차 조회\n  → 기본 플랜트 실패분은 보조 플랜트 조회\n  → 성공 파일 유지, BOM 없음이 확인된 조합은 재시도 제외",
         "fields": [
           "data"
+        ],
+        "problemTypes": [
+          "recovery",
+          "design"
         ]
       },
       {
@@ -1968,6 +2199,9 @@ export const projects = [
         "result": "일반 파일은 openpyxl로, 보호된 파일은 Excel로 읽고 이후에는 같은 비교와 계산을 수행합니다.",
         "fields": [
           "data"
+        ],
+        "problemTypes": [
+          "design"
         ]
       },
       {
@@ -1990,6 +2224,9 @@ export const projects = [
         "actionTitle": "동기 다운로드와 비동기 Excel 정리의 책임 분리",
         "fields": [
           "data"
+        ],
+        "problemTypes": [
+          "performance"
         ]
       },
       {
@@ -2012,6 +2249,9 @@ export const projects = [
         "result": "선택한 완제품의 환급 계산값과 하위 반제품별 산출 근거를 함께 내보냅니다.",
         "fields": [
           "data"
+        ],
+        "problemTypes": [
+          "quality"
         ]
       },
       {
@@ -2035,6 +2275,9 @@ export const projects = [
         "fields": [
           "data",
           "llm"
+        ],
+        "problemTypes": [
+          "design"
         ]
       },
       {
@@ -2057,6 +2300,10 @@ export const projects = [
         "result": "반복 실행에서 같은 항목을 재검토하는 부담을 줄이고, 검토 여부와 계산에 적용할 병합 결정을 구분했습니다.",
         "fields": [
           "data"
+        ],
+        "problemTypes": [
+          "quality",
+          "design"
         ]
       },
       {
@@ -2078,6 +2325,10 @@ export const projects = [
         "actionTitle": "중복 판별 캐시를 데이터 병합 경로에서 무효화",
         "fields": [
           "data"
+        ],
+        "problemTypes": [
+          "performance",
+          "quality"
         ]
       },
       {
@@ -2097,7 +2348,10 @@ export const projects = [
         ],
         "result": "페이지 전환의 위젯 재생성을 줄이고, 시작 시 생성하는 화면을 다섯 개에서 두 개로 줄였습니다.",
         "actionTitle": "행 위젯 풀링과 화면 지연 생성으로 반복 할당 제거",
-        "fields": []
+        "fields": [],
+        "problemTypes": [
+          "performance"
+        ]
       },
       {
         "id": "settings-save",
@@ -2117,7 +2371,10 @@ export const projects = [
           "앱을 종료할 때는 예약한 타이머를 취소했습니다. 이미 없어진 화면에 지연 작업이 실행되지 않도록 위젯과 예약 작업의 수명을 함께 관리했습니다."
         ],
         "result": "사용자에게 필요한 상태 변화는 바로 보여주고, 연속 입력에 따른 반복 저장과 화면 재계산을 줄였습니다.",
-        "fields": []
+        "fields": [],
+        "problemTypes": [
+          "performance"
+        ]
       }
     ]
   },
@@ -2184,6 +2441,10 @@ export const projects = [
         "implementation": "평가 출처별 마지막 처리 시각 확인\n  → 해당 시각부터 새 답안 조회\n  → 이미 저장된 출처, 답안, 태그 조합은 건너뛰기\n  → 실제 추가된 기록의 사용자, 태그만 재계산",
         "fields": [
           "data"
+        ],
+        "problemTypes": [
+          "performance",
+          "quality"
         ]
       },
       {
@@ -2208,6 +2469,10 @@ export const projects = [
         "implementation": "새로 추가된 답안 → 영향받는 사용자, 역량 태그\n  → 해당 사용자의 현재, 과거 조직 확인\n  → 사용자별 중간 집계 갱신\n  → 조직, 역량별 평균 재계산",
         "fields": [
           "data"
+        ],
+        "problemTypes": [
+          "performance",
+          "quality"
         ]
       },
       {
@@ -2233,6 +2498,10 @@ export const projects = [
         "fields": [
           "data",
           "backend"
+        ],
+        "problemTypes": [
+          "performance",
+          "operations"
         ]
       },
       {
@@ -2255,6 +2524,9 @@ export const projects = [
         "result": "사용자가 받은 요청 ID로 로그를 찾고, API별 지연과 오류 추이를 대조해 문제 범위를 좁힐 수 있습니다.",
         "fields": [
           "backend"
+        ],
+        "problemTypes": [
+          "operations"
         ]
       },
       {
@@ -2282,6 +2554,10 @@ export const projects = [
         "fields": [
           "llm",
           "backend"
+        ],
+        "problemTypes": [
+          "recovery",
+          "design"
         ]
       },
       {
@@ -2307,6 +2583,10 @@ export const projects = [
         "actionTitle": "로컬 입력을 복원하고 제출 직전의 예약 저장을 취소",
         "fields": [
           "backend"
+        ],
+        "problemTypes": [
+          "recovery",
+          "quality"
         ]
       },
       {
@@ -2329,6 +2609,10 @@ export const projects = [
         "result": "응시 API의 DB 접근을 비동기로 전환하고, 답안 저장 이후 채점이 이어지는 순서를 유지했습니다.",
         "fields": [
           "backend"
+        ],
+        "problemTypes": [
+          "performance",
+          "design"
         ]
       },
       {
@@ -2353,6 +2637,9 @@ export const projects = [
         "fields": [
           "llm",
           "agent"
+        ],
+        "problemTypes": [
+          "design"
         ]
       },
       {
@@ -2375,6 +2662,9 @@ export const projects = [
         "result": "출제와 대상자 배정에서 응시, 채점, 결과 내보내기까지 한 서비스에서 운영할 수 있도록 했습니다.",
         "fields": [
           "backend"
+        ],
+        "problemTypes": [
+          "design"
         ]
       },
       {
@@ -2397,6 +2687,9 @@ export const projects = [
         "result": "평가 운영을 위임할 수 있는 범위와 계정, 조직 관리 권한을 구분했습니다.",
         "fields": [
           "backend"
+        ],
+        "problemTypes": [
+          "design"
         ]
       },
       {
@@ -2419,6 +2712,9 @@ export const projects = [
         "result": "일괄 등록의 수정 지점을 행 단위로 전달하고, 사용자 목록 조회와 승인 대기 집계를 각 목적에 맞게 구성했습니다.",
         "fields": [
           "backend"
+        ],
+        "problemTypes": [
+          "quality"
         ]
       },
       {
@@ -2441,6 +2737,10 @@ export const projects = [
         "result": "조회 캐시가 실패해도 DB 조회로 관리자 업무를 이어가고, 데이터 변경 이후에는 이전 캐시를 사용하지 않도록 했습니다.",
         "fields": [
           "backend"
+        ],
+        "problemTypes": [
+          "recovery",
+          "performance"
         ]
       }
     ]
@@ -2503,6 +2803,10 @@ export const projects = [
         "actionTitle": "원본이 없는 후면의 생성 시점 수와 각도 분포 수정",
         "fields": [
           "ml"
+        ],
+        "problemTypes": [
+          "design",
+          "evaluation"
         ]
       }
     ]
@@ -2565,6 +2869,10 @@ export const projects = [
         "fields": [
           "data",
           "ml"
+        ],
+        "problemTypes": [
+          "quality",
+          "evaluation"
         ]
       },
       {
@@ -2587,6 +2895,10 @@ export const projects = [
         "fields": [
           "data",
           "ml"
+        ],
+        "problemTypes": [
+          "quality",
+          "evaluation"
         ]
       },
       {
@@ -2608,6 +2920,10 @@ export const projects = [
         "actionTitle": "플레이 전체에서 축별 움직임의 관계를 학습하고 예측 근거 제공",
         "fields": [
           "ml"
+        ],
+        "problemTypes": [
+          "evaluation",
+          "design"
         ]
       }
     ]
@@ -2673,6 +2989,9 @@ export const projects = [
         "fields": [
           "llm",
           "ml"
+        ],
+        "problemTypes": [
+          "evaluation"
         ]
       },
       {
@@ -2695,6 +3014,9 @@ export const projects = [
         "actionTitle": "질문별 음성 생성을 병렬 처리하고 먼저 끝난 결과부터 전달",
         "fields": [
           "backend"
+        ],
+        "problemTypes": [
+          "performance"
         ]
       },
       {
@@ -2716,6 +3038,9 @@ export const projects = [
         "actionTitle": "0~5점의 의미를 정의하고 사람 판정과 비교",
         "fields": [
           "llm"
+        ],
+        "problemTypes": [
+          "evaluation"
         ]
       }
     ]
@@ -2777,6 +3102,10 @@ export const projects = [
         "fields": [
           "llm",
           "agent"
+        ],
+        "problemTypes": [
+          "design",
+          "evaluation"
         ]
       },
       {
@@ -2804,6 +3133,10 @@ export const projects = [
         "fields": [
           "llm",
           "agent"
+        ],
+        "problemTypes": [
+          "design",
+          "evaluation"
         ]
       }
     ],
@@ -2847,8 +3180,22 @@ export const engineeringFields = [
   { id: 'ml', label: 'ML / AI' },
 ];
 
-export function matchesProject(project, field = 'all') {
-  return field === 'all' || project.sections.some(section => section.fields?.includes(field));
+export const problemTypes = [
+  { id: 'performance', label: '성능 최적화' },
+  { id: 'recovery', label: '안정성과 복구' },
+  { id: 'quality', label: '데이터 품질과 정합성' },
+  { id: 'design', label: '설계 판단' },
+  { id: 'evaluation', label: '평가와 검증' },
+  { id: 'operations', label: '운영과 배포' },
+];
+
+export function matchesSection(section, field = 'all', problem = 'all') {
+  return (field === 'all' || section.fields?.includes(field))
+    && (problem === 'all' || section.problemTypes?.includes(problem));
+}
+
+export function matchesProject(project, field = 'all', problem = 'all') {
+  return project.sections.some(section => matchesSection(section, field, problem));
 }
 
 export function fieldsForProject(project) {

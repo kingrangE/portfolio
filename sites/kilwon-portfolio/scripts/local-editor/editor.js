@@ -69,6 +69,14 @@ async function loadContent() {
     checkbox.type = 'checkbox'; checkbox.name = 'section.fields'; checkbox.value = field.id;
     label.append(checkbox, document.createTextNode(field.label)); topics.append(label);
   }
+  const problems = document.querySelector('#section-problems');
+  problems.querySelectorAll('label').forEach(label => label.remove());
+  for (const type of data.problemTypes) {
+    const label = document.createElement('label');
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox'; checkbox.name = 'section.problemTypes'; checkbox.value = type.id;
+    label.append(checkbox, document.createTextNode(type.label)); problems.append(label);
+  }
   for (const token of files.find(file => file.file === 'content/projects.mjs').tokens) {
     if (!token.scope) continue;
     const value = `/projects/${token.scope}/`;
@@ -124,6 +132,7 @@ createForm.addEventListener('submit', async event => {
   section.action = split('section.action', /\r?\n/);
   section.tags = split('section.tags', /[,\n]/);
   section.fields = data.getAll('section.fields');
+  section.problemTypes = data.getAll('section.problemTypes');
   const payload = { kind: createKind, revision: creationRevision, section };
   if (createKind === 'project') {
     const project = {};

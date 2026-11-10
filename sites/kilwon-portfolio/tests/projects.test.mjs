@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { projects, roles, engineeringFields, fieldsForProject, matchesProject, projectGroups } from '../content/projects.mjs';
+import { projects, roles, engineeringFields, problemTypes, fieldsForProject, matchesSection, matchesProject, projectGroups } from '../content/projects.mjs';
 
 test('project URLs and section links are unique and valid', () => {
   assert.equal(new Set(projects.map(project => project.slug)).size, projects.length);
@@ -25,6 +25,9 @@ test('project URLs and section links are unique and valid', () => {
       assert.ok(Array.isArray(section.fields));
       assert.equal(new Set(section.fields).size, section.fields.length);
       assert.ok(section.fields.every(id => engineeringFields.some(field => field.id === id)));
+      assert.ok(Array.isArray(section.problemTypes));
+      assert.equal(new Set(section.problemTypes).size, section.problemTypes.length);
+      assert.ok(section.problemTypes.every(id => problemTypes.some(type => type.id === id)));
     }
     if (project.url) assert.equal(new URL(project.url).protocol, 'https:');
   }
@@ -61,4 +64,23 @@ test('catalog groups include every project once and retain filtered matches', ()
   const filtered = projects.filter(project => matchesProject(project, 'data'));
   const grouped = projectGroups.flatMap(group => filtered.filter(project => project.group === group));
   assert.deepEqual(grouped.map(project => project.slug).sort(), filtered.map(project => project.slug).sort());
+});
+
+test('field and problem filters must match the same case', () => {
+  assert.deepEqual(problemTypes.map(type => type.id), ['performance', 'recovery', 'quality', 'design', 'evaluation', 'operations']);
+  const separateCases = { sections: [
+    { fields: ['backend'], problemTypes: ['quality'] },
+    { fields: ['data'], problemTypes: ['performance'] },
+  ] };
+  assert.equal(matchesProject(separateCases, 'backend'), true);
+  assert.equal(matchesProject(separateCases, 'all', 'performance'), true);
+  assert.equal(matchesProject(separateCases, 'backend', 'performance'), false);
+  assert.equal(matchesProject(separateCases, 'data', 'performance'), true);
+  const dcba = projects.find(project => project.slug === 'dcba');
+  assert.deepEqual(dcba.sections.filter(section => matchesSection(section, 'backend', 'performance')).map(section => section.id), ['cursor-reads']);
+  assert.equal(matchesProject(dcba, 'cicd', 'performance'), false);
+  assert.deepEqual(dcba.sections.filter(section => matchesSection(section, 'cicd', 'operations')).map(section => section.id), ['schema-order', 'delivery-artifact']);
+  const semo = projects.find(project => project.slug === 'semo');
+  assert.deepEqual(semo.sections.filter(section => matchesSection(section, 'data', 'recovery')).map(section => section.id), ['indexing']);
+  assert.equal(projects.filter(project => matchesProject(project, 'all', 'all')).length, projects.length);
 });

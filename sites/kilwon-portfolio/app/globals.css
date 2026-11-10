@@ -656,8 +656,12 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .case-filters { gap: 8px; }
 .case-filters .filter { border: 1px solid var(--line); padding: 9px 13px; background: #fff; font-size: 13px; min-height: 42px; }
 .case-filters .filter.active { background: var(--ink); border-color: var(--ink); color: #fff; }
+.case-filter-label { font-size: 13px; font-weight: 700; margin: 20px 0 10px; }
+.case-filter-summary { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-top: 18px; }
+.case-filter-summary .case-count { margin: 0; }
 .case-count { color: var(--muted); font-size: 13px; margin: 18px 0 0; }
 .case-reading-layout { padding-top: 30px; }
+.case-reading-empty { grid-template-columns: minmax(0, 1fr); }
  .engineering-case { border-top: 1px solid var(--line); padding-top: 32px; margin-bottom: 64px; }
 .engineering-case[hidden] { display: none; }
 .case-alias { display: block; scroll-margin-top: 90px; }

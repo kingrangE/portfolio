@@ -8,7 +8,7 @@ const { parse } = require('next/dist/compiled/babel/parser.js');
 export const sourceFiles = [
   'app/page.jsx', 'app/projects/page.jsx', 'app/projects/[slug]/page.jsx',
   'components/site-header.jsx', 'components/site-footer.jsx',
-  'components/project-visual.jsx', 'components/project-cases.jsx',
+  'components/project-visual.jsx', 'components/dcba-visual.jsx', 'components/project-cases.jsx',
   'components/project-gallery.jsx', 'components/project-toc.jsx',
   'content/projects.mjs',
 ];

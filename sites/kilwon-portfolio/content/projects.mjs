@@ -1,5 +1,22 @@
 export const projectEvidenceNotice = '개인 / 팀 프로젝트의 기술과 구현 내용은 GitHub 커밋 기록과 구현 코드를 바탕으로 작성했습니다. 회사 프로젝트는 재직 중 수행한 업무와 구현 경험을 정리했습니다.';
 
+export const dcbaAnimation = {
+  subject: '데이터베이스 / 보통',
+  question: '인덱스로 조회가 빨라지는 이유는?',
+  generate: {
+    description: 'Spring Boot가 접수한 요청을 Redis Streams에 보관합니다. FastAPI와 Kanana가 문제를 만들고, MariaDB에 문제와 작업 ID를 저장한 뒤 메시지를 완료 처리합니다.',
+    early: '요청 접수 / 대기열에 보관',
+    middle: 'Kanana가 질문과 답안을 생성 중',
+    final: 'DB 저장 후 메시지 처리 완료',
+  },
+  recover: {
+    description: 'DB 저장 뒤 완료 확인 전에 중단된 작업을 회수합니다. 같은 작업 ID로 저장된 문제를 찾아, 새 문제를 만들지 않고 완료 처리합니다.',
+    early: '저장 완료 / 완료 확인 전 중단',
+    middle: '시간 경과 후 회수 / 같은 작업 #07',
+    final: '기존 문제 확인 / 추가 생성 없이 완료',
+  },
+};
+
 export const projects = [
   {
     "featured": true,

@@ -41,7 +41,7 @@ export default async function ProjectPage({ params }) {
           </div>
           {project.repositoryNote && <p className="detail-context">{project.repositoryNote}</p>}
         </div>
-        {project.featured ? <div className="detail-visual project-open"><ProjectVisual slug={project.slug} /></div> :
+        {project.featured ? <div className="detail-visual project-open"><ProjectVisual slug={project.slug} interactive /></div> :
           <aside className="decision-panel"><p>핵심 설계</p><strong>{project.decision}</strong><ol>{project.flow.map(step => <li key={step}>{step}</li>)}</ol></aside>}
       </header>
       <ProjectCases name={project.name} sections={project.sections}

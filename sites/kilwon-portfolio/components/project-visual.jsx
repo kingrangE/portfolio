@@ -1,4 +1,18 @@
 const visuals = {
+  dcba: (
+<div className="project-visual visual-dcba">
+  <span className="visual-label">문제 조회와 모델 생성의 실행 흐름 분리</span>
+  <div className="dcba-word">DCBA</div>
+  <ol className="dcba-flow" aria-label="문제 생성 요청을 큐로 전달하고 DB 저장 후 완료 처리하는 순서">
+    <li><strong>Spring Boot</strong><span>생성 요청 접수</span></li>
+    <li><strong>Redis Streams</strong><span>미완료 작업 보관</span></li>
+    <li><strong>FastAPI</strong><span>Kanana 생성</span></li>
+    <li><strong>MariaDB</strong><span>문제, 작업 ID 저장</span></li>
+  </ol>
+  <span className="dcba-flow-note">DB 저장 후 메시지 처리 완료</span>
+  <span className="visual-arrow" aria-hidden="true">+</span>
+</div>
+  ),
   gaudi: (
 <div className="project-visual visual-gaudi"><span className="visual-label">개발자의 AI 활용 역량 평가</span><div className="gaudi-word">GAUDI</div><div className="score-sheet"><div className="sheet-title">AI 활용 역량별 평가</div><div className="score-row"><span>설계</span><i style={{'--progress': '78%'}}></i><b>확인</b></div><div className="score-row"><span>검증</span><i style={{'--progress': '91%'}}></i><b>확인</b></div><div className="score-row"><span>판단</span><i style={{'--progress': '65%'}}></i><b>확인</b></div><span className="sheet-foot">평가 화면 콘셉트 / 실제 측정값 아님</span></div><span className="visual-arrow" aria-hidden="true">+</span></div>
   ),

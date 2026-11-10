@@ -22,7 +22,7 @@ export default function Home() {
       </figure>
     </section>
     <section className="projects wrap section" id="projects" aria-labelledby="projects-title">
-      <div className="section-top"><div><h2 id="projects-title">대표 프로젝트</h2><p className="section-description">{"수집과 적재, 품질 검증과 재처리를 다룬 프로젝트와 RAG, 대화 Agent의 구현 경험입니다."}</p><p className="section-description">{projectEvidenceNotice}</p></div></div>
+      <div className="section-top"><div><h2 id="projects-title">대표 프로젝트</h2><p className="section-description">{"수집과 적재, 품질 검증과 재처리를 다룬 프로젝트와 RAG, 대화 Agent, 백엔드의 구현 경험입니다."}</p><p className="section-description">{projectEvidenceNotice}</p></div></div>
       <ProjectGallery featured />
       <div className="all-work">
         <Link className="button primary all-work-button" href="/projects/">전체 {projects.length}개 프로젝트 보기</Link>

@@ -27,9 +27,13 @@ test('project URLs and section links are unique and valid', () => {
   }
 });
 
-test('home features the selected four projects in the requested order', () => {
-  assert.deepEqual(projects.filter(project => project.featured).map(project => project.slug), ['softeer', 'orecast', 'talky', 'semo']);
-  assert.ok(projects.length >= 12);
+test('home retains the selected four projects and adds DCBA as the fifth', () => {
+  assert.deepEqual(projects.filter(project => project.featured).map(project => project.slug), ['softeer', 'orecast', 'talky', 'semo', 'dcba']);
+  const dcba = projects.find(project => project.slug === 'dcba');
+  assert.equal(dcba.group, '개인 프로젝트');
+  assert.ok(dcba.categories.includes('backend'));
+  assert.equal(dcba.url, 'https://github.com/kingrangE/DCBA');
+  assert.ok(projects.length >= 13);
 });
 
 test('role and keyword filters intersect, and resetting restores the catalog', () => {
@@ -48,7 +52,7 @@ test('role and keyword filters intersect, and resetting restores the catalog', (
 });
 
 test('catalog groups include every project once and retain filtered matches', () => {
-  assert.deepEqual(projectGroups, ['수상', '솔브레인 인턴', '왓츠랩 인턴']);
+  assert.deepEqual(projectGroups, ['수상', '개인 프로젝트', '솔브레인 인턴', '왓츠랩 인턴']);
   assert.ok(projects.every(project => projectGroups.includes(project.group)));
   assert.ok(projectGroups.every(group => projects.some(project => project.group === group)));
   const filtered = projects.filter(project => matchesProject(project, 'data', 'Airflow'));

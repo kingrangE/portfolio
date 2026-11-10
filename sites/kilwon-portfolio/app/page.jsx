@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import ProjectGallery from "../components/project-gallery";
 import { projects, projectEvidenceNotice } from "../content/projects.mjs";
+import { techStack } from "../content/tech-stack.mjs";
 
 export default function Home() {
   return (
@@ -26,6 +27,18 @@ export default function Home() {
       <div className="all-work">
         <Link className="button primary all-work-button" href="/projects/">전체 {projects.length}개 프로젝트 보기</Link>
         <p>인턴십과 대회에서 진행한 프로젝트를 직무와 기술별로 볼 수 있습니다.</p>
+      </div>
+    </section>
+    <section className="tech-stack wrap section" id="tech-stack" aria-labelledby="tech-stack-title">
+      <div className="section-top">
+        <div><h2 id="tech-stack-title">기술 스택</h2><p className="section-description">프로젝트 적용 횟수와 실습 경험을 구분했습니다.</p></div>
+        <a className="text-link" href="https://github.com/kingrangE/kingrangE#tech-stack" target="_blank" rel="noopener noreferrer">GitHub 기술 스택</a>
+      </div>
+      <div className="tech-stack-groups">
+        {techStack.map(group => <div className="tech-stack-row" key={group.title}>
+          <div className="tech-stack-label"><h3>{group.title}</h3><p>{group.description}</p></div>
+          <ul className="tech-stack-items" aria-label={group.title}>{group.items.map(item => <li key={item}>{item}</li>)}</ul>
+        </div>)}
       </div>
     </section>
     <section className="about-section" id="about" aria-labelledby="about-title">

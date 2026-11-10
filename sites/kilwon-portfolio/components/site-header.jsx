@@ -12,7 +12,7 @@ export default function SiteHeader() {
   return (
 <header className="site-header wrap">
     <button className="button primary header-refresh" type="button" onClick={refreshContent}>최신 정보 불러오기</button>
-    <nav aria-label="주 메뉴"><Link href="/projects/">프로젝트</Link><Link href="/#about">일하는 방식</Link><Link href="/#experience">경험</Link></nav>
+    <nav aria-label="주 메뉴"><Link href="/projects/">프로젝트</Link><Link href="/#tech-stack">기술 스택</Link><Link href="/#about">일하는 방식</Link><Link href="/#experience">경험</Link></nav>
     <a className="header-contact" href="mailto:kilwon.jeon00@gmail.com">이메일 보내기</a>
   </header>
   );

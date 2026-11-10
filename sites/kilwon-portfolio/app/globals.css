@@ -134,6 +134,19 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .all-work { margin-top: 48px; padding: 32px 24px; border-radius: 10px; text-align: center; }
 .all-work-button { width: min(100%, 520px); min-height: 68px; font-size: 20px; font-weight: 700; }
 .all-work p { margin: 16px 0 0; font-size: 14px; color: var(--muted); }
+.tech-stack { border-top: 1px solid var(--line); }
+.tech-stack-row { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 28px; padding-block: 24px; border-top: 1px solid var(--line); }
+.tech-stack-label h3 { margin: 0 0 5px; font-size: 17px; font-weight: 650; letter-spacing: -.4px; }
+.tech-stack-label p { margin: 0; color: var(--muted); font-size: 13px; }
+.tech-stack-items { display: flex; flex-wrap: wrap; align-content: start; gap: 9px; margin: 0; padding: 0; list-style: none; }
+.tech-stack-items li { padding: 6px 12px; border: 1px solid var(--line); border-radius: 4px; background: #fff; font-size: 14px; line-height: 1.6; overflow-wrap: anywhere; }
+@media (max-width: 800px) {
+  .tech-stack-row { grid-template-columns: 170px minmax(0, 1fr); gap: 20px; }
+}
+@media (max-width: 520px) {
+  .tech-stack .section-top { align-items: start; flex-direction: column; gap: 12px; }
+  .tech-stack-row { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+}
 .about-section { background: #eaf0f9; }
 .about-layout { display: grid; grid-template-columns: 1fr 1.1fr; gap: 100px; padding-top: 67px; padding-bottom: 67px; }
 .about-intro h2 { font-size: 32px; letter-spacing: -1.3px; font-weight: 700; line-height: 1.6; margin: 0 0 20px; }

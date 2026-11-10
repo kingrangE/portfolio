@@ -56,3 +56,9 @@ NEXT_PUBLIC_BASE_PATH=/portfolio npm run check:export
 ```
 
 저장소 이름이나 커스텀 도메인을 바꾸면 워크플로의 `NEXT_PUBLIC_BASE_PATH`도 함께 변경합니다. 로컬 개발에서는 이 환경변수 없이 루트 경로를 사용합니다.
+
+## 방문 통계
+
+GA4 태그는 `sites/kilwon-portfolio/app/layout.jsx`에서 전체 페이지에 로드하며 production 빌드에서만 실행합니다. `npm run dev`의 방문은 수집하지 않습니다.
+
+GA4 웹 스트림에서 향상된 측정과 브라우저 기록에 따른 페이지 변경 측정을 켜두면 Next.js의 페이지 이동도 집계됩니다. 같은 조회가 두 번 기록되지 않도록 별도의 수동 `page_view` 이벤트는 추가하지 않습니다. 방문 현황은 Google Analytics의 실시간 보고서와 페이지 및 화면 보고서에서 확인합니다.

@@ -35,10 +35,11 @@ export default async function ProjectPage({ params }) {
           <p className="detail-context">{project.organization} / {project.period}<br />{project.role}</p>
           <div className="tag-row">{project.tags.map(tag => <span key={tag}>{tag}</span>)}</div>
           <div className="detail-links">
-            {project.url ? <a className="button primary" href={project.url} target="_blank" rel="noopener noreferrer">GitHub에서 코드 보기</a>
+            {project.url ? <a className="button primary" href={project.url} target="_blank" rel="noopener noreferrer">{project.repositoryLabel || 'GitHub에서 코드 보기'}</a>
               : <span className="private-repo">코드 비공개</span>}
             <span>{project.status}</span>
           </div>
+          {project.repositoryNote && <p className="detail-context">{project.repositoryNote}</p>}
         </div>
         {project.featured ? <div className="detail-visual project-open"><ProjectVisual slug={project.slug} /></div> :
           <aside className="decision-panel"><p>핵심 설계</p><strong>{project.decision}</strong><ol>{project.flow.map(step => <li key={step}>{step}</li>)}</ol></aside>}

@@ -2174,7 +2174,7 @@ export const projects = [
       "검색 도구",
       "Validation"
     ],
-    "url": null,
+    "url": "https://github.com/kingrangE/startup-agent",
     "flow": [
       "창업 질문",
       "도구 선택, 검색",
@@ -2228,7 +2228,9 @@ export const projects = [
         "actionTitle": "검색 도구 결과와 검증 실패 사유를 다음 생성에 전달",
         "implementation": "질문 → 필요한 도구 선택, 검색 → 답변 생성 → 정확성 검증\n  ├─ 통과 → 사용자에게 응답\n  └─ 실패 → 실패 이유를 반영해 답변 재생성"
       }
-    ]
+    ],
+    "repositoryLabel": "GitHub 현재 버전",
+    "repositoryNote": "공개 저장소는 린 캔버스 생성과 평가를 다루는 현재 버전입니다. 아래 해커톤의 ReAct Agent 구현과는 범위가 다릅니다."
   }
 ];
 

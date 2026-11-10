@@ -55,6 +55,8 @@ export default function ProjectGallery({ featured = false }) {
             <div className="tag-row">{project.tags.map(tag => featured ? <span key={tag}>{tag}</span> :
               <button key={tag} className="keyword-link" aria-pressed={keyword === tag} aria-label={`${tag} 프로젝트 모아보기`}
                 onClick={() => { setRole('all'); setKeyword(tag); }}>{tag}</button>)}</div>
+            {project.url && <div className="project-repository"><a className="text-link" href={project.url} target="_blank" rel="noopener noreferrer"
+              aria-label={`${project.name} ${project.repositoryLabel || 'GitHub 저장소'} 열기`}>{project.repositoryLabel || 'GitHub'}</a></div>}
           </article>
           );
         })}

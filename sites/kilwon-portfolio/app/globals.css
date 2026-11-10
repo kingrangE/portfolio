@@ -33,6 +33,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .hero { display: grid; grid-template-columns: 1.08fr 1fr; gap: 65px; align-items: center; padding-top: 70px; padding-bottom: 100px; }
 .intro-name { font-size: 13px; color: var(--muted); margin: 0 0 25px; letter-spacing: -.2px; }
 .hero h1 { font-size: clamp(34px, 4.05vw, 54px); font-weight: 750; line-height: 1.45; letter-spacing: -2.6px; margin: 0 0 27px; }
+.hero h1.fixed-intro { font-size: clamp(24px, 2.2vw, 30px); line-height: 1.65; letter-spacing: -.8px; }
 .hero-description { font-size: 16px; color: var(--muted); line-height: 1.9; margin: 0 0 30px; }
 .hero-actions { display: flex; align-items: center; gap: 27px; }
 .button { display: inline-flex; align-items: center; justify-content: center; padding: 12px 20px; border-radius: 6px; font-size: 14px; font-weight: 650; border: 0; }

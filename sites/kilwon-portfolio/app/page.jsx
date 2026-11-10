@@ -10,9 +10,9 @@ export default function Home() {
 
     <section className="hero wrap" aria-labelledby="hero-title">
       <div className="hero-copy">
-        <p className="intro-name">{"데이터 파이프라인과 LLM 서비스를 개발하는 전길원입니다."}</p>
-        <h1 id="hero-title">수집부터 재처리까지,<br />데이터 흐름을 설계합니다.</h1>
-        <p className="hero-description">Airflow와 Spark로 데이터를 수집하고 검증하며, 중단된 작업을 다시 처리하는 파이프라인을 만들었습니다. 원자재 가격은 재전달돼도 중복 적재되지 않도록 했고, RAG와 대화 Agent에서는 색인 갱신과 기억 검색, LLM 평가를 다뤘습니다.</p>
+        {/* 사용자가 고정한 자기소개입니다. 명시적인 변경 요청이 있을 때만 수정합니다. */}
+        <h1 id="hero-title" className="fixed-intro">꾸준한 학습과 모든 실패 가능성에 대한 반증을 통해 현재 상황에 맞는 최선의 정답을 찾고자 하는 개발자 전길원입니다.</h1>
+        <p className="hero-description">학부 시절 AI/LLM/Agent 서비스를 개발하며, 좋은 프로덕트는 탄탄한 데이터 기반에서 시작함을 느꼈습니다. 이 경험에서 현재는 LLM, Agent 뿐만 아니라 데이터 처리/적재/품질 관리를 위한 데이터 엔지니어링과 모델링, AI를 개발에 효과적으로 활용하기 위한 하네스 엔지니어링과 Practice AI를 꾸준히 학습하고 있습니다.</p>
         <div className="hero-actions"><a className="button primary" href="https://kingrange.github.io/Resume/" target="_blank" rel="noopener noreferrer">이력서 확인</a></div>
         <div className="hero-socials"><a href="https://github.com/kingrangE" target="_blank" rel="noopener noreferrer">GitHub</a><a href="https://kingrang-e.tistory.com/" target="_blank" rel="noopener noreferrer">개발 블로그</a></div>
       </div>

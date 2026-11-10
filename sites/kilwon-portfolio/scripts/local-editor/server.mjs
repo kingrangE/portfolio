@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { resolve, dirname } from 'node:path';
 import { spawn } from 'node:child_process';
 import { sourceFiles, readTokens, replaceTokens, revision, readProjectCatalog, addContent } from './source.mjs';
-import { projectGroups, roles } from '../../content/projects.mjs';
+import { projectGroups, roles, engineeringFields } from '../../content/projects.mjs';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const root = resolve(here, '../..');
@@ -40,7 +40,7 @@ const server = createServer(async (req, res) => {
         return { file, revision: revision(source), tokens: readTokens(file, source) };
       });
       const source = readFileSync(resolve(root, 'content/projects.mjs'), 'utf8');
-      json(res, 200, { files, projects: readProjectCatalog(source), projectGroups, roles });
+      json(res, 200, { files, projects: readProjectCatalog(source), projectGroups, roles, engineeringFields });
     } catch { json(res, 500, { error: '소스를 읽지 못했습니다. 파일의 문법과 터미널을 확인해주세요.' }); }
     return;
   }

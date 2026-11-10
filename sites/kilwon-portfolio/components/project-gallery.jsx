@@ -2,34 +2,23 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { projects, roles, matchesProject, projectGroups } from '../content/projects.mjs';
+import { projects, engineeringFields, fieldsForProject, matchesProject, projectGroups } from '../content/projects.mjs';
 import ProjectVisual from './project-visual';
 
 export default function ProjectGallery({ featured = false }) {
-  const [role, setRole] = useState('all');
-  const [keyword, setKeyword] = useState('all');
-  const keywords = [...new Set(projects.flatMap(project => project.tags))]
-    .sort((a, b) => projects.filter(p => p.tags.includes(b)).length - projects.filter(p => p.tags.includes(a)).length);
-  const visible = projects.filter(project => featured ? project.featured : matchesProject(project, role, keyword));
-  function reset() { setRole('all'); setKeyword('all'); }
+  const [field, setField] = useState('all');
+  const visible = projects.filter(project => featured ? project.featured : matchesProject(project, field));
   return (
     <>
       {!featured && <div className="catalog-filters">
-        <fieldset><legend>직무로 찾기</legend><div className="filters">
-          {[{ id: 'all', label: '전체' }, ...roles].map(filter => (
-            <button key={filter.id} className={`filter${role === filter.id ? ' active' : ''}`}
-              aria-pressed={role === filter.id} onClick={() => setRole(filter.id)}>{filter.label}</button>
+        <fieldset><legend>분야로 찾기</legend><div className="filters">
+          {[{ id: 'all', label: '전체' }, ...engineeringFields].map(filter => (
+            <button key={filter.id} className={`filter${field === filter.id ? ' active' : ''}`}
+              aria-pressed={field === filter.id} onClick={() => setField(filter.id === field ? 'all' : filter.id)}>{filter.label}</button>
           ))}
         </div></fieldset>
-        <fieldset><legend>기술과 설계로 찾기</legend><div className="filters keyword-filters">
-          {['all', ...keywords.slice(0, 11)].map(tag => <button key={tag} className={`filter${keyword === tag ? ' active' : ''}`}
-            aria-pressed={keyword === tag} onClick={() => setKeyword(tag === keyword ? 'all' : tag)}>{tag === 'all' ? '전체' : tag}</button>)}
-        </div><details className="more-keywords"><summary>다른 키워드 {keywords.length - 11}개{keywords.slice(11).includes(keyword) && ` / ${keyword} 선택됨`}</summary>
-          <div className="filters keyword-filters">{keywords.slice(11).map(tag => <button key={tag} className={`filter${keyword === tag ? ' active' : ''}`}
-            aria-pressed={keyword === tag} onClick={() => setKeyword(tag === keyword ? 'all' : tag)}>{tag}</button>)}</div>
-        </details></fieldset>
-        <div className="catalog-results"><p role="status">{visible.length}개 프로젝트{role !== 'all' && ` / ${roles.find(item => item.id === role).label}`}{keyword !== 'all' && ` / ${keyword}`}</p>
-          {(role !== 'all' || keyword !== 'all') && <button className="text-link" onClick={reset}>필터 초기화</button>}
+        <div className="catalog-results"><p role="status">{visible.length}개 프로젝트{field !== 'all' && ` / ${engineeringFields.find(item => item.id === field).label}`}</p>
+          {field !== 'all' && <button className="text-link" onClick={() => setField('all')}>전체 보기</button>}
         </div>
       </div>}
       {(featured ? ['대표 프로젝트'] : projectGroups).map(group => {
@@ -39,7 +28,7 @@ export default function ProjectGallery({ featured = false }) {
           {!featured && <h2>{group} <span>{grouped.length}개</span></h2>}
           <div className={featured ? 'project-grid' : 'catalog-grid'}>
         {grouped.map(project => {
-          const relatedCase = project.sections.find(section => section.tags.includes(keyword));
+          const relatedCase = project.sections.find(section => section.fields?.includes(field));
           const href = `/projects/${project.slug}/${relatedCase ? `#${relatedCase.id}` : ''}`;
           return (
           <article key={project.slug} id={project.slug} className={featured ? 'project-card' : 'catalog-card'}>
@@ -52,9 +41,9 @@ export default function ProjectGallery({ featured = false }) {
                 {!featured && <p className="design-note">{relatedCase ? relatedCase.lead : project.decision}</p>}
               </div>
             </Link>
-            <div className="tag-row">{project.tags.map(tag => featured ? <span key={tag}>{tag}</span> :
-              <button key={tag} className="keyword-link" aria-pressed={keyword === tag} aria-label={`${tag} 프로젝트 모아보기`}
-                onClick={() => { setRole('all'); setKeyword(tag); }}>{tag}</button>)}</div>
+            <div className="tag-row" aria-label="관련 분야">{fieldsForProject(project).map(item => featured ? <span key={item.id}>{item.label}</span> :
+              <button key={item.id} className="field-link" aria-pressed={field === item.id} aria-label={`${item.label} 프로젝트 모아보기`}
+                onClick={() => setField(field === item.id ? 'all' : item.id)}>{item.label}</button>)}</div>
             {project.url && <div className="project-repository"><a className="text-link" href={project.url} target="_blank" rel="noopener noreferrer"
               aria-label={`${project.name} ${project.repositoryLabel || 'GitHub 저장소'} 열기`}>{project.repositoryLabel || 'GitHub'}</a></div>}
           </article>
@@ -63,7 +52,7 @@ export default function ProjectGallery({ featured = false }) {
           </div>
         </section>;
       })}
-      {!featured && visible.length === 0 && <div className="catalog-empty"><p>이 직무와 키워드를 함께 가진 프로젝트가 없습니다.</p><button className="button primary" onClick={reset}>전체 프로젝트 보기</button></div>}
+      {!featured && visible.length === 0 && <div className="catalog-empty"><p>이 분야의 프로젝트가 없습니다.</p><button className="button primary" onClick={() => setField('all')}>전체 프로젝트 보기</button></div>}
     </>
   );
 }

@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { projects, roles, matchesProject, projectGroups } from '../content/projects.mjs';
+import { projects, roles, engineeringFields, fieldsForProject, matchesProject, projectGroups } from '../content/projects.mjs';
 
 test('project URLs and section links are unique and valid', () => {
   assert.equal(new Set(projects.map(project => project.slug)).size, projects.length);
@@ -22,6 +22,9 @@ test('project URLs and section links are unique and valid', () => {
       assert.ok(section.action.every(action => action.trim().length > 0));
       assert.ok(section.tags.length > 0);
       assert.equal(new Set(section.tags).size, section.tags.length);
+      assert.ok(Array.isArray(section.fields));
+      assert.equal(new Set(section.fields).size, section.fields.length);
+      assert.ok(section.fields.every(id => engineeringFields.some(field => field.id === id)));
     }
     if (project.url) assert.equal(new URL(project.url).protocol, 'https:');
   }
@@ -36,26 +39,26 @@ test('home retains the selected four projects and adds DCBA as the fifth', () =>
   assert.ok(projects.length >= 13);
 });
 
-test('role and keyword filters intersect, and resetting restores the catalog', () => {
-  const samples = projects.filter(project => ['softeer', 'semo', 'stage-anxiety', 'meeting-assistant', 'cognitive-screening'].includes(project.slug));
-  const filter = (role, keyword) => samples.filter(project => matchesProject(project, role, keyword));
-  assert.equal(filter('all', 'all').length, samples.length);
-  assert.deepEqual(filter('data', 'Airflow').map(project => project.slug), ['softeer', 'semo']);
-  assert.deepEqual(filter('llm', 'LoRA').map(project => project.slug), ['stage-anxiety']);
-  assert.equal(filter('data', 'LoRA').length, 0);
-  for (const project of samples) {
-    for (const keyword of project.tags) {
-      assert.ok(filter('all', keyword).includes(project), `${project.slug}: searchable by ${keyword}`);
-    }
-  }
-  assert.ok(filter('ml', 'all').every(project => !project.categories.includes('llm') || project.slug === 'stage-anxiety'));
+test('fields group related cases without treating tool names as fields', () => {
+  const filter = field => projects.filter(project => matchesProject(project, field)).map(project => project.slug);
+  assert.deepEqual(engineeringFields.map(field => field.id), ['data', 'llm', 'rag', 'agent', 'backend', 'cicd', 'ml']);
+  assert.equal(filter('all').length, projects.length);
+  assert.deepEqual(filter('cicd'), ['dcba']);
+  assert.ok(filter('rag').includes('semo'));
+  assert.ok(filter('rag').includes('talky'));
+  assert.ok(!filter('rag').includes('dcba'), 'deduplication with ChromaDB does not itself make a RAG case');
+  assert.ok(filter('agent').includes('separk'));
+  assert.ok(!filter('agent').includes('semo'));
+  assert.equal(filter('Airflow').length, 0);
+  assert.deepEqual(fieldsForProject(projects.find(project => project.slug === 'dcba')).map(field => field.id), ['llm', 'backend', 'cicd']);
+  for (const project of projects) assert.ok(fieldsForProject(project).length > 0);
 });
 
 test('catalog groups include every project once and retain filtered matches', () => {
   assert.deepEqual(projectGroups, ['수상', '개인 프로젝트', '솔브레인 인턴', '왓츠랩 인턴']);
   assert.ok(projects.every(project => projectGroups.includes(project.group)));
   assert.ok(projectGroups.every(group => projects.some(project => project.group === group)));
-  const filtered = projects.filter(project => matchesProject(project, 'data', 'Airflow'));
+  const filtered = projects.filter(project => matchesProject(project, 'data'));
   const grouped = projectGroups.flatMap(group => filtered.filter(project => project.group === group));
   assert.deepEqual(grouped.map(project => project.slug).sort(), filtered.map(project => project.slug).sort());
 });

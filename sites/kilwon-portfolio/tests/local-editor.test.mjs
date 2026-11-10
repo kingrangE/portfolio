@@ -41,7 +41,7 @@ const section = {
   id: 'memory', title: '기억 검색', lead: '관련 대화를 찾습니다.',
   situation: '이전 대화를 찾기 어려웠습니다.', task: '주제에 맞는 대화를 찾아야 했습니다.',
   action: ['주제 관계를 저장했습니다.', '3홉까지 탐색했습니다.'],
-  result: '관련 대화를 조회하도록 구현했습니다.', tags: ['Neo4j'],
+  result: '관련 대화를 조회하도록 구현했습니다.', tags: ['Neo4j'], fields: ['rag', 'agent'],
 };
 const project = {
   slug: 'new-project', name: '새 프로젝트', group: '수상', organization: '대회 수상',
@@ -57,6 +57,7 @@ test('adding a project includes its first case without rewriting existing projec
   assert.deepEqual(readProjectCatalog(result.source), [{ slug: 'talky', name: 'Talky' }, { slug: 'new-project', name: '새 프로젝트' }]);
   assert.ok(result.source.includes('{"slug":"talky","name":"Talky","sections":[{"id":"overview","aliases":["voice"],"title":"기존 사례"}]}'));
   assert.ok(result.source.endsWith('export const untouched = "유지";'));
+  assert.match(result.source, /"fields": \[\s*"rag",\s*"agent"\s*\]/);
   const tokens = readTokens('content/projects.mjs', result.source);
   assert.ok(tokens.some(token => token.scope === 'new-project' && token.value === section.result));
   assert.ok(!result.source.includes('"featured": true'));
@@ -79,7 +80,7 @@ test('new content validates required fields, classifications, routes and externa
     { categories: ['unknown'] }, { categories: [] }, { tags: [] },
     { url: 'javascript:alert(1)' }, { url: 'https://user:secret@example.com' },
   ]) assert.throws(() => addContent(catalogSource, { kind: 'project', project: { ...project, ...patch }, section }));
-  for (const patch of [{ id: 'cases' }, { id: '한글' }, { action: [] }, { tags: [] }, { result: '' }]) {
+  for (const patch of [{ id: 'cases' }, { id: '한글' }, { action: [] }, { tags: [] }, { result: '' }, { fields: ['unknown'] }, { fields: 'rag' }, { fields: {} }]) {
     assert.throws(() => addContent(catalogSource, { kind: 'project', project, section: { ...section, ...patch } }));
   }
   assert.throws(() => addContent(catalogSource, { kind: 'section', slug: 'missing', section }));

@@ -1,6 +1,6 @@
 import { createHash } from 'node:crypto';
 import { createRequire } from 'node:module';
-import { projectGroups, roles } from '../../content/projects.mjs';
+import { projectGroups, roles, engineeringFields } from '../../content/projects.mjs';
 
 const require = createRequire(import.meta.url);
 // shortcut: Next.js 내부 Babel 경로에 의존, 업그레이드로 경로가 바뀌면 파서 연결을 갱신합니다.
@@ -50,6 +50,9 @@ export function addContent(source, input) {
   const section = { id };
   for (const [key, label] of Object.entries({ title: '사례 제목', lead: '한 줄 요약', situation: '문제 상황', task: '해결할 과제', result: '결과' })) section[key] = text(sectionInput[key], label);
   section.tags = list(sectionInput.tags, '사례 기술, 키워드');
+  const fields = sectionInput.fields ?? [];
+  if (!Array.isArray(fields) || fields.some(field => !engineeringFields.some(item => item.id === field))) throw new Error('지원하지 않는 사례 분야입니다.');
+  section.fields = [...new Set(fields)];
   section.action = list(sectionInput.action, '작업 내용');
   for (const key of ['note', 'actionTitle', 'implementation']) {
     const value = text(sectionInput[key], key, true);

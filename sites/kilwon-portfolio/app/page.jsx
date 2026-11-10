@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import ProjectGallery from "../components/project-gallery";
 import { projects, projectEvidenceNotice } from "../content/projects.mjs";
-import { techStack } from "../content/tech-stack.mjs";
+import { techStack, stackExperience } from "../content/tech-stack.mjs";
 
 export default function Home() {
   return (
@@ -31,13 +31,22 @@ export default function Home() {
     </section>
     <section className="tech-stack wrap section" id="tech-stack" aria-labelledby="tech-stack-title">
       <div className="section-top">
-        <div><h2 id="tech-stack-title">기술 스택</h2><p className="section-description">프로젝트 적용 횟수와 실습 경험을 구분했습니다.</p></div>
+        <div><h2 id="tech-stack-title">기술 스택</h2></div>
         <a className="text-link" href="https://github.com/kingrangE/kingrangE#tech-stack" target="_blank" rel="noopener noreferrer">GitHub 기술 스택</a>
       </div>
+      <ul className="tech-stack-legend" aria-label="사용 경험 범례">
+        {Object.entries(stackExperience).map(([experience, info]) => <li key={experience} data-experience={experience}>
+          <span className="stack-indicator" aria-hidden="true" /><span>{info.label}<span className="stack-legend-detail">{info.description}</span></span>
+        </li>)}
+      </ul>
       <div className="tech-stack-groups">
         {techStack.map(group => <div className="tech-stack-row" key={group.title}>
-          <div className="tech-stack-label"><h3>{group.title}</h3><p>{group.description}</p></div>
-          <ul className="tech-stack-items" aria-label={group.title}>{group.items.map(item => <li key={item}>{item}</li>)}</ul>
+          <div className="tech-stack-label"><h3>{group.title}</h3></div>
+          <ul className="tech-stack-items" aria-label={group.title}>{group.items.map(item => <li key={item.name} data-experience={item.experience}
+            aria-label={`${item.name}, ${stackExperience[item.experience].label}, ${stackExperience[item.experience].description}`}
+            title={`${stackExperience[item.experience].label}: ${stackExperience[item.experience].description}`}>
+            <span className="stack-indicator" aria-hidden="true" />{item.name}
+          </li>)}</ul>
         </div>)}
       </div>
     </section>

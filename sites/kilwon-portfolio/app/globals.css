@@ -135,11 +135,21 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .all-work-button { width: min(100%, 520px); min-height: 68px; font-size: 20px; font-weight: 700; }
 .all-work p { margin: 16px 0 0; font-size: 14px; color: var(--muted); }
 .tech-stack { border-top: 1px solid var(--line); }
+.tech-stack [data-experience="frequent"] { --stack-accent: #2459d3; --stack-tint: #e7f0ff; }
+.tech-stack [data-experience="applied"] { --stack-accent: #376755; --stack-tint: #e8f1eb; }
+.tech-stack [data-experience="practiced"] { --stack-accent: #80516f; --stack-tint: #f3ebf1; }
+.tech-stack [data-experience="tool"] { --stack-accent: #53627a; --stack-tint: #eef1f6; }
+.tech-stack-legend { display: flex; flex-wrap: wrap; gap: 16px 28px; margin: 0 0 28px; padding: 0; list-style: none; }
+.tech-stack-legend li { display: flex; align-items: baseline; gap: 9px; font-size: 13px; }
+.stack-legend-detail { display: block; color: var(--muted); font-size: 12px; }
+.stack-indicator { display: inline-block; flex: none; width: 9px; height: 9px; border: 1.5px solid var(--stack-accent); border-radius: 50%; background: var(--stack-accent); }
+.tech-stack [data-experience="applied"] .stack-indicator { border-radius: 1px; }
+.tech-stack [data-experience="practiced"] .stack-indicator { background: transparent; }
+.tech-stack [data-experience="tool"] .stack-indicator { height: 3px; border-radius: 0; }
 .tech-stack-row { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: 28px; padding-block: 24px; border-top: 1px solid var(--line); }
 .tech-stack-label h3 { margin: 0 0 5px; font-size: 17px; font-weight: 650; letter-spacing: -.4px; }
-.tech-stack-label p { margin: 0; color: var(--muted); font-size: 13px; }
 .tech-stack-items { display: flex; flex-wrap: wrap; align-content: start; gap: 9px; margin: 0; padding: 0; list-style: none; }
-.tech-stack-items li { padding: 6px 12px; border: 1px solid var(--line); border-radius: 4px; background: #fff; font-size: 14px; line-height: 1.6; overflow-wrap: anywhere; }
+.tech-stack-items li { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border: 1px solid var(--stack-accent); border-radius: 4px; background: var(--stack-tint); font-size: 14px; line-height: 1.6; overflow-wrap: anywhere; }
 @media (max-width: 800px) {
   .tech-stack-row { grid-template-columns: 170px minmax(0, 1fr); gap: 20px; }
 }

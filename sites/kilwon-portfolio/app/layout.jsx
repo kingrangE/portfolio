@@ -3,8 +3,8 @@ import SiteFooter from '../components/site-footer';
 import './globals.css';
 
 export const metadata = {
-  title: { default: '전길원 | LLM & Data Engineer', template: '%s | 전길원' },
-  description: 'LLM 서비스, Agent, 데이터 파이프라인을 개발하는 전길원의 포트폴리오. 프로젝트별 담당 업무와 설계 이유, 실험 결과를 소개합니다.',
+  title: { default: '전길원 | Data & LLM Engineer', template: '%s | 전길원' },
+  description: '데이터 수집과 적재, 품질 검증, 재처리를 구현한 전길원의 포트폴리오. Airflow와 Spark 기반 처리 경험에 RAG 색인 갱신, 대화 Agent와 LLM 평가 경험을 함께 소개합니다.',
   icons: { icon: `${process.env.NEXT_PUBLIC_BASE_PATH || ''}/favicon.svg` },
 };
 

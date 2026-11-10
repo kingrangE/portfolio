@@ -9,9 +9,9 @@ export default function Home() {
 
     <section className="hero wrap" aria-labelledby="hero-title">
       <div className="hero-copy">
-        <p className="intro-name">{"꾸준한 학습과 모든 실패 가능성에 대한 반증을 통해 현재 상황에 맞는 최선의 정답을 찾고자 하는 개발자 전길원입니다."}</p>
-        <h1 id="hero-title">데이터를 다루고<br />AI 서비스를 만듭니다.</h1>
-        <p className="hero-description">흩어진 정보를 모아 서비스에 필요한 데이터로 가공합니다.<br />AI가 만든 답변을 평가하고,<br />사용자가 쓰는 과정에서 생기는 문제를 해결합니다.</p>
+        <p className="intro-name">{"데이터 파이프라인과 LLM 서비스를 개발하는 전길원입니다."}</p>
+        <h1 id="hero-title">수집부터 재처리까지,<br />데이터 흐름을 설계합니다.</h1>
+        <p className="hero-description">Airflow와 Spark로 데이터 수집, 품질 검증, 재처리를 구현했습니다. 원자재 가격 적재에서는 중단 후의 중복 처리를 다뤘고, RAG와 대화 Agent에서는 색인 갱신, 기억 검색과 LLM 평가를 맡았습니다.</p>
         <div className="hero-actions"><a className="button primary" href="https://kingrange.github.io/Resume/" target="_blank" rel="noopener noreferrer">이력서 확인</a></div>
         <div className="hero-socials"><a href="https://github.com/kingrangE" target="_blank" rel="noopener noreferrer">GitHub</a><a href="https://kingrang-e.tistory.com/" target="_blank" rel="noopener noreferrer">개발 블로그</a></div>
       </div>
@@ -21,7 +21,7 @@ export default function Home() {
       </figure>
     </section>
     <section className="projects wrap section" id="projects" aria-labelledby="projects-title">
-      <div className="section-top"><div><h2 id="projects-title">대표 프로젝트</h2><p className="section-description">{"Platform, Agent, Data Engineering, RAG 프로젝트입니다."}</p><p className="section-description">{projectEvidenceNotice}</p></div></div>
+      <div className="section-top"><div><h2 id="projects-title">대표 프로젝트</h2><p className="section-description">{"수집과 적재, 품질 검증과 재처리를 다룬 프로젝트와 RAG, 대화 Agent의 구현 경험입니다."}</p><p className="section-description">{projectEvidenceNotice}</p></div></div>
       <ProjectGallery featured />
       <div className="all-work">
         <Link className="button primary all-work-button" href="/projects/">전체 {projects.length}개 프로젝트 보기</Link>

@@ -62,3 +62,5 @@ NEXT_PUBLIC_BASE_PATH=/portfolio npm run check:export
 GA4 태그는 `sites/kilwon-portfolio/app/layout.jsx`에서 전체 페이지에 로드하며 production 빌드에서만 실행합니다. `npm run dev`의 방문은 수집하지 않습니다.
 
 GA4 웹 스트림에서 향상된 측정과 브라우저 기록에 따른 페이지 변경 측정을 켜두면 Next.js의 페이지 이동도 집계됩니다. 같은 조회가 두 번 기록되지 않도록 별도의 수동 `page_view` 이벤트는 추가하지 않습니다. 방문 현황은 Google Analytics의 실시간 보고서와 페이지 및 화면 보고서에서 확인합니다.
+
+본인 방문을 제외하려면 제외할 Chrome 프로필에서 `https://kingrange.github.io/portfolio/?analytics=off`를 한 번 엽니다. 해당 프로필의 사이트 저장소에 설정을 저장하고 GA4 초기화 전에 전송을 차단합니다. 설정 후 주소에서 해당 매개변수는 제거합니다. 일반 주소로 접속하는 다른 방문자는 계속 집계하며, 같은 Google 계정으로 로그인한 다른 기기에는 설정이 동기화되지 않습니다. 제외를 해제하려면 같은 프로필에서 `?analytics=on`으로 접속합니다. 사이트 저장소를 지우면 제외 설정도 사라집니다. 저장소가 차단된 경우 `off` 링크의 현재 페이지에서만 제외됩니다.

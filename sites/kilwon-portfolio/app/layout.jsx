@@ -27,6 +27,21 @@ export default function RootLayout({ children }) {
         {process.env.NODE_ENV === 'production' && <>
           <Script src="https://www.googletagmanager.com/gtag/js?id=G-1J7FMFK6M0" strategy="afterInteractive" />
           <Script id="google-analytics" strategy="afterInteractive">{`
+            const analyticsUrl = new URL(window.location.href);
+            const analyticsPreference = analyticsUrl.searchParams.get('analytics');
+            let analyticsExcluded = analyticsPreference === 'off';
+            try {
+              if (analyticsPreference === 'off') localStorage.setItem('portfolio-analytics-excluded', 'true');
+              if (analyticsPreference === 'on') localStorage.removeItem('portfolio-analytics-excluded');
+              analyticsExcluded = analyticsExcluded || localStorage.getItem('portfolio-analytics-excluded') === 'true';
+            } catch (error) {
+              console.warn('방문 통계 제외 설정을 저장할 수 없습니다. 브라우저의 사이트 저장소 설정을 확인해주세요.', error);
+            }
+            if (analyticsPreference === 'off' || analyticsPreference === 'on') {
+              analyticsUrl.searchParams.delete('analytics');
+              window.history.replaceState(window.history.state, '', analyticsUrl.href);
+            }
+            window['ga-disable-G-1J7FMFK6M0'] = analyticsExcluded;
             window.dataLayer = window.dataLayer || [];
             function gtag(){window.dataLayer.push(arguments);}
             gtag('js', new Date());

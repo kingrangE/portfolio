@@ -12,7 +12,7 @@ export default function Home() {
       <div className="hero-copy">
         <p className="intro-name">{"데이터 파이프라인과 LLM 서비스를 개발하는 전길원입니다."}</p>
         <h1 id="hero-title">수집부터 재처리까지,<br />데이터 흐름을 설계합니다.</h1>
-        <p className="hero-description">Airflow와 Spark로 데이터 수집, 품질 검증, 재처리를 구현했습니다. 원자재 가격 적재에서는 중단 후의 중복 처리를 다뤘고, RAG와 대화 Agent에서는 색인 갱신, 기억 검색과 LLM 평가를 맡았습니다.</p>
+        <p className="hero-description">Airflow와 Spark로 데이터를 수집하고 검증하며, 중단된 작업을 다시 처리하는 파이프라인을 만들었습니다. 원자재 가격은 재전달돼도 중복 적재되지 않도록 했고, RAG와 대화 Agent에서는 색인 갱신과 기억 검색, LLM 평가를 다뤘습니다.</p>
         <div className="hero-actions"><a className="button primary" href="https://kingrange.github.io/Resume/" target="_blank" rel="noopener noreferrer">이력서 확인</a></div>
         <div className="hero-socials"><a href="https://github.com/kingrangE" target="_blank" rel="noopener noreferrer">GitHub</a><a href="https://kingrang-e.tistory.com/" target="_blank" rel="noopener noreferrer">개발 블로그</a></div>
       </div>
@@ -22,11 +22,11 @@ export default function Home() {
       </figure>
     </section>
     <section className="projects wrap section" id="projects" aria-labelledby="projects-title">
-      <div className="section-top"><div><h2 id="projects-title">대표 프로젝트</h2><p className="section-description">{"수집과 적재, 품질 검증과 재처리를 다룬 프로젝트와 RAG, 대화 Agent, 백엔드의 구현 경험입니다."}</p><p className="section-description">{projectEvidenceNotice}</p></div></div>
+      <div className="section-top"><div><h2 id="projects-title">대표 프로젝트</h2><p className="section-description">{"데이터를 모으고 검증하는 파이프라인부터, 그 데이터를 검색하고 활용하는 RAG와 대화 Agent, 학습 서비스의 백엔드까지 개발했습니다."}</p><p className="section-description">{projectEvidenceNotice}</p></div></div>
       <ProjectGallery featured />
       <div className="all-work">
         <Link className="button primary all-work-button" href="/projects/">전체 {projects.length}개 프로젝트 보기</Link>
-        <p>인턴십과 대회에서 진행한 프로젝트를 직무와 기술별로 볼 수 있습니다.</p>
+        <p>개인 프로젝트와 인턴십, 대회에서 한 작업을 직무와 기술별로 볼 수 있습니다.</p>
       </div>
     </section>
     <section className="tech-stack wrap section" id="tech-stack" aria-labelledby="tech-stack-title">
@@ -54,20 +54,20 @@ export default function Home() {
       <div className="wrap about-layout section">
         <div className="about-intro">
           <h2 id="about-title">실패한 뒤의 데이터 상태까지<br />설계에 포함합니다.</h2>
-          <p>저는 작업이 어느 지점에서 멈출 수 있는지, 그때 무엇이 저장돼 있는지를 따져보는 편입니다. 같은 데이터를 다시 받아도 되는지, 실패한 결과가 다음 계산에 섞이지 않는지 살피며 재시도와 재처리의 기준을 정해 왔습니다.</p>
+          <p>작업이 중간에 멈추면 어디까지 저장돼 있을지 먼저 따져보는 편입니다. 다시 실행할 때 같은 행이 늘어나지는 않는지, 검증에 실패한 결과를 다음 작업이 읽지는 않는지 살핍니다. 프로젝트마다 이 질문을 기준으로 저장 순서와 재처리 방식을 정했습니다.</p>
         </div>
         <div className="principles">
           <article><div>
             <h3>저장은 끝났는데, 완료 처리는 못 했다면</h3>
-            <p>Orecast에서는 DB 저장 직후 프로그램이 종료되면 같은 가격을 다시 받게 됩니다. 이 중단 지점을 고려해 품목과 날짜로 기존 행을 갱신하고, 저장이 끝난 뒤에만 메시지 처리를 확정했습니다.</p>
+            <p>Orecast에서는 DB에 가격을 저장한 뒤 메시지 완료 확인을 보내기 전에 프로그램이 멈출 수 있습니다. 같은 가격을 다시 받아도 품목과 날짜가 같은 행을 갱신하고, DB 저장이 끝난 뒤에만 메시지 처리를 확정하도록 했습니다.</p>
           </div></article>
           <article><div>
             <h3>같은 입력으로 다시 실행해도 해결되지 않는 오류</h3>
             <p>Softeer에서는 일시적인 실행 오류와 입력, 품질 오류를 나눴습니다. 재시도는 Airflow가 맡고, 검증에 실패한 데이터는 원인을 남겨 후속 계산에서 제외했습니다. Lambda의 호출 성공 응답 안에 담긴 함수 실패도 별도로 확인했습니다.</p>
           </div></article>
           <article><div>
-            <h3>색인 교체 중에 실패하면 남겨야 할 것</h3>
-            <p>Semo에서는 새 청크의 임베딩과 저장을 마친 뒤에만 이전 청크를 지웠습니다. 중간에 실패하면 기존 자료와 일부 새 자료가 함께 남을 수 있습니다. 다음 실행에서 식별자를 대조해 갱신을 이어가도록 했습니다.</p>
+            <h3>새 색인을 못 만들었을 때 남아 있어야 할 자료</h3>
+            <p>Semo에서는 새 청크의 임베딩과 저장을 모두 마친 뒤 이전 청크를 지웠습니다. 중간에 실패하면 이전 자료와 일부 새 자료가 함께 남습니다. 다음 실행은 청크 ID를 다시 대조해 갱신을 이어갑니다.</p>
           </div></article>
           <article><div>
             <h3>자막 지연을 줄여도 회의 기록은 남도록</h3>

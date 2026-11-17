@@ -27,7 +27,7 @@ export default function Home() {
       <ProjectGallery featured />
       <div className="all-work">
         <Link className="button primary all-work-button" href="/projects/">전체 {projects.length}개 프로젝트 보기</Link>
-        <p>개인 프로젝트와 인턴십, 대회에서 한 작업을 분야와 문제 해결 유형별로 볼 수 있습니다.</p>
+        <p>개인 프로젝트와 인턴십, 대회에서 수행한 작업을 분야와 문제 해결 유형별로 살펴볼 수 있습니다.</p>
       </div>
     </section>
     <section className="tech-stack wrap section" id="tech-stack" aria-labelledby="tech-stack-title">
@@ -55,7 +55,7 @@ export default function Home() {
       <div className="wrap about-layout section">
         <div className="about-intro">
           <h2 id="about-title">실패한 뒤의 데이터 상태까지<br />설계에 포함합니다.</h2>
-          <p>작업이 중간에 멈추면 어디까지 저장돼 있을지 먼저 따져보는 편입니다. 다시 실행할 때 같은 행이 늘어나지는 않는지, 검증에 실패한 결과를 다음 작업이 읽지는 않는지 살핍니다. 프로젝트마다 이 질문을 기준으로 저장 순서와 재처리 방식을 정했습니다.</p>
+          <p>작업이 중간에 멈추면 어디까지 저장되는지 먼저 따져봅니다. 다시 실행할 때 같은 데이터가 중복 저장되지는 않는지, 검증에 실패한 결과를 다음 작업이 읽지는 않는지 살핍니다. 이를 기준으로 저장 순서와 재처리 방식을 정했습니다.</p>
         </div>
         <div className="principles">
           <article><div>

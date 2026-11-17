@@ -8,22 +8,29 @@ export default function ResearchVisual({ interactive = false }) {
   const [run, setRun] = useState(0);
 
   useEffect(() => {
-    if (!window.IntersectionObserver) return;
-    const observer = new IntersectionObserver(entries => {
+    const target = container.current.closest('a.project-open') || container.current;
+    const restart = () => setRun(value => value + 1);
+    target.addEventListener('mouseenter', restart);
+    target.addEventListener('focusin', restart);
+    const observer = window.IntersectionObserver && new IntersectionObserver(entries => {
       if (entries.some(entry => entry.isIntersecting)) {
         setRun(value => value + 1);
         observer.disconnect();
       }
     }, { threshold: 0.5 });
-    observer.observe(container.current);
-    return () => observer.disconnect();
+    observer?.observe(container.current);
+    return () => {
+      observer?.disconnect();
+      target.removeEventListener('mouseenter', restart);
+      target.removeEventListener('focusin', restart);
+    };
   }, []);
 
   return <div className="research-demo" ref={container}>
     <div key={run} className="project-visual visual-research" data-playing={run > 0}
       role="img" aria-label={`${researchAnimation.description} ${researchAnimation.footnote}`}>
       <span className="visual-label">{researchAnimation.label}</span>
-      <div className="research-word">Research Agent</div>
+      <div className="research-word">{researchAnimation.name}</div>
       <div className="research-market" aria-hidden="true">
         <div className="research-chart-heading">
           <span>{researchAnimation.window}</span>

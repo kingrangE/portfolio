@@ -18,6 +18,7 @@ export const dcbaAnimation = {
 };
 
 export const researchAnimation = {
+  name: '맥락',
   label: '지금 살펴볼 테마와 종목 찾기',
   window: '같은 5분의 움직임 비교',
   series: ['테마 평균', '시장 비교 ETF'],
@@ -1739,7 +1740,7 @@ export const projects = [
     "sourceReviewed": "2026-11-17",
     "slug": "research-agent",
     "group": "개인 프로젝트",
-    "name": "Research Agent / 맥락",
+    "name": "맥락",
     "subtitle": "시장 변화를 비교하고 관련 뉴스와 종목을 연결하는 데이터 프로덕트",
     "category": "시장 탐색 데이터 프로덕트",
     "categories": [

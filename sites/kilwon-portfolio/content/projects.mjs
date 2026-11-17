@@ -334,6 +334,11 @@ export const projects = [
       "https://github.com/softeerbootcamp-8th/DE_team1-TheOne/commit/7907cbaa95",
       "https://github.com/softeerbootcamp-8th/DE_team1-TheOne/commit/9e528c16bf",
       "https://github.com/softeerbootcamp-8th/DE_team1-TheOne/commit/2d8375cb6a"
+    ],
+    "highlights": [
+      "운행 2,090만 건의 최대 64배 후보 확장 전에 중복을 제거해, 후보 집합을 유지하면서 해당 단계의 셔플 제거",
+      "DB 저장 직후 실패한 작업도 입력 내용과 설정을 대조해 기존 결과 버전을 재사용하도록 설계",
+      "기사와 차량의 월별 상태, 변경 이력을 보존해 중간 월부터도 같은 조건으로 합성 데이터 재생성"
     ]
   },
   {
@@ -590,7 +595,12 @@ export const projects = [
         ]
       }
     ],
-    "featured": true
+    "featured": true,
+    "highlights": [
+      "수집과 로컬 적재를 분리해 저장 PC 중단에 대응하고, DB 저장 후 재전달된 가격도 중복 없이 반영",
+      "직전 값으로 채운 분석 데이터와 실제 관측 원본을 분리해, 가격이 있어도 관측 공백은 품질 지표에 표시",
+      "미래 가격이 학습에 섞이지 않도록 검증 경계를 분리하고, 모델 선택과 최종 성능 평가에 서로 다른 구간 사용"
+    ]
   },
   {
     "featured": true,
@@ -1158,6 +1168,11 @@ export const projects = [
       "https://github.com/kingrangE/Talky/commit/b3cf5a4d5c41bb1fba67fc24d8bf37e4fbabe611",
       "https://github.com/kingrangE/Talky/commit/5f6d679f068a91e73472d1c187165903f5ae1a83",
       "https://github.com/kingrangE/Talky/commit/0325e98a7914a6ce73eec4c99804fcc5b3743392"
+    ],
+    "highlights": [
+      "원문 검색과 중복 제거, 정렬을 개선해 평균 검색 근거 재현율 4.4% → 70.8% 달성(동일 개발 평가 60문항)",
+      "원문과 그래프 동기화 작업을 함께 저장하고, 삭제 표식으로 뒤늦은 쓰기가 지운 기억을 복원하는 문제 차단",
+      "GPU 추론 슬롯을 실제 모델 실행 중에만 점유하도록 바꿔, CPU 음성 처리와 DB 저장이 다음 추론을 막는 문제 해소"
     ]
   },
   {
@@ -1385,6 +1400,11 @@ export const projects = [
       "https://github.com/kingrangE/semo/blob/1c7e653b9505b318576f7d7039275173d1c5e76d/semo/indexing.py",
       "https://github.com/kingrangE/semo/blob/1c7e653b9505b318576f7d7039275173d1c5e76d/semo/content.py",
       "https://github.com/kingrangE/semo/commit/1ab56179db14b785b3c03afcb400c1d278794263"
+    ],
+    "highlights": [
+      "새 청크 저장 후 이전 청크를 삭제하고 동시 갱신은 DB 잠금으로 순서를 맞춰, 갱신 실패 시에도 기존 검색 자료 보존",
+      "청크 총건수가 같아도 발생하는 검색 누락을 예상 ID와 실제 ID의 집합 대조로 진단",
+      "모델이 만든 출처 주소를 그대로 쓰지 않고, 문장별 자료 번호를 검증해 실제 검색 원문의 링크로 인용 구성"
     ]
   },
   {
@@ -1684,6 +1704,10 @@ export const projects = [
       "https://github.com/kingrangE/DCBA/commit/2bc6a8143c981d01c1722ea4459e01249e7d6861",
       "https://github.com/kingrangE/DCBA/blob/83eb6a6/LLM-Server/app/services/automation_service.py",
       "https://github.com/kingrangE/DCBA/blob/83eb6a6/DCBA/src/main/java/kingrangE/DCBA/service/ExerciseService.java"
+    ],
+    "highlights": [
+      "저장 직후 중단된 생성 작업은 Redis Streams에서 회수하고, 같은 작업 ID의 기존 결과로 중복 생성 방지",
+      "문제 DB를 기준으로 중복 검사 색인을 복구해, DB 저장 실패와 색인 누락이 다음 생성의 판단을 왜곡하지 않도록 설계"
     ]
   },
   {
@@ -1903,6 +1927,11 @@ export const projects = [
       "https://github.com/kingrangE/research_agent/blob/main/docs/decisions/0006-market-explorer.md",
       "https://github.com/kingrangE/research_agent/blob/main/market_watch.py",
       "https://github.com/kingrangE/research_agent/blob/main/price_tracking.py"
+    ],
+    "highlights": [
+      "한 조회에서 83번 반복하던 거래일 계산을 시장별 1회로 축소하고, 요청 안에서만 재사용해 다음 조회의 정정 반영 유지",
+      "테마와 비교 ETF를 같은 5분 구간으로 맞추고, 관측 공백과 기업별 집계 기준을 적용해 비교 가능한 대상만 제시",
+      "같은 관련주로 연결돼도 계약 당사자의 법인이 다르면 사건 병합을 거절하고, 기사 이후 공개된 근거는 과거 판정에서 제외"
     ]
   },
   {
@@ -2121,6 +2150,11 @@ export const projects = [
       "https://github.com/kingrangE/GAUDI/blob/main/backend/feature_demo/limits.py",
       "https://github.com/kingrangE/GAUDI/blob/main/backend/feature_demo/meter.py",
       "https://github.com/kingrangE/GAUDI/blob/main/backend/feature_demo/slots.py"
+    ],
+    "highlights": [
+      "판정 횟수를 유지한 병렬화로 전체 채점 22.1초 → 7.4초, 약 66.5% 단축(단일 E2E 측정)",
+      "부실한 지시도 생성 모델이 과제 전문으로 보완하던 정보 누출을 차단해, 응시자의 지시 자체를 평가하도록 수정",
+      "평가 접수와 비용 예약을 DB 잠금 안에서 처리하고, 호출별 사용량 정산으로 중복 실행과 여러 워커의 예산 초과 제어"
     ]
   },
   {
@@ -2330,6 +2364,11 @@ export const projects = [
           "승인 기반 검색"
         ]
       }
+    ],
+    "highlights": [
+      "자막 대기열이 차면 오래된 음성을 건너뛰고, 회의록은 별도 전체 녹음으로 작성해 실시간성과 기록 보존을 분리",
+      "회의 간 결정 변경은 양쪽 원문 인용과 사용자 승인으로 확정하고, 원문이 바뀌면 기존 연결과 생성 중인 답변도 무효화",
+      "나눠 전사한 긴 녹음의 상대 시각을 원본 시간축으로 복원하고, 전체 녹음의 화자 구분 결과와 결합"
     ]
   },
   {
@@ -2583,6 +2622,11 @@ export const projects = [
           "settings-save"
         ]
       }
+    ],
+    "highlights": [
+      "SAP 수집과 Excel 계산을 자동화해 BOM 역산 업무 소요 30인일 이상 → 7인일 이하로 단축에 기여(당시 업무 기록)",
+      "반제품 의존 관계를 따라 하위 계산부터 수행하고, 최종 원재료 소요량에서 반제품별 산출 근거까지 추적 가능하게 구성",
+      "Excel COM을 전용 STA 스레드에서 처리하고, 다운로드와 프로세스 정리를 분리해 스레드 충돌과 Excel 누적에 대응"
     ]
   },
   {
@@ -2826,6 +2870,11 @@ export const projects = [
           "performance"
         ]
       }
+    ],
+    "highlights": [
+      "전체 집계 11,174ms → 변경분 반영 55.2ms, 약 99.5% 단축(합성 약 2만 건, 이후 제거된 분석 버전의 개발 측정)",
+      "일반 조회 인덱스 12개 → 4개로 정리해 임시 테이블 적재 약 34.4% 단축(합성 2만 행, 당시 분석 버전의 개발 측정)",
+      "답안 저장을 확정한 뒤 채점 워커를 예약하고, 자동저장과 최종 제출이 겹쳐도 같은 답안을 중복 생성하지 않도록 처리"
     ]
   },
   {
@@ -2892,6 +2941,10 @@ export const projects = [
           "evaluation"
         ]
       }
+    ],
+    "highlights": [
+      "모델 재학습 없이 SSIM 0.66 → 0.75로 개선(당시 내부 실험의 영상 유사도 지표)",
+      "정면 원본만 있는 조건에서 후면 정보 부족에 주목해, 3D 재구성에 쓰는 전후면 이미지 수와 각도 분포 조정"
     ]
   },
   {
@@ -3009,6 +3062,10 @@ export const projects = [
           "design"
         ]
       }
+    ],
+    "highlights": [
+      "PoC 내부 평가에서 최종 재현율 83%를 기록해 목표 재현율 75% 초과",
+      "플레이 영상과 데이터 분석으로 반복 수행의 영향을 찾아 정제 기준을 바꾸고, Z축 가속도를 입력 변수에 추가"
     ]
   },
   {
@@ -3104,6 +3161,10 @@ export const projects = [
           "performance"
         ]
       }
+    ],
+    "highlights": [
+      "LoRA와 Soft Prompt로 질문 품질 57% 상대 향상, 지시 이행 100% 기록(당시 내부 평가 20개 사례)",
+      "질문별 음성을 병렬 생성해 완성된 파일부터 전달하고, Unity 수신을 백그라운드로 옮겨 VR 화면 멈춤 해소"
     ]
   },
   {
@@ -3211,6 +3272,10 @@ export const projects = [
       "https://github.com/kingrangE/startup-agent/commit/a83814e863",
       "https://github.com/kingrangE/startup-agent/commit/9b8856b2b3",
       "https://github.com/kingrangE/startup-agent/commit/853c4b6352"
+    ],
+    "highlights": [
+      "관점별 병렬 검색 결과에서 URL 중복을 제거하고, Cross-Encoder로 관련도를 다시 매겨 생성 근거 선별",
+      "사실과 가설, 출처를 문장별로 구분하고 초안을 최대 2회 수정한 뒤에도 검증에 실패한 문장은 제외"
     ]
   }
 ];

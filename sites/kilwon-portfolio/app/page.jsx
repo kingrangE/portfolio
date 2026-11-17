@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import ProjectGallery from "../components/project-gallery";
-import { projects, projectEvidenceNotice } from "../content/projects.mjs";
+import { projects } from "../content/projects.mjs";
 import { techStack, stackExperience } from "../content/tech-stack.mjs";
 
 export default function Home() {
@@ -23,7 +23,7 @@ export default function Home() {
       </figure>
     </section>
     <section className="projects wrap section" id="projects" aria-labelledby="projects-title">
-      <div className="section-top"><div><h2 id="projects-title">대표 프로젝트</h2><p className="section-description">{"데이터를 모으고 검증하는 파이프라인부터, 그 데이터를 검색하고 활용하는 RAG와 대화 Agent, 학습 서비스의 백엔드까지 개발했습니다."}</p><p className="section-description">{projectEvidenceNotice}</p></div></div>
+      <div className="section-top"><h2 id="projects-title">대표 프로젝트</h2></div>
       <ProjectGallery featured />
       <div className="all-work">
         <Link className="button primary all-work-button" href="/projects/">전체 {projects.length}개 프로젝트 보기</Link>

@@ -45,8 +45,9 @@ export default function ProjectGallery({ featured = false }) {
               <div className="project-body">
                 <div className="project-meta"><span>{project.organization}</span><span>{project.status}</span></div>
                 <h3>{project.name}<span>{project.subtitle}</span></h3>
-                <p>{project.summary}</p>
-                {!featured && <p className="design-note">{relatedCase ? relatedCase.lead : project.decision}</p>}
+                <ul className="project-highlights" aria-label="주요 성과와 설계">
+                  {project.highlights.map(highlight => <li key={highlight}>{highlight}</li>)}
+                </ul>
               </div>
             </Link>
             <div className="tag-row" aria-label="관련 분야">{fieldsForProject(project).map(item => featured ? <span key={item.id}>{item.label}</span> :

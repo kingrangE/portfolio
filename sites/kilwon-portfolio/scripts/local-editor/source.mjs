@@ -14,7 +14,7 @@ export const sourceFiles = [
 ];
 export const normalize = value => value.replace(/\s+/g, ' ').trim();
 export const revision = source => createHash('sha256').update(source).digest('hex');
-const proseFields = new Set(['name', 'subtitle', 'summary', 'decision', 'organization', 'period', 'role', 'status', 'category', 'title', 'lead', 'situation', 'task', 'result', 'note', 'version', 'actionTitle', 'implementation', 'action', 'flow']);
+const proseFields = new Set(['name', 'subtitle', 'summary', 'highlights', 'decision', 'organization', 'period', 'role', 'status', 'category', 'title', 'lead', 'situation', 'task', 'result', 'note', 'version', 'actionTitle', 'implementation', 'action', 'flow']);
 
 function projectArray(source) {
   const ast = parse(source, { sourceType: 'module', plugins: ['jsx'] });
@@ -92,6 +92,7 @@ export function addContent(source, input) {
     value.categories = categories;
     value.tags = list(info.tags, '프로젝트 기술, 키워드');
     value.decision = section.lead;
+    value.highlights = [section.lead, section.result];
     value.flow = info.flow?.length ? list(info.flow, '처리 흐름') : [];
     const url = text(info.url, '코드 주소', true);
     if (url) {

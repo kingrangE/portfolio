@@ -30,7 +30,9 @@ export default async function ProjectPage({ params }) {
           <p className="detail-category">{project.category}</p>
           <h1>{project.name}</h1>
           <p className="detail-subtitle">{project.subtitle}</p>
-          <p className="detail-summary">{project.summary}</p>
+          <ul className="project-highlights detail-highlights" aria-label="주요 성과와 설계">
+            {project.highlights.map(highlight => <li key={highlight}>{highlight}</li>)}
+          </ul>
           <p className="detail-context">{['수상', '개인 프로젝트'].includes(project.group) ? projectEvidenceNotice : '재직 중 수행한 업무와 구현 경험을 정리한 회사 프로젝트입니다.'}</p>
           <p className="detail-context">{project.organization} / {project.period}<br />{project.role}</p>
           <div className="tag-row" aria-label="관련 분야">{fieldsForProject(project).map(field => <span key={field.id}>{field.label}</span>)}</div>

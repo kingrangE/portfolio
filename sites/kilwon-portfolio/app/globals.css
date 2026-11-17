@@ -183,34 +183,37 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .visual-research { background: var(--mist); color: var(--ink); }
 .project-visual.visual-research { height: auto; min-height: 290px; display: flex; flex-direction: column; padding: 48px 24px 12px; }
 .research-word { font: 600 clamp(24px, 3vw, 32px)/1.3 var(--display); letter-spacing: -1.3px; }
-.research-comparison { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 16px; }
-.research-source, .research-reference { min-width: 0; padding: 10px 12px; border: 1px solid var(--line); border-radius: 6px; background: #fff; }
-.research-source { border-top: 3px solid #b7791f; }
-.research-reference { border-top: 3px solid var(--green); }
-.research-comparison span { display: block; font-size: 10px; line-height: 1.5; color: var(--muted); }
-.research-comparison strong { display: block; margin-top: 5px; font-size: clamp(12px, 1.4vw, 15px); line-height: 1.5; white-space: nowrap; }
-.research-comparison p { margin: 3px 0 5px; font-size: 13px; line-height: 1.5; font-weight: 650; }
-.research-source p { color: #80510e; }
-.research-reference p { color: var(--green); }
-.research-comparison small { display: block; font-size: 10px; line-height: 1.5; color: var(--muted); }
-.research-resolution { display: flex; align-items: center; gap: 10px; margin-top: 10px; color: var(--green); font-size: 12px; line-height: 1.5; font-weight: 650; }
-.research-resolution svg { width: 30px; height: 24px; flex: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.research-market { margin-top: 15px; }
+.research-chart-heading { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; font-size: 10px; line-height: 1.5; color: var(--muted); }
+.research-legend { display: flex; flex-wrap: wrap; gap: 9px; margin-left: auto; font-size: 9px; }
+.research-legend span { display: inline-flex; align-items: center; gap: 4px; }
+.research-legend i { width: 10px; border-top: 2px solid var(--blue); }
+.research-legend [data-series="1"] i { border-color: var(--plum); border-top-style: dashed; }
+.research-chart { display: block; width: 100%; height: 76px; margin-top: 5px; overflow: visible; }
+.research-guide { stroke: var(--line); stroke-dasharray: 3 4; }
+.research-theme, .research-benchmark { stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.research-theme { stroke: var(--blue); }
+.research-benchmark { stroke: var(--plum); stroke-dasharray: 5 5; }
+.research-chart-times { display: flex; justify-content: space-between; font-size: 9px; line-height: 1.5; color: var(--muted); }
+.research-focus { margin-top: 10px; padding-left: 12px; border-left: 3px solid var(--green); }
+.research-focus strong { display: block; font-size: 13px; line-height: 1.5; }
+.research-focus>span { display: block; margin-top: 2px; font-size: 10px; line-height: 1.5; color: var(--muted); }
 .research-footnote { display: block; margin-top: auto; padding-top: 10px; font-size: 9px; line-height: 1.5; color: var(--muted); }
 .research-controls { padding-top: 16px; }
 .research-controls button { padding: 7px 12px; border: 1px solid var(--line); background: var(--paper); font-size: 12px; }
 .research-controls button:hover { border-color: var(--blue); }
 .research-controls p { font-size: 13px; line-height: 1.8; color: var(--muted); margin: 12px 0 0; }
-@keyframes research-reference {
-  0%, 25% { opacity: 0; transform: translateY(8px); }
-  50%, 100% { opacity: 1; transform: translateY(0); }
+@keyframes research-compare {
+  0%, 10% { clip-path: inset(-5px 100% -5px -5px); }
+  65%, 100% { clip-path: inset(-5px); }
 }
 @keyframes research-resolve {
   0%, 60% { opacity: 0; }
   85%, 100% { opacity: 1; }
 }
 @media (prefers-reduced-motion: no-preference) {
-  .visual-research[data-playing="true"] .research-reference { animation: research-reference 3.6s ease-out both; }
-  .visual-research[data-playing="true"] .research-resolution { animation: research-resolve 3.6s ease-out both; }
+  .visual-research[data-playing="true"] .research-chart { animation: research-compare 3.6s ease-in-out both; }
+  .visual-research[data-playing="true"] .research-focus { animation: research-resolve 3.6s ease-out both; }
 }
 .talky-word { position: absolute; top: 55px; left: 25px; font: 500 49px/1.2 var(--display); letter-spacing: -2px; }
 .speech { position: absolute; font-size: 11px; border-radius: 13px 13px 13px 3px; padding: 12px 16px; max-width: calc(100% - 50px); }

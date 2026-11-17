@@ -1,4 +1,5 @@
 import DcbaVisual from './dcba-visual';
+import ResearchVisual from './research-visual';
 
 const visuals = {
   gaudi: (
@@ -50,5 +51,6 @@ const visuals = {
 
 export default function ProjectVisual({ slug, interactive = false }) {
   if (slug === 'dcba') return <DcbaVisual interactive={interactive} />;
+  if (slug === 'research-agent') return <ResearchVisual interactive={interactive} />;
   return visuals[slug] || null;
 }

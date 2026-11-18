@@ -23,7 +23,15 @@ export default function Home() {
       </figure>
     </section>
     <section className="projects wrap section" id="projects" aria-labelledby="projects-title">
-      <div className="section-top"><h2 id="projects-title">대표 프로젝트</h2></div>
+      <div className="section-top projects-heading">
+        <h2 id="projects-title">대표 프로젝트</h2>
+        <div className="featured-service-links">
+          {projects.filter(project => project.featured && project.serviceUrl).map(project => (
+            <a key={project.slug} className="button primary service-link" href={project.serviceUrl} target="_blank" rel="noopener noreferrer"
+              aria-label={`${project.name} 서비스 열기 (새 탭)`}>{project.name} 서비스 열기 <span aria-hidden="true">↗</span></a>
+          ))}
+        </div>
+      </div>
       <ProjectGallery featured />
       <div className="all-work">
         <Link className="button primary all-work-button" href="/projects/">전체 {projects.length}개 프로젝트 보기</Link>

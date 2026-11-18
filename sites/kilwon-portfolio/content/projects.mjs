@@ -1361,6 +1361,7 @@ export const projects = [
       "GitHub Actions"
     ],
     "url": "https://github.com/kingrangE/DCBA",
+    "serviceUrl": "https://54.117.6.194",
     "flow": [
       "React 학습 화면",
       "Spring Boot 인증, 조회, 생성 예약",

@@ -37,7 +37,9 @@ export default async function ProjectPage({ params }) {
           <p className="detail-context">{project.organization} / {project.period}<br />{project.role}</p>
           <div className="tag-row" aria-label="관련 분야">{fieldsForProject(project).map(field => <span key={field.id}>{field.label}</span>)}</div>
           <div className="detail-links">
-            {project.url ? <a className="button primary" href={project.url} target="_blank" rel="noopener noreferrer">{project.repositoryLabel || 'GitHub에서 코드 보기'}</a>
+            {project.serviceUrl && <a className="button primary service-link" href={project.serviceUrl} target="_blank" rel="noopener noreferrer"
+              aria-label={`${project.name} 서비스 열기 (새 탭)`}>서비스 열기 <span aria-hidden="true">↗</span></a>}
+            {project.url ? <a className={project.serviceUrl ? 'text-link' : 'button primary'} href={project.url} target="_blank" rel="noopener noreferrer">{project.repositoryLabel || 'GitHub에서 코드 보기'}</a>
               : <span className="private-repo">코드 비공개</span>}
             <span>{project.status}</span>
           </div>

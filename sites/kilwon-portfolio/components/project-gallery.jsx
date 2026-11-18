@@ -53,8 +53,12 @@ export default function ProjectGallery({ featured = false }) {
             <div className="tag-row" aria-label="관련 분야">{fieldsForProject(project).map(item => featured ? <span key={item.id}>{item.label}</span> :
               <button key={item.id} className="field-link" aria-pressed={field === item.id} aria-label={`${item.label} 프로젝트 모아보기`}
                 onClick={() => setField(field === item.id ? 'all' : item.id)}>{item.label}</button>)}</div>
-            {project.url && <div className="project-repository"><a className="text-link" href={project.url} target="_blank" rel="noopener noreferrer"
-              aria-label={`${project.name} ${project.repositoryLabel || 'GitHub 저장소'} 열기`}>{project.repositoryLabel || 'GitHub'}</a></div>}
+            {(project.serviceUrl || project.url) && <div className="project-repository">
+              {project.serviceUrl && <a className="button primary service-link" href={project.serviceUrl} target="_blank" rel="noopener noreferrer"
+                aria-label={`${project.name} 서비스 열기 (새 탭)`}>서비스 열기 <span aria-hidden="true">↗</span></a>}
+              {project.url && <a className="text-link" href={project.url} target="_blank" rel="noopener noreferrer"
+                aria-label={`${project.name} ${project.repositoryLabel || 'GitHub 저장소'} 열기`}>{project.repositoryLabel || 'GitHub'}</a>}
+            </div>}
           </article>
           );
         })}

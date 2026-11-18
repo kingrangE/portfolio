@@ -40,25 +40,26 @@ export default function ProjectGallery({ featured = false }) {
           const href = `/projects/${project.slug}/${relatedCase ? `#${relatedCase.id}` : ''}`;
           return (
           <article key={project.slug} id={project.slug} className={featured ? 'project-card' : 'catalog-card'}>
-            <Link className="project-open" href={href} aria-label={`${project.name}${relatedCase ? `: ${relatedCase.title}` : " 프로젝트"} 읽기`}>
+            <div className="project-open">
               {featured && <ProjectVisual slug={project.slug} />}
               <div className="project-body">
                 <div className="project-meta"><span>{project.organization}</span><span>{project.status}</span></div>
-                <h3>{project.name}<span>{project.subtitle}</span></h3>
+                <h3>
+                  <Link className="project-title-link" href={href} aria-label={`${project.name}${relatedCase ? `: ${relatedCase.title}` : " 프로젝트"} 읽기`}>{project.name}</Link>
+                  {project.serviceUrl && <a className="project-service-link" href={project.serviceUrl} target="_blank" rel="noopener noreferrer"
+                    aria-label={`${project.name} 접속하기 (새 탭)`}>{project.name} 접속하기 <span aria-hidden="true">↗</span></a>}
+                  <span>{project.subtitle}</span>
+                </h3>
                 <ul className="project-highlights" aria-label="주요 성과와 설계">
                   {project.highlights.map(highlight => <li key={highlight}>{highlight}</li>)}
                 </ul>
               </div>
-            </Link>
+            </div>
             <div className="tag-row" aria-label="관련 분야">{fieldsForProject(project).map(item => featured ? <span key={item.id}>{item.label}</span> :
               <button key={item.id} className="field-link" aria-pressed={field === item.id} aria-label={`${item.label} 프로젝트 모아보기`}
                 onClick={() => setField(field === item.id ? 'all' : item.id)}>{item.label}</button>)}</div>
-            {(project.serviceUrl || project.url) && <div className="project-repository">
-              {project.serviceUrl && <a className="button primary service-link" href={project.serviceUrl} target="_blank" rel="noopener noreferrer"
-                aria-label={`${project.name} 서비스 열기 (새 탭)`}>서비스 열기 <span aria-hidden="true">↗</span></a>}
-              {project.url && <a className="text-link" href={project.url} target="_blank" rel="noopener noreferrer"
-                aria-label={`${project.name} ${project.repositoryLabel || 'GitHub 저장소'} 열기`}>{project.repositoryLabel || 'GitHub'}</a>}
-            </div>}
+            {project.url && <div className="project-repository"><a className="text-link" href={project.url} target="_blank" rel="noopener noreferrer"
+              aria-label={`${project.name} ${project.repositoryLabel || 'GitHub 저장소'} 열기`}>{project.repositoryLabel || 'GitHub'}</a></div>}
           </article>
           );
         })}

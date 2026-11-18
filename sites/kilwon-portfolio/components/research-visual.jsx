@@ -8,7 +8,7 @@ export default function ResearchVisual({ interactive = false }) {
   const [run, setRun] = useState(0);
 
   useEffect(() => {
-    const target = container.current.closest('a.project-open') || container.current;
+    const target = container.current.closest('.project-open') || container.current;
     const restart = () => setRun(value => value + 1);
     target.addEventListener('mouseenter', restart);
     target.addEventListener('focusin', restart);

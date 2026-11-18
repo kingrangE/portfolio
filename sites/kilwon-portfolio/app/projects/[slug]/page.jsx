@@ -28,7 +28,11 @@ export default async function ProjectPage({ params }) {
       <header className="detail-hero">
         <div>
           <p className="detail-category">{project.category}</p>
-          <h1>{project.name}</h1>
+          <div className="detail-title-row">
+            <h1>{project.name}</h1>
+            {project.serviceUrl && <a className="project-service-link" href={project.serviceUrl} target="_blank" rel="noopener noreferrer"
+              aria-label={`${project.name} 접속하기 (새 탭)`}>{project.name} 접속하기 <span aria-hidden="true">↗</span></a>}
+          </div>
           <p className="detail-subtitle">{project.subtitle}</p>
           <ul className="project-highlights detail-highlights" aria-label="주요 성과와 설계">
             {project.highlights.map(highlight => <li key={highlight}>{highlight}</li>)}
@@ -37,8 +41,6 @@ export default async function ProjectPage({ params }) {
           <p className="detail-context">{project.organization} / {project.period}<br />{project.role}</p>
           <div className="tag-row" aria-label="관련 분야">{fieldsForProject(project).map(field => <span key={field.id}>{field.label}</span>)}</div>
           <div className="detail-links">
-            {project.serviceUrl && <a className="button primary service-link" href={project.serviceUrl} target="_blank" rel="noopener noreferrer"
-              aria-label={`${project.name} 서비스 열기 (새 탭)`}>서비스 열기 <span aria-hidden="true">↗</span></a>}
             {project.url ? <a className={project.serviceUrl ? 'text-link' : 'button primary'} href={project.url} target="_blank" rel="noopener noreferrer">{project.repositoryLabel || 'GitHub에서 코드 보기'}</a>
               : <span className="private-repo">코드 비공개</span>}
             <span>{project.status}</span>

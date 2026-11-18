@@ -33,8 +33,8 @@ test('project URLs and section links are unique and valid', () => {
   }
 });
 
-test('home retains the selected projects and adds Research Agent as the sixth', () => {
-  assert.deepEqual(projects.filter(project => project.featured).map(project => project.slug), ['softeer', 'orecast', 'talky', 'semo', 'dcba', 'research-agent']);
+test('home follows the requested featured project order', () => {
+  assert.deepEqual(projects.filter(project => project.featured).map(project => project.slug), ['softeer', 'dcba', 'talky', 'orecast', 'semo', 'research-agent']);
   const dcba = projects.find(project => project.slug === 'dcba');
   assert.equal(dcba.group, '개인 프로젝트');
   assert.ok(dcba.categories.includes('backend'));

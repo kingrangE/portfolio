@@ -64,3 +64,10 @@ export const techStack = [
     ],
   },
 ];
+
+export function stackForExperience(experience = 'all') {
+  return techStack.map(group => ({
+    ...group,
+    items: group.items.filter(item => experience === 'all' || item.experience === experience),
+  })).filter(group => group.items.length > 0);
+}

@@ -595,6 +595,7 @@ export const projects = [
       "검색 평가"
     ],
     "url": "https://github.com/kingrangE/Talky",
+    "serviceUrl": "https://54-180-127-236.sslip.io/",
     "flow": [
       "음성 입력 / STT",
       "기억 검색",

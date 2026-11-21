@@ -53,7 +53,7 @@ test('fields group related cases without treating tool names as fields', () => {
   assert.ok(filter('agent').includes('separk'));
   assert.ok(!filter('agent').includes('semo'));
   assert.equal(filter('Airflow').length, 0);
-  assert.deepEqual(fieldsForProject(projects.find(project => project.slug === 'dcba')).map(field => field.id), ['llm', 'backend', 'cicd']);
+  assert.deepEqual(fieldsForProject(projects.find(project => project.slug === 'dcba')).map(field => field.id), ['data', 'llm', 'backend', 'cicd']);
   for (const project of projects) assert.ok(fieldsForProject(project).length > 0);
 });
 
@@ -79,7 +79,7 @@ test('field and problem filters must match the same case', () => {
   const dcba = projects.find(project => project.slug === 'dcba');
   assert.deepEqual(dcba.sections.filter(section => matchesSection(section, 'backend', 'performance')).map(section => section.id), ['cursor-reads']);
   assert.equal(matchesProject(dcba, 'cicd', 'performance'), false);
-  assert.deepEqual(dcba.sections.filter(section => matchesSection(section, 'cicd', 'operations')).map(section => section.id), ['schema-order', 'delivery-artifact']);
+  assert.deepEqual(dcba.sections.filter(section => matchesSection(section, 'cicd', 'operations')).map(section => section.id), ['schema-order']);
   const semo = projects.find(project => project.slug === 'semo');
   assert.deepEqual(semo.sections.filter(section => matchesSection(section, 'data', 'recovery')).map(section => section.id), ['indexing']);
   assert.equal(projects.filter(project => matchesProject(project, 'all', 'all')).length, projects.length);

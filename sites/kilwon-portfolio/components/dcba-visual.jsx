@@ -54,11 +54,11 @@ export default function DcbaVisual({ interactive = false }) {
           </div>
           <div className="dcba-stage">
             <svg viewBox="0 0 32 32"><path d="m18 3-12 16h9l-1 10 12-17h-9Z" /></svg>
-            <strong>FastAPI</strong><span>Kanana 생성</span>
+            <strong>FastAPI</strong><span>NVIDIA NIM</span>
           </div>
           <div className="dcba-stage">
             <svg viewBox="0 0 32 32"><ellipse cx="16" cy="7" rx="12" ry="4" /><path d="M4 7v18c0 5 24 5 24 0V7M4 16c0 5 24 5 24 0" /></svg>
-            <strong>MariaDB</strong><span>문제, 작업 ID</span>
+            <strong>관계형 DB</strong><span>문제, 작업 ID</span>
           </div>
         </div>
         <span className="dcba-packet">작업 #07</span>

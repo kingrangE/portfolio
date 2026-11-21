@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import ProjectGallery from '../../components/project-gallery';
 
-export const metadata = { title: '전체 프로젝트', description: 'Data Engineering, LLM, RAG, Agent, Backend 등 분야별로 살펴보는 전길원의 프로젝트와 설계 기록.' };
+export const metadata = { title: '전체 프로젝트', description: 'Data Engineering, DBA, LLM, RAG, Agent, Backend 등 분야별로 살펴보는 전길원의 프로젝트와 설계 기록.' };
 
 export default function ProjectsPage() {
   return <section className="project-catalog wrap section" aria-labelledby="catalog-title">

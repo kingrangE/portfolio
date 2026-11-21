@@ -180,7 +180,8 @@ export const projects = [
         ],
         "implementation": "지역, 월별 저장 잠금 → 입력, 설정 식별자 조회\n  ├─ 기존 실행: 저장된 버전 반환\n  └─ 새 실행: 결과, 입력 이력 저장 → 적재 건수 확인 → 함께 확정",
         "fields": [
-          "data"
+          "data",
+          "dba"
         ],
         "problemTypes": [
           "quality",
@@ -359,7 +360,8 @@ export const projects = [
         ],
         "result": "합성 문항 5만 건에 초당 75건의 혼합 부하를 적용했을 때, MariaDB 대비 목록 p99는 85.72ms → 15.37ms로 약 82.1% 줄었습니다. 분야와 난이도 검색 p95는 111.98ms → 11.30ms로 약 89.9% 줄었고, 초당 150건을 요청했을 때의 성공 처리량 중앙값은 100.3건 → 150.0건이었습니다.",
         "fields": [
-          "backend"
+          "backend",
+          "dba"
         ],
         "problemTypes": [
           "performance",
@@ -391,7 +393,8 @@ export const projects = [
         "fields": [
           "data",
           "backend",
-          "cicd"
+          "cicd",
+          "dba"
         ],
         "problemTypes": [
           "quality",
@@ -426,7 +429,8 @@ export const projects = [
         "note": "Redis에 보존된 작업과 DB 완료 이력으로 복구합니다. 모델 호출 자체가 중복 실행될 가능성은 남아 있으며, 로컬 벡터 저장소는 단일 생성 흐름을 전제로 합니다.",
         "implementation": "작업 수신 → DB 완료 이력 조회\n  ├─ 완료된 문제 존재: 기존 결과 반환\n  ├─ 완료됐지만 문제 삭제됨: 재생성 없이 완료 처리\n  └─ 미완료: 생성 → 문제와 완료 이력 함께 커밋\n  → 메시지 완료 확인",
         "fields": [
-          "backend"
+          "backend",
+          "dba"
         ],
         "problemTypes": [
           "recovery",
@@ -664,7 +668,8 @@ export const projects = [
         "fields": [
           "data",
           "backend",
-          "rag"
+          "rag",
+          "dba"
         ],
         "problemTypes": [
           "quality",
@@ -697,7 +702,8 @@ export const projects = [
         "fields": [
           "data",
           "backend",
-          "rag"
+          "rag",
+          "dba"
         ],
         "problemTypes": [
           "quality",
@@ -838,7 +844,8 @@ export const projects = [
         "implementation": "주제 관계를 최대 3홉 탐색 → 메시지별로 묶고 최단 거리 선택\n  → 사용자, 현재 대화 제외 조건 유지 → 결과 수 제한",
         "fields": [
           "rag",
-          "agent"
+          "agent",
+          "dba"
         ],
         "problemTypes": [
           "performance",
@@ -870,7 +877,8 @@ export const projects = [
         "version": "2026.11 개인 고도화 / 검색 경로 분리 실험",
         "fields": [
           "rag",
-          "data"
+          "data",
+          "dba"
         ],
         "problemTypes": [
           "evaluation",
@@ -2190,7 +2198,8 @@ export const projects = [
         "fields": [
           "backend",
           "llm",
-          "rag"
+          "rag",
+          "dba"
         ],
         "problemTypes": [
           "design"
@@ -2644,7 +2653,8 @@ export const projects = [
         "actionTitle": "조회 조건에 맞는 인덱스와 트랜잭션 범위 갱신 잠금",
         "fields": [
           "data",
-          "backend"
+          "backend",
+          "dba"
         ],
         "problemTypes": [
           "performance",
@@ -3203,6 +3213,7 @@ export const roles = [
 
 export const engineeringFields = [
   { id: 'data', label: 'Data Engineering' },
+  { id: 'dba', label: 'DBA' },
   { id: 'llm', label: 'LLM' },
   { id: 'rag', label: 'RAG' },
   { id: 'agent', label: 'Agent' },

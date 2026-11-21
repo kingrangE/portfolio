@@ -44,7 +44,7 @@ test('home follows the requested featured project order', () => {
 
 test('fields group related cases without treating tool names as fields', () => {
   const filter = field => projects.filter(project => matchesProject(project, field)).map(project => project.slug);
-  assert.deepEqual(engineeringFields.map(field => field.id), ['data', 'llm', 'rag', 'agent', 'backend', 'cicd', 'ml']);
+  assert.deepEqual(engineeringFields.map(field => field.id), ['data', 'dba', 'llm', 'rag', 'agent', 'backend', 'cicd', 'ml']);
   assert.equal(filter('all').length, projects.length);
   assert.deepEqual(filter('cicd'), ['dcba']);
   assert.ok(filter('rag').includes('semo'));
@@ -53,7 +53,7 @@ test('fields group related cases without treating tool names as fields', () => {
   assert.ok(filter('agent').includes('separk'));
   assert.ok(!filter('agent').includes('semo'));
   assert.equal(filter('Airflow').length, 0);
-  assert.deepEqual(fieldsForProject(projects.find(project => project.slug === 'dcba')).map(field => field.id), ['data', 'llm', 'backend', 'cicd']);
+  assert.deepEqual(fieldsForProject(projects.find(project => project.slug === 'dcba')).map(field => field.id), ['data', 'dba', 'llm', 'backend', 'cicd']);
   for (const project of projects) assert.ok(fieldsForProject(project).length > 0);
 });
 
@@ -83,4 +83,16 @@ test('field and problem filters must match the same case', () => {
   const semo = projects.find(project => project.slug === 'semo');
   assert.deepEqual(semo.sections.filter(section => matchesSection(section, 'data', 'recovery')).map(section => section.id), ['indexing']);
   assert.equal(projects.filter(project => matchesProject(project, 'all', 'all')).length, projects.length);
+});
+
+test('DBA filters target database cases and combine with the same case problem type', () => {
+  const project = slug => projects.find(item => item.slug === slug);
+  assert.deepEqual(projects.filter(item => matchesProject(item, 'dba')).map(item => item.slug),
+    ['softeer', 'dcba', 'talky', 'meeting-assistant', 'hr-cbt']);
+  assert.deepEqual(project('dcba').sections.filter(section => matchesSection(section, 'dba', 'performance')).map(section => section.id),
+    ['cursor-reads']);
+  assert.equal(matchesProject(project('softeer'), 'dba', 'recovery'), true);
+  assert.equal(matchesProject(project('softeer'), 'dba', 'performance'), false);
+  assert.equal(matchesProject(project('semo'), 'dba'), false);
+  assert.equal(matchesProject(project('orecast'), 'dba'), false);
 });

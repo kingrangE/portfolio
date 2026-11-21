@@ -1,5 +1,7 @@
 'use client';
 
+import InlineEmphasis from './inline-emphasis.mjs';
+
 import { useState } from 'react';
 import Link from 'next/link';
 import { projects, engineeringFields, problemTypes, fieldsForProject, matchesSection, matchesProject, projectGroups } from '../content/projects.mjs';
@@ -51,7 +53,7 @@ export default function ProjectGallery({ featured = false }) {
                   <span>{project.subtitle}</span>
                 </h3>
                 <ul className="project-highlights" aria-label="주요 성과와 설계">
-                  {project.highlights.map(highlight => <li key={highlight}>{highlight}</li>)}
+                  {project.highlights.map(highlight => <li key={highlight}><InlineEmphasis>{highlight}</InlineEmphasis></li>)}
                 </ul>
               </div>
             </div>

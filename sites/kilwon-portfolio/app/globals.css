@@ -741,3 +741,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
   .case-narrative p, .case-narrative li { font-size: 14px; }
   .case-narrative pre { padding: 16px; font-size: 12px; }
 }
+
+.project-highlights strong, .case-section strong { color: var(--ink); font-weight: 700; }
+.case-outcome .case-results { margin: 0; }
+.case-outcome .case-results li { color: var(--ink); }

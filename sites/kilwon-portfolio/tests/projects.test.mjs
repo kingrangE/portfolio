@@ -17,7 +17,10 @@ test('project URLs and section links are unique and valid', () => {
     for (const section of project.sections) {
       assert.match(section.id, /^[a-z][a-z0-9-]*$/);
       assert.ok(section.title.trim());
-      for (const field of ['lead', 'situation', 'task', 'result']) assert.ok(section[field]?.trim(), `${project.slug}/${section.id}: missing ${field}`);
+      for (const field of ['lead', 'situation', 'task']) assert.ok(section[field]?.trim(), `${project.slug}/${section.id}: missing ${field}`);
+      const results = Array.isArray(section.result) ? section.result : [section.result];
+      assert.ok(results.length > 0);
+      assert.ok(results.every(result => typeof result === 'string' && result.trim()), `${project.slug}/${section.id}: missing result`);
       assert.ok(section.action.length > 0);
       assert.ok(section.action.every(action => action.trim().length > 0));
       assert.ok(section.tags.length > 0);

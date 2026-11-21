@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import ProjectToc from './project-toc';
+import InlineEmphasis from './inline-emphasis.mjs';
 import { engineeringFields, problemTypes, matchesSection } from '../content/projects.mjs';
 
 export default function ProjectCases({ name, sections, nextProject }) {
@@ -56,15 +57,18 @@ export default function ProjectCases({ name, sections, nextProject }) {
           {section.aliases?.map(id => <span className="case-alias" id={id} key={id} aria-hidden="true" />)}
           {section.version && <p className="case-version">{section.version}</p>}
           <h2 id={`${section.id}-title`}>{section.title}<a className="heading-anchor" href={`#${section.id}`} aria-label={`${section.title} 바로가기`}>#</a></h2>
-          <p className="case-lead">{section.lead}</p>
+          <p className="case-lead"><InlineEmphasis>{section.lead}</InlineEmphasis></p>
           <div className="case-tags" aria-label="이 사례의 분야">{fields.filter(field => section.fields?.includes(field.id)).map(field => <button key={field.id} className="field-link"
             aria-pressed={selected === field.id} onClick={() => setSelected(selected === field.id ? 'all' : field.id)}>{field.label}</button>)}</div>
           <div className="case-narrative">
-            <p>{section.situation} {section.task}</p>
+            <p><InlineEmphasis>{section.situation}</InlineEmphasis> <InlineEmphasis>{section.task}</InlineEmphasis></p>
             <h3>{section.actionTitle || '설계와 구현'}</h3>
-            <ul>{section.action.map(action => <li key={action}>{action}</li>)}</ul>
+            <ul>{section.action.map(action => <li key={action}><InlineEmphasis>{action}</InlineEmphasis></li>)}</ul>
             {section.implementation && <pre aria-label="구현 흐름"><code>{section.implementation}</code></pre>}
-            <div className="case-outcome"><h3>적용 결과</h3><p>{section.result}</p>
+            <div className="case-outcome"><h3>적용 결과</h3>
+              {Array.isArray(section.result)
+                ? <ul className="case-results">{section.result.map(result => <li key={result}><InlineEmphasis>{result}</InlineEmphasis></li>)}</ul>
+                : <p><InlineEmphasis>{section.result}</InlineEmphasis></p>}
               {section.note && <p className="case-note">{section.note}</p>}
             </div>
           </div>

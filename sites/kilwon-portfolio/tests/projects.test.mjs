@@ -80,7 +80,7 @@ test('field and problem filters must match the same case', () => {
   assert.equal(matchesProject(separateCases, 'backend', 'performance'), false);
   assert.equal(matchesProject(separateCases, 'data', 'performance'), true);
   const dcba = projects.find(project => project.slug === 'dcba');
-  assert.deepEqual(dcba.sections.filter(section => matchesSection(section, 'backend', 'performance')).map(section => section.id), ['cursor-reads']);
+  assert.deepEqual(dcba.sections.filter(section => matchesSection(section, 'backend', 'performance')).map(section => section.id), ['cursor-reads', 'review-query', 'subject-index', 'notification-cursor']);
   assert.equal(matchesProject(dcba, 'cicd', 'performance'), false);
   assert.deepEqual(dcba.sections.filter(section => matchesSection(section, 'cicd', 'operations')).map(section => section.id), ['schema-order']);
   const semo = projects.find(project => project.slug === 'semo');
@@ -93,7 +93,7 @@ test('DBA filters target database cases and combine with the same case problem t
   assert.deepEqual(projects.filter(item => matchesProject(item, 'dba')).map(item => item.slug),
     ['softeer', 'dcba', 'talky', 'meeting-assistant', 'hr-cbt']);
   assert.deepEqual(project('dcba').sections.filter(section => matchesSection(section, 'dba', 'performance')).map(section => section.id),
-    ['cursor-reads']);
+    ['cursor-reads', 'review-query', 'subject-index', 'notification-cursor']);
   assert.equal(matchesProject(project('softeer'), 'dba', 'recovery'), true);
   assert.equal(matchesProject(project('softeer'), 'dba', 'performance'), false);
   assert.equal(matchesProject(project('semo'), 'dba'), false);

@@ -265,7 +265,7 @@ export const projects = [
     "organization": "개인 프로젝트",
     "period": "2026.01부터 개발 / 2026.11 검색과 데이터 전환 개선",
     "role": "Spring Boot 백엔드 / LLM 생성과 복습 / 검색 실행 계획 개선 / DB 전환과 복구",
-    "decision": "흔한 검색어는 최신순으로 한 페이지를 먼저 찾습니다. 결과가 부족하면 전체 검색을 실행해 오래된 문항도 확인합니다. DB를 옮길 때는 데이터의 내용 해시와 다음 ID를 대조하고, 전환 후에는 새로 받은 쓰기까지 보존해 복구하도록 했습니다.",
+    "decision": "B-tree를 문항 ID 순서로 읽어 최신 후보에서 한 페이지를 먼저 찾습니다. 결과가 부족하면 범위를 제한하지 않는 GIN 검색을 실행해 오래된 문항과 다음 페이지도 확인합니다. DB 전환은 내용 해시와 다음 ID를 검증한 뒤 허용하고, 전환 후 받은 쓰기도 되옮겨 복구하도록 했습니다.",
     "source": "https://app.notion.com/p/3ceab4402a3180cda440f055bbdcefc8",
     "sourceReviewed": "2026-11-21",
     "slug": "dcba",
@@ -279,7 +279,7 @@ export const projects = [
       "data"
     ],
     "status": "개인 프로젝트",
-    "summary": "6개 CS 과목과 3단계 난이도의 문제를 생성하고 검색해 복습하는 개인 프로젝트입니다. 최신순 탐색과 GIN 검색을 결합한 PostgreSQL은 개발 환경의 혼합 부하 실험에서 MariaDB보다 분야와 난이도 검색 p95가 약 89.9% 짧았습니다(111.98ms → 11.30ms). DB를 옮길 때는 복사한 데이터를 검증한 뒤 전환하고, 전환 후 바뀐 데이터도 이전 DB로 되옮길 수 있도록 했습니다.",
+    "summary": "6개 CS 과목과 3단계 난이도의 문제를 생성하고 검색해 복습하는 개인 프로젝트입니다. 흔한 검색어의 본문 조회와 정렬이 목록 조회까지 늦추는 문제를 B-tree 최신순 탐색과 GIN 검색의 조합으로 개선했습니다. 합성 5만 문항의 혼합 부하에서 MariaDB 대비 PostgreSQL의 분야와 난이도 검색 p95를 111.98ms에서 11.30ms로 약 89.9% 줄였고, 데이터 검증과 역이관을 갖춰 DB를 전환할 수 있도록 했습니다.",
     "tags": [
       "Java",
       "Spring Boot",
@@ -340,7 +340,7 @@ export const projects = [
       },
       {
         "id": "cursor-reads",
-        "title": "최신순 탐색을 먼저 실행해 분야와 난이도 검색 p95 약 89.9% 단축",
+        "title": "B-tree 최신순 탐색과 GIN 검색을 조합해 검색 p95 약 89.9% 단축",
         "tags": [
           "PostgreSQL",
           "pg_trgm",
@@ -348,17 +348,18 @@ export const projects = [
           "실행 계획",
           "혼합 부하"
         ],
-        "lead": "흔한 검색어는 많은 본문을 읽고 정렬해 목록 조회까지 늦췄습니다. 최신순으로 한 페이지를 먼저 찾고, 결과가 부족하면 전체 검색을 실행하도록 바꿨습니다.",
-        "situation": "MariaDB는 한글 부분 문자열 검색을 위해 3글자 조각과 동기화 트리거, 초기 색인 작업을 유지했습니다. PostgreSQL의 초기 GIN 검색도 흔한 검색어에서는 본문 9,860행을 읽은 뒤 정렬했습니다. 이때 같은 연결 풀을 쓰는 목록 조회도 기다려야 했습니다.",
-        "task": "연속 부분 문자열 검색과 과목, 난이도, 저장과 차단 범위, 양방향 커서 이동을 유지하면서 읽고 정렬할 후보를 줄였습니다.",
-        "actionTitle": "커서 순서로 최대 128건을 검색하고 부족하면 GIN 검색 실행",
+        "lead": "흔한 검색어는 GIN으로 많은 후보를 찾은 뒤 최신순으로 정렬해, 같은 연결 풀을 쓰는 목록 조회까지 늦췄습니다. 최신 문항에서 먼저 한 페이지를 찾고 부족한 경우에만 전체 검색을 실행하도록 바꿨습니다.",
+        "situation": "MariaDB는 한글 부분 문자열 검색을 위해 3글자 조각 테이블과 동기화 트리거, 초기 채우기 작업을 유지했습니다. PostgreSQL의 초기 GIN 검색도 흔한 검색어에서는 본문 9,860행을 읽고 결과를 문항 ID 순서로 정렬했습니다. 검색과 목록이 같은 연결 풀을 사용해 검색 지연이 목록 요청의 대기로도 이어졌습니다.",
+        "task": "한글 부분 문자열 검색과 과목, 난이도, 저장과 차단 범위, 양방향 커서 이동을 유지하면서 흔한 검색어의 본문 조회와 정렬 비용을 줄였습니다.",
+        "actionTitle": "B-tree로 최신 후보를 먼저 읽고, 페이지가 부족하면 GIN 검색으로 보완",
         "action": [
-          "문항 ID의 B-tree를 커서 방향으로 읽습니다. 사용자별 저장과 차단 범위, 과목과 난이도 조건을 적용한 후보 최대 128건에서 검색어를 비교했습니다.",
-          "페이지에 보여줄 9문항과 다음 페이지 확인용 1문항을 찾으면 반환합니다. 부족하면 후보 범위를 제한하지 않는 GIN 검색을 실행해 오래된 문항과 다음 페이지가 있는지도 확인합니다.",
-          "MariaDB의 3글자 조각 검색과 최적화한 PostgreSQL에 같은 합성 데이터와 요청 구성을 적용했습니다. 목록, 분야와 난이도 검색, 전체 검색, 저장 검색의 지연을 각각 측정하고 성공 처리량과 오류도 기록했습니다.",
-          "검색과 커서 이동, 저장과 차단, 삭제 후 조회 결과 등 37개 동작을 대조해 검색 조건과 페이지 경계가 유지되는지 확인했습니다."
+          "문항 ID의 B-tree를 커서 방향으로 읽고, 과목과 난이도 및 사용자별 저장과 차단 조건을 적용한 후보 최대 128건에서 본문을 비교합니다. B-tree는 최신순 후보를 읽는 데 사용하고, 검색어의 부분 문자열 일치는 본문에서 판정합니다.",
+          "화면에 보여줄 9문항과 다음 페이지 확인용 1문항을 찾으면 반환합니다. 결과가 부족하면 후보 범위를 제한하지 않는 GIN 검색을 실행해 오래된 일치 문항과 다음 페이지를 확인합니다. 최신 후보 안에 없다는 이유로 검색 결과가 없다고 판단하지 않도록 했습니다.",
+          "GIN만 사용하면 흔한 검색어의 넓은 후보를 읽고 다시 정렬해야 합니다. 최신 후보만 검색하면 오래된 문항을 놓칠 수 있어, 최근 문항이 충분한 검색은 빨리 끝내고 나머지는 전체 검색으로 처리하는 방식을 선택했습니다.",
+          "SQL 실행 계획에서 필터 없는 흔한 검색어를 대조했습니다. 기존 경로는 본문 9,860행을 읽고 최신순으로 정렬했지만, 변경 후에는 문항 ID 인덱스를 역순으로 읽어 본문 38행에서 결과 10건을 찾았습니다.",
+          "MariaDB와 최적화한 PostgreSQL에 같은 합성 데이터와 요청 구성을 적용해 부하별 지연과 성공 처리량, 오류를 비교했습니다. 검색과 커서 왕복, 저장과 차단, 삭제 후 조회 결과 등 37개 동작도 대조했습니다."
         ],
-        "result": "합성 문항 5만 건에 초당 75건의 혼합 부하를 적용했을 때, MariaDB 대비 목록 p99는 85.72ms → 15.37ms로 약 82.1% 줄었습니다. 분야와 난이도 검색 p95는 111.98ms → 11.30ms로 약 89.9% 줄었고, 초당 150건을 요청했을 때의 성공 처리량 중앙값은 100.3건 → 150.0건이었습니다.",
+        "result": "합성 문항 5만 건에 초당 75건의 혼합 부하를 적용했을 때 MariaDB 대비 목록 p99는 85.72ms → 15.37ms로 약 82.1%, 분야와 난이도 검색 p95는 111.98ms → 11.30ms로 약 89.9% 줄었습니다. 초당 150건 요청에서는 성공 처리량 중앙값이 MariaDB 100.3건, PostgreSQL 150.0건이었고, PostgreSQL의 오류율은 0%였습니다. PostgreSQL 내부 실행 계획에서 확인한 본문 조회 9,860행 → 38행은 별도의 필터 없는 흔한 검색어 비교입니다.",
         "fields": [
           "backend",
           "dba"
@@ -367,7 +368,8 @@ export const projects = [
           "performance",
           "design"
         ],
-        "note": "저장 5천 건과 차단 500건을 포함해 읽기 95%, 쓰기 5%로 구성한 개발 실험입니다. 매번 데이터 분포를 복구해 3회 반복했으며, 각 회차는 3초 워밍업과 8초 측정으로 진행했습니다. 지연 수치는 반복 중앙값이며 계정 문자열 비교 설정을 바꾸기 전의 결과입니다. 저부하 목록과 일부 쓰기는 PostgreSQL이 더 느렸으므로 모든 요청이나 운영 환경에 같은 개선율을 적용할 수는 없습니다."
+        "note": "문항 5만 건, 저장 5천 건, 차단 500건의 합성 데이터에 읽기 95%, 쓰기 5%를 적용한 개발 실험입니다. 각 회차에 데이터 분포를 복구하고 3초 워밍업과 8초 측정을 3회 반복했으며, 지연은 반복 중앙값입니다. 계정 문자열 비교 설정을 바꾸기 전의 검색 실험으로, 운영 트래픽과 모델 생성 시간은 포함하지 않습니다. 초당 25건에서는 목록 p99가 MariaDB 19.91ms, PostgreSQL 36.29ms였고 일부 쓰기도 PostgreSQL이 더 느려, 읽기 비중이 높은 서비스의 검색 피크를 기준으로 선택했습니다.",
+        "implementation": "문항 ID의 B-tree를 커서 방향으로 탐색\n  → 필터를 적용한 최신 후보 최대 128건에서 본문 비교\n  ├─ 페이지 9건과 다음 페이지 확인용 1건 확보: 반환\n  └─ 부족: 범위 제한 없는 GIN 검색 → 결과와 다음 커서 확인"
       },
       {
         "id": "schema-order",
@@ -382,10 +384,10 @@ export const projects = [
         "lead": "DB를 옮겨도 문항과 계정 ID, 저장과 차단 관계, 생성 완료 이력과 Chroma 참조는 유지돼야 했습니다. 전환 후 받은 쓰기도 복구 과정에서 잃지 않도록 했습니다.",
         "situation": "데이터를 복사해도 계정 이름을 비교하는 규칙이나 다음 ID는 DB마다 다를 수 있습니다. PostgreSQL로 전환한 뒤 이전 MariaDB 스냅샷만 다시 열면, 전환 후 추가하거나 삭제한 내용도 사라집니다.",
         "task": "기존 관계와 로그인 동작을 유지해 빈 DB로 복사하고, 검증한 데이터를 커밋한 경우에만 PostgreSQL 프로필이 시작되도록 했습니다.",
-        "actionTitle": "7개 테이블을 대조하고 서비스가 쓰기를 받기 전과 후의 복구 방법 구분",
+        "actionTitle": "테이블별 내용과 다음 ID를 대조하고 쓰기 재개 전후의 복구 방법 구분",
         "action": [
           "배포와 같은 잠금을 잡고 웹과 API, 생성 워커의 쓰기를 멈춘 뒤 MariaDB, Redis와 사용 중인 Chroma를 백업합니다. 대상 DB에 데이터가 이미 있으면 덮어쓰지 않고 전환을 중단합니다.",
-          "계정, 문항, 저장, 차단, 생성 완료 작업, 삭제 기록, 복습 기준의 7개 테이블을 ID 순서로 복사합니다. 행 수와 SHA-256 내용 해시, 다음 ID를 대조한 뒤 데이터와 이관 완료 표시를 같은 트랜잭션에 기록합니다.",
+          "초기 이관 대상인 계정, 문항, 저장, 차단, 생성 완료 작업, 삭제 기록, 복습 기준의 7개 테이블을 ID 순서로 복사합니다. 행 수와 SHA-256 내용 해시, 다음 ID를 대조한 뒤 데이터와 이관 완료 표시를 같은 트랜잭션에 기록합니다. 이후 에이전트 출제 릴리스에서는 출제 이력 테이블도 양방향 복사의 검증 대상에 포함합니다.",
           "MariaDB의 계정 비교 방식을 유지하기 위해 PostgreSQL에도 대소문자와 악센트를 구분하지 않는 ICU 비교와 유일성 제약을 적용했습니다. 두 엔진의 Unicode 비교 차이로 계정이 충돌하면 복사 트랜잭션을 롤백합니다.",
           "서비스가 쓰기를 받기 전에 실패하면 기존 MariaDB를 다시 엽니다. PostgreSQL이 쓰기를 받은 뒤에는 현재 데이터를 별도의 빈 MariaDB로 되옮긴 후 복구합니다. 이 시점부터는 이전 DB를 자동으로 다시 열지 않습니다."
         ],
@@ -402,7 +404,7 @@ export const projects = [
           "operations"
         ],
         "note": "운영 전환 자동화는 구현했으며, 이관과 역이관을 확인한 결과는 격리 리허설 기준입니다.",
-        "implementation": "배포 잠금 → 쓰기 중지와 백업 → 빈 대상에 데이터 복사\n  → 7개 테이블의 내용과 ID 상태 검증 → 이관 표시와 함께 커밋\n  ├─ 공개 쓰기 재개 전 실패: 기존 MariaDB 재개\n  └─ PostgreSQL 쓰기 재개 후: 현재 데이터를 역이관한 뒤 복구",
+        "implementation": "배포 잠금 → 쓰기 중지와 백업 → 빈 대상에 데이터 복사\n  → 테이블별 내용과 ID 상태 검증 → 이관 표시와 함께 커밋\n  ├─ 공개 쓰기 재개 전 실패: 기존 MariaDB 재개\n  └─ PostgreSQL 쓰기 재개 후: 현재 데이터를 역이관한 뒤 복구",
         "aliases": [
           "concurrent-preferences",
           "delivery-artifact"
@@ -526,9 +528,12 @@ export const projects = [
       }
     ],
     "evidence": [
-      "https://github.com/kingrangE/DCBA/blob/d8836477d6d15e1196db0969933bbd01197ba953/docs/postgresql-benchmark.md",
-      "https://github.com/kingrangE/DCBA/blob/d8836477d6d15e1196db0969933bbd01197ba953/docs/postgresql-cutover.md",
-      "https://github.com/kingrangE/DCBA/blob/d8836477d6d15e1196db0969933bbd01197ba953/docs/postgresql-evidence/ordered-results.jsonl",
+      "https://github.com/kingrangE/DCBA/blob/0b68b338733430b7b5c2498c28e0729fc49e4833/docs/postgresql-cutover.md",
+      "https://github.com/kingrangE/DCBA/blob/0b68b338733430b7b5c2498c28e0729fc49e4833/docs/postgresql-benchmark.md",
+      "https://github.com/kingrangE/DCBA/blob/0b68b338733430b7b5c2498c28e0729fc49e4833/docs/postgresql-evidence/ordered-results.jsonl",
+      "https://github.com/kingrangE/DCBA/blob/0b68b338733430b7b5c2498c28e0729fc49e4833/docs/postgresql-evidence/ordered-pg-plans.json",
+      "https://github.com/kingrangE/DCBA/blob/0b68b338733430b7b5c2498c28e0729fc49e4833/docs/postgresql-evidence/ordered-maria-plans.json",
+      "https://github.com/kingrangE/DCBA/blob/0b68b338733430b7b5c2498c28e0729fc49e4833/DCBA/src/main/java/kingrangE/DCBA/service/OrderedPostgresSearch.java",
       "https://github.com/kingrangE/DCBA/commit/13a7207f3489d8f4df983d37cdc0554b07df8b3d",
       "https://github.com/kingrangE/DCBA/commit/0b044f0e69b4f04dbf6bfbf17232370d159a4807",
       "https://github.com/kingrangE/DCBA/commit/3cdf62b87493181a7ea263a5bdb75ca48fc0c285",
@@ -538,9 +543,9 @@ export const projects = [
       "https://github.com/kingrangE/DCBA/commit/6d2fab8508ce87707ce5f255f2eb15a727ef564d"
     ],
     "highlights": [
-      "최신순 탐색과 GIN 검색을 결합해 분야와 난이도 검색 p95 약 89.9% 단축(111.98ms → 11.30ms, 합성 5만 문항 / 초당 75건 혼합 부하에서 MariaDB와 PostgreSQL 비교)",
-      "DB 전환 전 7개 테이블의 내용 해시와 다음 ID를 대조하고, 전환 후 바뀐 데이터도 이전 DB로 되옮길 수 있도록 구현",
-      "작업 ID로 완료 여부를 확인해 저장된 문항은 재사용하고, 관리자가 삭제한 문항은 같은 작업으로 다시 생성하지 않도록 처리"
+      "B-tree 최신순 탐색과 GIN 검색으로 분야와 난이도 검색 p95 111.98ms → 11.30ms, 약 89.9% 단축(합성 5만 문항 / 초당 75건 혼합 부하, MariaDB 대비 PostgreSQL)",
+      "필터 없는 흔한 검색어의 PostgreSQL 본문 조회 9,860행 → 38행으로 축소하고, 최신 후보가 부족하면 GIN 검색으로 전체 범위 확인",
+      "DB 전환 전 테이블별 내용 해시와 다음 ID를 대조하고, 전환 후 받은 쓰기까지 이전 DB로 되옮길 수 있도록 복구 경로 구현"
     ]
   },
   {

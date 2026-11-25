@@ -20,11 +20,13 @@ export default function Home() {
             <summary className="button ai-work-trigger">AI로 이렇게 일하고 있습니다.<span className="ai-work-toggle" aria-hidden="true">+</span></summary>
             <div className="ai-work-panel">
               <ul aria-label="AI와 협업하는 방식">
-                <li><strong>목표와 제약, 완료 기준</strong>을 먼저 정하고 AI와 구현 대안을 비교합니다.</li>
-                <li>독립적인 작업은 <strong>여러 Agent에 나눠 맡기고</strong>, 결과를 통합해 검토합니다.</li>
-                <li>AI가 제안한 개선은 <strong>코드와 실행 계획, 재현 실험</strong>으로 확인합니다.</li>
+                <li>목표, 요구사항, 기획, 기술 스택과 구현 방향을 상세히 명세합니다. <strong>Superpowers, Grill-me 등의 스킬</strong>로 기획을 검토하고 대안을 모색하며 개발 방향을 구체화합니다.</li>
+                <li><strong>Orca</strong>를 기반으로 작업을 독립적인 단위로 나누고, 여러 Agent를 병렬로 실행해 개발 생산성을 높입니다.</li>
+                <li><strong>AI Agent 기반의 테스트 자동화 시스템</strong>을 구축해 프로그램의 안정성을 지속적으로 확인합니다.</li>
+                <li>테스트 시나리오를 먼저 작성해 전달하고, <strong>AI와 함께 누락된 조건과 예외 상황을 찾아 보완</strong>합니다.</li>
                 <li>작업 규칙은 <strong>AGENTS.md</strong>에, 반복 절차는 <strong>Skill</strong>로 정리해 같은 기준으로 작업하게 합니다.</li>
                 <li><strong>GitHub와 Notion 기반의 Second Brain Ontology</strong>를 구축하여 운영하고 있습니다. 모델이 바뀌어도 같은 지식과 작업 기준을 재사용할 수 있도록 설계합니다.</li>
+                <li><strong>GPT dots</strong>를 활용해 매일 오전 9시에 최신 Skill과 도구를 확인하고, 개발에 필요한 것을 선별해 반영합니다.</li>
               </ul>
             </div>
           </details>

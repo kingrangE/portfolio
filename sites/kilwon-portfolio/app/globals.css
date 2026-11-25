@@ -745,3 +745,15 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .project-highlights strong, .case-section strong { color: var(--ink); font-weight: 700; }
 .case-outcome .case-results { margin: 0; }
 .case-outcome .case-results li { color: var(--ink); }
+
+.hero-actions { align-items: flex-start; flex-wrap: wrap; gap: 12px; }
+.ai-work { flex: 1 1 280px; min-width: 0; }
+.ai-work-trigger { min-height: 44px; gap: 12px; background: var(--mist); color: var(--blue); text-align: left; list-style: none; cursor: pointer; }
+.ai-work-trigger::-webkit-details-marker { display: none; }
+.ai-work-trigger:hover { background: #dce8ff; }
+.ai-work-toggle { flex-shrink: 0; font-size: 20px; line-height: 1; font-weight: 400; }
+.ai-work[open] .ai-work-toggle { transform: rotate(45deg); }
+.ai-work-panel { margin-top: 14px; padding: 16px 18px; border: 1px solid var(--line); border-radius: 6px; background: #fff; color: var(--muted); font-size: 14px; line-height: 1.85; }
+.ai-work-panel ul { margin: 0; padding-left: 18px; }
+.ai-work-panel li + li { margin-top: 10px; }
+.ai-work-panel strong { color: var(--ink); font-weight: 700; }

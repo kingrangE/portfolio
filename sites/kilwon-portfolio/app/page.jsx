@@ -24,7 +24,7 @@ export default function Home() {
                 <li>독립적인 작업은 <strong>여러 Agent에 나눠 맡기고</strong>, 결과를 통합해 검토합니다.</li>
                 <li>AI가 제안한 개선은 <strong>코드와 실행 계획, 재현 실험</strong>으로 확인합니다.</li>
                 <li>작업 규칙은 <strong>AGENTS.md</strong>에, 반복 절차는 <strong>Skill</strong>로 정리해 같은 기준으로 작업하게 합니다.</li>
-                <li>결정과 프로젝트 맥락은 <strong>Notion에 기록</strong>해 다른 Agent와 다음 작업에서도 이어 씁니다.</li>
+                <li><strong>GitHub와 Notion 기반의 Second Brain Ontology</strong>를 구축 중입니다. 모델이 바뀌어도 같은 지식과 작업 기준을 재사용할 수 있도록 설계합니다.</li>
               </ul>
             </div>
           </details>

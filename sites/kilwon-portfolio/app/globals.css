@@ -747,13 +747,18 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .case-outcome .case-results li { color: var(--ink); }
 
 .hero-actions { align-items: flex-start; flex-wrap: wrap; gap: 12px; }
-.ai-work { flex: 1 1 280px; min-width: 0; }
-.ai-work-trigger { min-height: 44px; gap: 12px; background: var(--mist); color: var(--blue); text-align: left; list-style: none; cursor: pointer; }
-.ai-work-trigger::-webkit-details-marker { display: none; }
+.ai-work-trigger { min-height: 44px; background: var(--mist); color: var(--blue); text-align: left; }
 .ai-work-trigger:hover { background: #dce8ff; }
-.ai-work-toggle { flex-shrink: 0; font-size: 20px; line-height: 1; font-weight: 400; }
-.ai-work[open] .ai-work-toggle { transform: rotate(45deg); }
-.ai-work-panel { margin-top: 14px; padding: 16px 18px; border: 1px solid var(--line); border-radius: 6px; background: #fff; color: var(--muted); font-size: 14px; line-height: 1.85; }
-.ai-work-panel ul { margin: 0; padding-left: 18px; }
-.ai-work-panel li + li { margin-top: 10px; }
+html { scrollbar-gutter: stable; }
+html:has(.ai-work-dialog[open]) { overflow: hidden; }
+.ai-work-dialog { width: min(680px, calc(100% - 32px)); max-height: calc(100dvh - 48px); margin: auto; padding: 0; border: 1px solid var(--line); border-radius: 12px; background: #fff; color: var(--ink); box-shadow: 0 24px 80px #17243b40; overflow-y: auto; }
+.ai-work-dialog::backdrop { background: #17243b80; }
+.ai-work-panel { padding: clamp(20px, 4vw, 32px); color: var(--muted); font-size: 14px; line-height: 1.85; }
+.ai-work-heading { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 20px; }
+.ai-work-heading h2 { margin: 0; color: var(--ink); font-size: clamp(18px, 3vw, 22px); line-height: 1.5; letter-spacing: -.5px; }
+.ai-work-heading form { flex-shrink: 0; }
+.ai-work-close { min-height: 44px; padding: 8px 12px; border: 1px solid var(--line); border-radius: 6px; background: var(--paper); font-size: 13px; }
+.ai-work-close:hover { background: var(--mist); }
+.ai-work-panel ul { margin: 0; padding-left: 20px; }
+.ai-work-panel li + li { margin-top: 14px; }
 .ai-work-panel strong { color: var(--ink); font-weight: 700; }

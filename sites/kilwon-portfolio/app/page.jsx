@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import ProjectGallery from "../components/project-gallery";
 import TechStack from "../components/tech-stack";
+import AiWorkDialog from "../components/ai-work-dialog.mjs";
 import { projects } from "../content/projects.mjs";
 
 export default function Home() {
@@ -16,10 +17,8 @@ export default function Home() {
         <p className="hero-description">학부 시절 AI/LLM/Agent 서비스를 개발하며, 좋은 프로덕트는 탄탄한 데이터 기반에서 시작함을 느꼈습니다. 이 경험에서 현재는 LLM, Agent 뿐만 아니라 데이터 처리/적재/품질 관리를 위한 데이터 엔지니어링과 모델링, AI를 개발에 효과적으로 활용하기 위한 하네스 엔지니어링과 Practice AI를 꾸준히 학습하고 있습니다.</p>
         <div className="hero-actions">
           <a className="button primary" href="https://kingrange.github.io/Resume/" target="_blank" rel="noopener noreferrer">이력서 확인</a>
-          <details className="ai-work">
-            <summary className="button ai-work-trigger">AI로 이렇게 일하고 있습니다.<span className="ai-work-toggle" aria-hidden="true">+</span></summary>
-            <div className="ai-work-panel">
-              <ul aria-label="AI와 협업하는 방식">
+          <AiWorkDialog>
+            <ul aria-label="AI와 협업하는 방식">
                 <li>목표, 요구사항, 기획, 기술 스택과 구현 방향을 상세히 명세합니다. <strong>Superpowers, Grill-me 등의 스킬</strong>로 기획을 검토하고 대안을 모색하며 개발 방향을 구체화합니다.</li>
                 <li><strong>Orca</strong>를 기반으로 작업을 독립적인 단위로 나누고, 여러 Agent를 병렬로 실행해 개발 생산성을 높입니다.</li>
                 <li><strong>AI Agent 기반의 테스트 자동화 시스템</strong>을 구축해 프로그램의 안정성을 지속적으로 확인합니다.</li>
@@ -28,8 +27,7 @@ export default function Home() {
                 <li><strong>GitHub와 Notion 기반의 Second Brain Ontology</strong>를 구축하여 운영하고 있습니다. 모델이 바뀌어도 같은 지식과 작업 기준을 재사용할 수 있도록 설계합니다.</li>
                 <li><strong>GPT dots</strong>를 활용해 매일 오전 9시에 최신 Skill과 도구를 확인하고, 개발에 필요한 것을 선별해 반영합니다.</li>
               </ul>
-            </div>
-          </details>
+          </AiWorkDialog>
         </div>
         <div className="hero-socials"><a href="https://github.com/kingrangE" target="_blank" rel="noopener noreferrer">GitHub</a><a href="https://kingrang-e.tistory.com/" target="_blank" rel="noopener noreferrer">개발 블로그</a></div>
       </div>
